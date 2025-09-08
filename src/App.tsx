@@ -5,7 +5,7 @@ import TimeLineData from "./DataSources/TimeLine.json";
 
 function App() {
   return (
-    <div className="w-full h-screen bg-gray-900">
+    <div className="w-full h-screen bg-white-900">
       <TimeLine/>
     </div>
   );
