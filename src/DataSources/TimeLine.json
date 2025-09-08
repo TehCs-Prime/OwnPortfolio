@@ -1,0 +1,141 @@
+
+{
+  "_comment": "This JSON stores my timeline data, all with same format:\n(academic_profile ->work_experience ->participations_achievements ->competitions_awards). \n",
+
+  "academic_profile": [
+    {
+      "start_date": "2023-10",
+      "end_date": "Current",
+      "title": "Universiti Sains Malaysia (USM), Penang",
+      "heading": "CGPA: 3.77 | Bachelor of Computer Sciences (Intelligent Computing) with Honours",
+      "description": "Core subjects: Machine Learning and Computational Intelligence, Programming Methodology and Paradigms, Design & Analysis of Algorithms, Operating Systems, Database, Principles of Computer Networks and Information Security, Integrated Software Development Workshop.",
+      "points": [],
+      "media": [
+        { "type": "image", "path": "assets/images/.jpg" },
+        { "type": "video", "path": "assets/videos/.mp4" }
+      ]
+    },
+    {
+      "start_date": "2022-07",
+      "end_date": "2023-05",
+      "title": "Kolej Matrikulasi Johor (KMJ), Johor",
+      "heading": "CGPA: 4.0 | Matriculation in Science",
+      "description": "",
+      "points": [],
+      "media": [
+        { "type": "image", "path": "assets/images/.jpg" },
+        { "type": "video", "path": "assets/videos/.mp4" }
+      ]
+    }
+  ],
+  "work_experience": [
+    {
+      "start_date": "2023-07",
+      "end_date": "2023-09",
+      "title": "Southern University College, Johor, Malaysia",
+      "heading": "Summer Internship | Assistant Executive",
+      "description": "Assisted the team in performing the following duties for events e.g. Undergraduate Graduation Ceremony, College Open Days, Students Exchange Programme:",
+      "points": [
+        "Managed logistics, including VIP coordination, reviewing event procedures and delivering presentations.",
+        "Designed student's handbook and recorded meeting minutes.",
+        "Utilized Microsoft Excel, SharePoint, Word, and PowerPoint for documentation and team coordination."
+      ],
+      "media": [
+        { "type": "image", "path": "assets/images/.jpg" },
+        { "type": "video", "path": "assets/videos/.mp4" }
+      ]
+    },
+    {
+      "start_date": "2020-02",
+      "end_date": "2022-07",
+      "title": "LOVETTE & CO, Malaysia",
+      "heading": "Event Setup Crew",
+      "description": "",
+      "points": [
+        "Enhanced client satisfaction ratings by scheduling on-site service requests, managing show logistics and booth functionality need to meet demands.",
+        "Followed all policies, regulations, dress code and schedules.",
+        "Successfully communicated with all team members to navigate job duties and complete tasks.",
+        "Loaded, unloaded and moved material to and from storage and production areas."
+      ],
+      "media": [
+        { "type": "image", "path": "assets/images/.jpg" },
+        { "type": "video", "path": "assets/videos/.mp4" }
+      ]
+    }
+  ],
+  "participations_achievements": [
+    {
+      "start_date": "2022-07",
+      "end_date": "2023-05",
+      "title": "Peer Assistance Leader (PAL)",
+      "heading": "",
+      "description": "Duties including:",
+      "points": [
+        "Led a team of about 15 people across the academic year, coordinating tasks and ensuring cross-unit collaboration.",
+        "Supervised the progress and provided feedback to drive continuous improvement."
+      ],
+      "media": [
+        { "type": "image", "path": "assets/images/.jpg" },
+        { "type": "video", "path": "assets/videos/.mp4" }
+      ]
+    },
+    {
+      "start_date": "2017-01",
+      "end_date": "2021-02",
+      "title": "",
+      "heading": "",
+      "description": "",
+      "points": [
+        "President of the History & Geography Club",
+        "President of the STEM Society (Science, Technology, Engineering, Mathematics)"
+      ],
+      "media": [
+        { "type": "image", "path": "assets/images/.jpg" },
+        { "type": "video", "path": "assets/videos/.mp4" }
+      ]
+    }
+  ],
+  "competitions_awards": [
+    {
+      "start_date": "2025-05",
+      "end_date": "",
+      "title": "Top 10 Finalist | National Varsity Hackathon 2025 (V HACK 2025)",
+      "heading": "",
+      "description": "",
+      "points": [],
+      "media": [
+        { "type": "image", "path": "assets/images/.jpg" },
+        { "type": "video", "path": "assets/videos/.mp4" }
+      ]
+    },
+    {
+      "start_date": "2022-09",
+      "end_date": "",
+      "title": "",
+      "heading": "",
+      "description": "",
+      "points": [
+        "National Chemistry Quiz of Malaysia (K3M) 2022 ",
+        "Matriculation Co-Curricular Sports Carnival (KAKOM)",
+        "Champion | KMJ Maths Trail ’23",
+        "Second-runner up | KMJ e-Quizzery Science Carnival"
+      ],
+      "media": [
+        { "type": "image", "path": "assets/images/.jpg" },
+        { "type": "video", "path": "assets/videos/.mp4" }
+      ]
+    },
+    {
+      "start_date": "2020-09",
+      "end_date": "",
+      "title": "National Top 200 Finalist | National level IMU Virtual Science Discovery Challenge 2021 (SDC)",
+      "heading": "",
+      "description": "",
+      "points": [],
+      "media": [
+        { "type": "image", "path": "assets/images/.jpg" },
+        { "type": "video", "path": "assets/videos/.mp4" }
+      ]
+    }
+  ]
+}
