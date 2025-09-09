@@ -3,6 +3,7 @@ import * as THREE from "three"
 import { GLTFLoader } from "three-stdlib"
 import { OrbitControls } from "three-stdlib"
 
+
 const TimeLine = () => {
   const mountRef = useRef<HTMLDivElement | null>(null)
 
@@ -74,7 +75,25 @@ const TimeLine = () => {
         console.error("Error loading model:", error)
     }
     )
+    loader.load(
+    "/assets/bckground.gltf",
+    (gltf) => {
+        const bg = gltf.scene
+        bg.scale.set(50, 50, 50) // make it huge
+        bg.position.set(0, 0, 0)
+        
+        // Flip normals so we can view inside it
+        bg.traverse((child) => {
+        if (child.isMesh) {
+            child.material.side = THREE.BackSide
+        }
+        })
 
+        scene.add(bg)
+    },
+    undefined,
+    (error) => console.error("Error loading background:", error)
+    )
 
     // === Controls ===
     const controls = new OrbitControls(camera, renderer.domElement)
