@@ -1,12 +1,9 @@
 import './App.css'
-import TimeLineSpace from "./components/TimeLineSpace";
-import TimeLineData from "./DataSources/TimeLine.json";
-import TimeLineSphere from "./components/TimeLineSphere"
-
+import TimeLine from "./sections/TimeLine";
 
 function App() {
   return (
-    <TimeLineSpace/>
+    <TimeLine/>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import  { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three-stdlib";
 import { OrbitControls } from "three-stdlib";
@@ -38,7 +38,7 @@ const SpaceBoiScene = () => {
     controls.dampingFactor = 0.05;
     controls.screenSpacePanning = false; // pan only in camera plane
     controls.enablePan = true; // allow click+drag pan
-    controls.enableZoom = true; // scroll to zoom
+    controls.enableZoom = false; // scroll to zoom
     controls.mouseButtons = {
       LEFT: THREE.MOUSE.ROTATE,
       MIDDLE: THREE.MOUSE.DOLLY,
@@ -101,7 +101,7 @@ const SpaceBoiScene = () => {
         overflow: "hidden",
         margin: 0,
         padding: 0,
-        position: "fixed",
+        position: "relative",
         top: 0,
         left: 0,
       }}
