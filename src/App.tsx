@@ -1,13 +1,12 @@
 import './App.css'
-import TimeLine from "./components/TimeLine";
+import TimeLineSpace from "./components/TimeLineSpace";
 import TimeLineData from "./DataSources/TimeLine.json";
+import TimeLineSphere from "./components/TimeLineSphere"
 
 
 function App() {
   return (
-    <div className="w-full h-screen bg-white-900">
-      <TimeLine/>
-    </div>
+    <TimeLineSpace/>
   );
 }
 
