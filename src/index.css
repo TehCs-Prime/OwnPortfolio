@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+.animate-gradient-flow {
+  animation: gradient-flow 4s linear infinite;
+}
+
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -7,7 +21,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: transparent;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -26,6 +40,7 @@ a:hover {
 
 body {
   margin: 0;
+  overflow-x: hidden;
   display: flex;
   place-items: center;
   min-width: 320px;
