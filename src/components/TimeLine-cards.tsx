@@ -1,7 +1,15 @@
 import React from "react";
 import Particles from './Particles';
+import TrueFocus from './TrueFocus';
+import AutoMedia from './AutoMedia';
+
 
 const TimeLineCard: React.FC = () => {
+const TestMedia = [
+  { type: "image" as const, src: "/src/DataSources/ExpImg1.png", alt: "Test 1" },
+  { type: "image" as const, src: "/src/DataSources/ExpImg2.png", alt: "Test 2" },
+  { type: "video" as const, src: "/src/DataSources/Expvideo.mp4", poster: "portfolio-website/src/DataSources/ExpImg1.png" },
+];
   return (
     <div className="relative w-full h-full"> {/* parent */}
       {/* Particles as background */}
@@ -20,7 +28,7 @@ const TimeLineCard: React.FC = () => {
       
       {/* Content Wrapper */}
       <div className="relative flex flex-col z-10 items-center justify-start py-16 px-4">
-        <div className="relative w-full max-w-5xl">
+        <div className="relative w-full">
           {/* Center line */}
           <div className="absolute left-1/2 top-0 w-[0.2rem] h-full bg-gradient-to-b from-white/50 to-transparent -translate-x-1/2"></div>
 
@@ -44,8 +52,44 @@ const TimeLineCard: React.FC = () => {
                 </div>
 
                 {/* Left content */}
-                <div className="bg-white/10 p-4 rounded-xl w-64">
-                  Left content area
+                <div className="bg-transparent backdrop-blur-md shadow-lg rounded-2xl w-[35rem] p-6 hover:shadow-xl transition-shadow duration-300">
+                  <div className="space-y-3">
+                    {/* Date */}
+                    <div className="text-xs text-gray-300 font-light tracking-wide">
+                      <span className="inline-block">
+                        <TrueFocus 
+                          sentence="Jul 2023 — Sep 2023"
+                          manualMode={true}
+                          blurAmount={1.5}
+                          borderColor="#5227ff"
+                          animationDuration={0.5}
+                          pauseBetweenAnimations={1}
+                        />
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h2 className="flex items-center gap-4 text-2xl font-bold text-transparent bg-clip-text bg-white m-0">
+                      <span className="bg-blue-500/20 p-2 rounded-full text-indigo-300 text-2xl">🎓</span>
+                      <span className="text-white font-extrabold text-xl leading-tight">Southern University College, Johor, Malaysia</span>
+                    </h2>
+
+                    {/* Heading */}
+                    <h3 className="text-base text-gray-400 font-medium">
+                      Summer Internship | Assistant Executive
+                    </h3>
+                    {/* Media display */}
+                    <div className="mt-5">
+                      <AutoMedia
+                      media={TestMedia}
+                      height="h-[20rem]"
+                      autoPlayInterval={5000}
+                      pauseOnHover={false}
+                      showDots={false}
+                      showArrows={false}
+                    />
+                    </div>
+                  </div>
                 </div>
               </div>
 
