@@ -1,19 +1,84 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Particles from './Particles';
 import TrueFocus from './TrueFocus';
-import AutoMedia from './AutoMedia';
+import timelineData from '../DataSources/TimeLine.json';
+
+type TimelineItem = {
+  start_date: string;
+  end_date: string;
+  title: string;
+  heading: string;
+  description: {
+    title: string;
+    content: string;
+  };
+  points: {
+    title: string;
+    content: string[];
+  },
+  media: { type: string; path: string }[];
+  source?: 'academic' | 'work';
+};
+
+const academic = (timelineData.academic_profile as TimelineItem[]).map(item => ({
+  ...item,
+  source: 'academic' as const
+}));
+
+const work = (timelineData.work_experience as TimelineItem[]).map(item => ({
+  ...item,
+  source: 'work' as const
+}));
+
+// combine only academic + work
+const combined = [...academic, ...work];
+
+// sort newest first based on start_date (YYYY-MM format)
+combined.sort((a, b) => {
+  // treat 'Present' as future date
+  const dateA = a.start_date === 'Present' ? '9999-12' : a.start_date;
+  const dateB = b.start_date === 'Present' ? '9999-12' : b.start_date;
+  return dateB.localeCompare(dateA); // descending
+});
+
+const formatDate = (dateStr: string) => {
+  if (!dateStr || dateStr.toLowerCase() === 'present') return 'Present';
+  // dateStr is "YYYY-MM"
+  const [year, month] = dateStr.split('-').map(Number);
+  // month - 1 because Date months are 0-indexed
+  const date = new Date(year, month - 1);
+  // "Jul 2023"
+  return date.toLocaleString('en-US', { month: 'short', year: 'numeric' });
+};
 
 
 const TimeLineCard: React.FC = () => {
-const TestMedia = [
-  { type: "image" as const, src: "/src/DataSources/ExpImg1.png", alt: "Test 1" },
-  { type: "image" as const, src: "/src/DataSources/ExpImg2.png", alt: "Test 2" },
-  { type: "video" as const, src: "/src/DataSources/Expvideo.mp4", poster: "portfolio-website/src/DataSources/ExpImg1.png" },
-];
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const itemRefs = useRef<HTMLDivElement[]>([]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // find which section is closest to center of screen
+      let current = 0;
+      itemRefs.current.forEach((el, index) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight / 2) {
+          current = index;
+        }
+      });
+      setActiveIndex(current);
+    };
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="relative w-full h-full"> {/* parent */}
+    <div className="relative w-full h-full max-w-full"> {/* parent */}
       {/* Particles as background */}
-      <div className="fixed inset-0 -z-10">
+      <div className="fixed inset-0 -z-10 max-w-full">
         <Particles
           particleColors={['#ffffff']}
           particleCount={500}
@@ -27,89 +92,118 @@ const TestMedia = [
       </div>
       
       {/* Content Wrapper */}
-      <div className="relative flex flex-col z-10 items-center justify-start py-16 px-4">
+      <div className="relative flex flex-col z-10 items-center justify-start py-16 max-w-full">
         <div className="relative w-full">
           {/* Center line */}
-          <div className="absolute left-1/2 top-0 w-[0.2rem] h-full bg-gradient-to-b from-white/50 to-transparent -translate-x-1/2"></div>
+          <div className="max-w-full absolute left-1/2 top-0 w-[0.2rem] h-full bg-gradient-to-b from-white/50 to-transparent -translate-x-1/2"></div>
+          <div
+  className="absolute left-1/2 w-4 h-20 bg-gradient-to-b from-[#B9E986] to-transparent rounded-full shadow-[0_0_20px_#B9E986] -translate-x-1/2 transition-all duration-300"
+  style={{
+    top:
+      itemRefs.current[activeIndex]?.offsetTop +
+      (itemRefs.current[activeIndex]?.offsetHeight ?? 0) / 2,
+  }}
+></div>
 
           {/* Initial blinking dot */}
-          <div className="absolute left-1/2 -top-12 w-24 h-24 bg-gradient-to-r from-[#0A2E36] to-[#B9E986] rounded-full flex items-center justify-center animate-pulse -translate-x-1/2 -translate-y-12 z-10">
-            <div className="w-12 h-12 bg-gray-300 rounded-full opacity-85"></div>
+          <div className="max-w-full absolute left-1/2 -top-12 w-24 h-24 bg-gradient-to-r from-[#0A2E36] to-[#B9E986] rounded-full flex items-center justify-center animate-pulse -translate-x-1/2 -translate-y-12 z-10">
+            <div className="max-w-full w-12 h-12 bg-gray-300 rounded-full opacity-85"></div>
           </div>
 
           {/* Timeline Rows */}
-          <div className="space-y-20 mt-20">
-            <div className="grid grid-cols-2 gap-4 items-center">
+          <div className="space-y-20 mt-30">
+            {combined.map((item, index) => {
+              const icon = item.source === 'academic' ? '🎓' : '💼';
+              return (
+                <div key={index}       ref={(el) => { if(el) itemRefs.current[index] = el; }} className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center h-auto md:h-screen">
 
-              {/* LEFT SIDE */}
-              <div className="flex justify-end pr-[8rem] relative">
-                {/* Connector line (center → left) */}
-                <div className="absolute right-0 top-1/2 flex items-center -translate-y-1/2">
-                  {/* Horizontal line */}
-                  <div className="bg-gradient-to-r from-purple-400 to-pink-600 w-[1rem] h-[1rem] rounded-full ml-[-0.5rem]" />
-                  {/* Dot */}
-                  <div className="w-[5rem] h-[0.2rem] bg-gradient-to-r from-white/50 to-transparent"></div>
-                </div>
-
-                {/* Left content */}
-                <div className="bg-transparent backdrop-blur-md shadow-lg rounded-2xl w-[35rem] p-6 hover:shadow-xl transition-shadow duration-300">
-                  <div className="space-y-3">
-                    {/* Date */}
-                    <div className="text-xs text-gray-300 font-light tracking-wide">
-                      <span className="inline-block">
-                        <TrueFocus 
-                          sentence="Jul 2023 — Sep 2023"
-                          manualMode={true}
-                          blurAmount={1.5}
-                          borderColor="#5227ff"
-                          animationDuration={0.5}
-                          pauseBetweenAnimations={1}
-                        />
-                      </span>
+                  {/* LEFT SIDE */}
+                  <div className="flex justify-end pr-0 md:pr-[8rem] relative transition-transform duration-300 hover:scale-105">
+                    {/* Connector line (center → left) */}
+                    <div className="hidden md:flex absolute right-0 top-1/2 flex items-center -translate-y-1/2">
+                      {/* Dot */}
+                      <div className="bg-gradient-to-r from-[#FFF07C] to-[#80FF72] w-[1rem] h-[1rem] rounded-full ml-[-0.5rem]" />
+                      {/* Horizontal line */}
+                      <div className="w-[5rem] h-[0.2rem] bg-gradient-to-r from-white/50 to-transparent"></div>
                     </div>
 
-                    {/* Title */}
-                    <h2 className="flex items-center gap-4 text-2xl font-bold text-transparent bg-clip-text bg-white m-0">
-                      <span className="bg-blue-500/20 p-2 rounded-full text-indigo-300 text-2xl">🎓</span>
-                      <span className="text-white font-extrabold text-xl leading-tight">Southern University College, Johor, Malaysia</span>
-                    </h2>
+                    {/* Left content */}
+                    <div className="bg-transparent backdrop-blur-md shadow-lg rounded-2xl w-full max-w-md md:w-[35rem] p-6 hover:shadow-xl transition-shadow duration-300">
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-1 w-full">
+                          {/* Icon + Date + Title + Headings */}
+                          <div className="flex flex-col flex-1 text-center items-center">
 
-                    {/* Heading */}
-                    <h3 className="text-base text-gray-400 font-medium">
-                      Summer Internship | Assistant Executive
-                    </h3>
-                    {/* Media display */}
-                    <div className="mt-5">
-                      <AutoMedia
-                      media={TestMedia}
-                      height="h-[20rem]"
-                      autoPlayInterval={5000}
-                      pauseOnHover={false}
-                      showDots={false}
-                      showArrows={false}
-                    />
+                            {/* Icon */}
+                            <div className="relative inline-flex items-center justify-center 
+                                            p-4 rounded-full text-4xl text-indigo-200
+                                            aspect-square w-fit h-fit mb-[2rem]
+                                            bg-indigo-500/25 shadow-[0_0_15px_#6366f1] hover:shadow-[0_0_25px_#6366f1] 
+                                            transition-shadow duration-300">
+                              {icon}
+                            </div>
+                            
+                            {/* Date */}
+                            <div className="text-xs text-gray-300 font-light tracking-wide mb-[1.1rem]">
+                              <span className="inline-block">
+                                <TrueFocus 
+                                  sentence={`${formatDate(item.start_date)} — ${formatDate(item.end_date)}`}
+                                  manualMode={true}
+                                  blurAmount={1.9}
+                                  borderColor="#5227ff"
+                                  animationDuration={0.5}
+                                  pauseBetweenAnimations={1}
+                                />
+                              </span>
+                            </div>
+
+                            {/* Title */}
+                            <h2 className="text-white font-extrabold text-xl leading-tight">
+                              {item.title}
+                            </h2>
+
+                            {/* Heading */}
+                            <h3 className="text-base text-gray-400 font-medium">
+                              {item.heading}
+                            </h3>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* RIGHT SIDE */}
+                  <div className="flex justify-start pl-0 md:pl-[4rem] relative">
+                    {/* Right content */}
+                    <div className="p-4 rounded-xl w-full max-w-lg md:w-[40rem]">
+                      <div className="text-left backdrop-blur-sm rounded-xl p-6">
+
+                        {/* Description */}
+                        <h4 className="text-white font-semibold text-sm mb-3">{item.description.title}</h4>
+                        <p className="text-gray-300 text-sm mb-4 leading-relaxed text-justify">
+                          {item.description.content}
+                        </p>
+
+                        {/* Points */}
+                        {item.points.content.length > 0 && (
+                          <div className="space-y-3">
+                            <h4 className="text-white font-semibold text-sm mb-3">{item.points.title}</h4>
+                            {item.points.content.map((point, idx) => (
+                              <div key={idx} className="flex items-start gap-3">
+                                <div className={`w-2 h-2 rounded-full mt-2 bg-gradient-to-r from-green-400 to-teal-600 flex-shrink-0`} />
+                                      <p className="text-gray-300 text-sm leading-relaxed text-justify">
+                                        {point}
+                                      </p>
+                              </div>
+                              ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* RIGHT SIDE */}
-              <div className="flex justify-start pl-[8rem] relative">
-                {/* Connector line (center → right) */}
-                <div className="absolute left-0 top-1/2 flex items-center -translate-y-1/2">
-                  {/* Dot */}
-                  <div className="w-[5rem] h-[0.2rem] bg-gradient-to-l from-white/50 to-transparent"></div>
-                  {/* Horizontal line */}
-                  <div className="bg-gradient-to-r from-purple-400 to-pink-600 w-[1rem] h-[1rem] rounded-full ml-[-0.5rem]" />
-                </div>
-
-                {/* Right content */}
-                <div className="bg-white/10 p-4 rounded-xl w-64">
-                  Right content area
-                </div>
-              </div>
-
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>
