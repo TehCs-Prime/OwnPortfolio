@@ -38,3 +38,40 @@
 .read-the-docs {
   color: #888;
 }
+
+.beam-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem; /* match rounded-2xl */
+  padding: 2px; /* border thickness */
+  background: linear-gradient(
+    90deg,
+    #6366f1,
+    #8b5cf6,
+    #6366f1,
+    #8b5cf6
+  );
+  background-size: 300% 300%;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: beamMove 4s linear infinite;
+  z-index: 0;
+}
+
+.beam-border > * {
+  position: relative;
+  z-index: 1; /* keep your content above the border */
+}
+
+@keyframes beamMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}

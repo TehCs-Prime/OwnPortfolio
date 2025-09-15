@@ -53,27 +53,36 @@ const formatDate = (dateStr: string) => {
 
 
 const TimeLineCard: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState<number>(0);
   const itemRefs = useRef<HTMLDivElement[]>([]);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+const [beamTop, setBeamTop] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // find which section is closest to center of screen
-      let current = 0;
-      itemRefs.current.forEach((el, index) => {
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight / 2) {
-          current = index;
-        }
-      });
-      setActiveIndex(current);
-    };
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
+useEffect(() => {
+  const handleScroll = () => {
+    if (!wrapperRef.current) return;
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const rect = wrapperRef.current.getBoundingClientRect();
+    const wrapperTop = window.scrollY + rect.top;   // absolute top of wrapper
+    const targetTop = window.scrollY + window.innerHeight / 2; // center of viewport
+
+    // compute top relative to wrapper
+    const relativeTop = targetTop - wrapperTop;
+
+    // clamp between 0 and wrapper height so it never goes outside
+    const clampedTop = Math.max(0, Math.min(relativeTop, rect.height));
+    setBeamTop(clampedTop);
+  };
+
+  handleScroll();
+  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('resize', handleScroll);
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('resize', handleScroll);
+  };
+}, []);
+
 
   return (
     <div className="relative w-full h-full max-w-full"> {/* parent */}
@@ -93,18 +102,15 @@ const TimeLineCard: React.FC = () => {
       
       {/* Content Wrapper */}
       <div className="relative flex flex-col z-10 items-center justify-start py-16 max-w-full">
-        <div className="relative w-full">
+        <div className="relative w-full" ref={wrapperRef}>
           {/* Center line */}
-          <div className="max-w-full absolute left-1/2 top-0 w-[0.2rem] h-full bg-gradient-to-b from-white/50 to-transparent -translate-x-1/2"></div>
-          <div
-  className="absolute left-1/2 w-4 h-20 bg-gradient-to-b from-[#B9E986] to-transparent rounded-full shadow-[0_0_20px_#B9E986] -translate-x-1/2 transition-all duration-300"
-  style={{
-    top:
-      itemRefs.current[activeIndex]?.offsetTop +
-      (itemRefs.current[activeIndex]?.offsetHeight ?? 0) / 2,
-  }}
-></div>
+          <div className="absolute left-1/2 top-0 w-[0.2rem] h-full bg-gradient-to-b from-white/50 to-transparent -translate-x-1/2"></div>
 
+          {/* Light beam */}
+          <div
+            className="absolute hidden md:block left-1/2 w-4 h-20 bg-gradient-to-b from-[#B9E986] to-[#7E9181] rounded-full shadow-[0_0_20px_#B9E986] -translate-x-1/2 z-50 "
+            style={{ top: beamTop }}
+          />
           {/* Initial blinking dot */}
           <div className="max-w-full absolute left-1/2 -top-12 w-24 h-24 bg-gradient-to-r from-[#0A2E36] to-[#B9E986] rounded-full flex items-center justify-center animate-pulse -translate-x-1/2 -translate-y-12 z-10">
             <div className="max-w-full w-12 h-12 bg-gray-300 rounded-full opacity-85"></div>
@@ -115,7 +121,7 @@ const TimeLineCard: React.FC = () => {
             {combined.map((item, index) => {
               const icon = item.source === 'academic' ? '🎓' : '💼';
               return (
-                <div key={index}       ref={(el) => { if(el) itemRefs.current[index] = el; }} className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center h-auto md:h-screen">
+                <div key={index} ref={(el) => { if(el) itemRefs.current[index] = el; }} className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center h-auto md:h-screen">
 
                   {/* LEFT SIDE */}
                   <div className="flex justify-end pr-0 md:pr-[8rem] relative transition-transform duration-300 hover:scale-105">
@@ -128,7 +134,7 @@ const TimeLineCard: React.FC = () => {
                     </div>
 
                     {/* Left content */}
-                    <div className="bg-transparent backdrop-blur-md shadow-lg rounded-2xl w-full max-w-md md:w-[35rem] p-6 hover:shadow-xl transition-shadow duration-300">
+                    <div className="relative bg-transparent backdrop-blur-md shadow-lg rounded-2xl w-full max-w-md md:w-[35rem] p-6 hover:shadow-xl transition-shadow duration-300 beam-border">
                       <div className="space-y-3">
                         <div className="flex items-center gap-1 w-full">
                           {/* Icon + Date + Title + Headings */}
