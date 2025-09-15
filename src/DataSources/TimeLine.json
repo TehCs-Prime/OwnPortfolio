@@ -95,24 +95,24 @@
       "heading": "",
       "description": {
         "title": "",
-        "content": "Duties including:"
+        "content": ""
       },
       "points": {
-        "title": "",
+        "title": "Duties including:",
         "content": [
         "Led a team of about 15 people across the academic year, coordinating tasks and ensuring cross-unit collaboration.",
         "Supervised the progress and provided feedback to drive continuous improvement."
         ]
       },
       "media": [
-        { "type": "image", "path": "assets/images/.jpg" },
-        { "type": "video", "path": "assets/videos/.mp4" }
+        { "type": "image", "path": "assets/ExpImg1.png" },
+        { "type": "video", "path": "assets/Expvideo.mp4" }
       ]
     },
     {
       "start_date": "2017-01",
       "end_date": "2021-02",
-      "title": "",
+      "title": "President of the History & Geography Club",
       "heading": "",
       "description": {
         "title": "",
@@ -120,14 +120,29 @@
       },
       "points": {
         "title": "",
-        "content": [
-        "President of the History & Geography Club",
-        "President of the STEM Society (Science, Technology, Engineering, Mathematics)"
-        ]
+        "content": []
       },
       "media": [
-        { "type": "image", "path": "assets/images/.jpg" },
-        { "type": "video", "path": "assets/videos/.mp4" }
+        { "type": "image", "path": "assets/ExpImg2.png" },
+        { "type": "video", "path": "assets/Expvideo.mp4" }
+      ]
+    },
+    {
+      "start_date": "2017-01",
+      "end_date": "2021-02",
+      "title": "President of the STEM Society (Science, Technology, Engineering, Mathematics)",
+      "heading": "",
+      "description": {
+        "title": "",
+        "content": ""
+      },
+      "points": {
+        "title": "",
+        "content": []
+      },
+      "media": [
+        { "type": "image", "path": "assets/ExpImg1.png" },
+        { "type": "video", "path": "assets/Expvideo.mp4" }
       ]
     }
   ],
@@ -146,14 +161,14 @@
         "content": []
       },
       "media": [
-        { "type": "image", "path": "assets/images/.jpg" },
-        { "type": "video", "path": "assets/videos/.mp4" }
+        { "type": "image", "path": "assets/ExpImg1.png" },
+        { "type": "video", "path": "assets/Expvideo.mp4" }
       ]
     },
     {
       "start_date": "2022-09",
       "end_date": "",
-      "title": "",
+      "title": "National Chemistry Quiz of Malaysia (K3M) 2022",
       "heading": "",
       "description": {
         "title": "",
@@ -161,16 +176,65 @@
       },
       "points": {
         "title": "",
-        "content": [
-        "National Chemistry Quiz of Malaysia (K3M) 2022 ",
-        "Matriculation Co-Curricular Sports Carnival (KAKOM)",
-        "Champion | KMJ Maths Trail ’23",
-        "Second-runner up | KMJ e-Quizzery Science Carnival"
-        ]
+        "content": []
       },
       "media": [
-        { "type": "image", "path": "assets/images/.jpg" },
-        { "type": "video", "path": "assets/videos/.mp4" }
+        { "type": "image", "path": "assets/ExpImg2.png" },
+        { "type": "video", "path": "assets/Expvideo.mp4" }
+      ]
+    },
+    {
+      "start_date": "2022-09",
+      "end_date": "",
+      "title": "Matriculation Co-Curricular Sports Carnival (KAKOM)",
+      "heading": "",
+      "description": {
+        "title": "",
+        "content": ""
+      },
+      "points": {
+        "title": "",
+        "content": []
+      },
+      "media": [
+        { "type": "image", "path": "assets/ExpImg1.png" },
+        { "type": "video", "path": "assets/Expvideo.mp4" }
+      ]
+    },
+    {
+      "start_date": "2022-09",
+      "end_date": "",
+      "title": "Champion | KMJ Maths Trail ’23",
+      "heading": "",
+      "description": {
+        "title": "",
+        "content": ""
+      },
+      "points": {
+        "title": "",
+        "content": []
+      },
+      "media": [
+        { "type": "image", "path": "assets/ExpImg2.png" },
+        { "type": "video", "path": "assets/Expvideo.mp4" }
+      ]
+    },
+    {
+      "start_date": "2022-09",
+      "end_date": "",
+      "title": "Second-runner up | KMJ e-Quizzery Science Carnival",
+      "heading": "",
+      "description": {
+        "title": "",
+        "content": ""
+      },
+      "points": {
+        "title": "",
+        "content": []
+      },
+      "media": [
+        { "type": "image", "path": "assets/ExpImg1.png" },
+        { "type": "video", "path": "assets/Expvideo.mp4" }
       ]
     },
     {
@@ -187,8 +251,8 @@
         "content": []
       },
       "media": [
-        { "type": "image", "path": "assets/images/.jpg" },
-        { "type": "video", "path": "assets/videos/.mp4" }
+        { "type": "image", "path": "assets/ExpImg2.png" },
+        { "type": "video", "path": "assets/Expvideo.mp4" }
       ]
     }
   ]

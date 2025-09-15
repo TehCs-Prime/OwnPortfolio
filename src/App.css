@@ -67,6 +67,16 @@
   z-index: 1; /* keep your content above the border */
 }
 
+/* tailwind.css or global.css */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+
 @keyframes beamMove {
   0% {
     background-position: 0% 50%;

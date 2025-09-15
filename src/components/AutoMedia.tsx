@@ -1,146 +1,162 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export type MediaItem = {
-  id?: string | number;
-  type: "image" | "video";
-  src: string;
-  alt?: string;
-  poster?: string; // for videos
+type TimelineEntry = {
+  start_date: string;
+  end_date: string;
+  title: string;
+  heading?: string;
+  description: { title?: string; content?: string };
+  points: { title?: string; content: string[] };
+  media: { type: string; path: string }[];
 };
 
 type Props = {
-  media: MediaItem[];
-  height?: string; // Tailwind-friendly height (e.g. 'h-72' or 'h-80')
-  autoPlayInterval?: number; // ms
+  entry: TimelineEntry;
+  height?: string;
+  imageDuration?: number; // ms to show image before next
   pauseOnHover?: boolean;
-  showDots?: boolean;
-  showArrows?: boolean;
 };
 
-export default function AutoMedia({
-  media,
+function formatDate(dateString: string) {
+  if (!dateString) return "";
+  const [year, month] = dateString.split("-");
+  const d = new Date(Number(year), Number(month) - 1, 1);
+  return d.toLocaleString("default", { month: "short", year: "numeric" });
+}
+
+export default function AutoMediaUnderHeading({
+  entry,
   height = "h-72",
-  autoPlayInterval = 4000,
+  imageDuration = 3000,
   pauseOnHover = true,
-  showDots = true,
-  showArrows = true,
 }: Props) {
-  const [index, setIndex] = useState(0);
+  const [mediaIndex, setMediaIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef<number | null>(null);
 
-  const length = media.length;
+  // Build media array from entry, ensure leading '/'
+  const media = (entry.media || []).map((m, i) => ({
+    id: i,
+    type: m.type as "image" | "video",
+    src: m.path.startsWith("/") ? m.path : "/" + m.path,
+  }));
+
+  // Show image for fixed duration
   useEffect(() => {
-    if (length <= 1) return;
-    if (isPaused) return;
-    // auto advance
-    timerRef.current = window.setInterval(() => {
-      setIndex((i) => (i + 1) % length);
-    }, autoPlayInterval);
+    if (!media.length) return;
+    const current = media[mediaIndex];
+    if (!current) return;
+
+    // For images, schedule next
+    if (current.type === "image" && !isPaused) {
+      timerRef.current = window.setTimeout(() => {
+        nextMedia();
+      }, imageDuration);
+    }
 
     return () => {
       if (timerRef.current) {
-        clearInterval(timerRef.current);
+        clearTimeout(timerRef.current);
         timerRef.current = null;
       }
     };
-  }, [isPaused, autoPlayInterval, length]);
+  }, [mediaIndex, media, isPaused, imageDuration]);
 
-  function go(n: number) {
-    setIndex((i) => {
-      const next = (i + n + length) % length;
-      return next;
-    });
+  function nextMedia() {
+    setMediaIndex((idx) => (idx + 1) % media.length);
   }
 
-  if (!media || media.length === 0) return null;
+  const startFormatted = formatDate(entry.start_date);
+  const endFormatted = formatDate(entry.end_date);
+
+  if (!entry) return null;
 
   return (
     <div
-      className={`w-full ${height} relative rounded-2xl overflow-hidden shadow-md bg-black/30`}
+      className="w-[30rem] mx-auto bg-transparent backdrop-blur-md shadow-lg rounded-2xl p-6 hover:shadow-xl transition-shadow duration-300 space-y-4"
       onMouseEnter={() => pauseOnHover && setIsPaused(true)}
       onMouseLeave={() => pauseOnHover && setIsPaused(false)}
     >
-      {/* media slides */}
-      <AnimatePresence initial={false} mode="wait">
-        {media.map((m, i) =>
-          i === index ? (
-            <motion.div
-              key={m.id ?? i}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.6 }}
-              className="absolute inset-0 w-full h-full flex items-center justify-center"
-            >
-              {m.type === "image" ? (
-                <img
-                  src={m.src}
-                  alt={m.alt ?? "media"}
-                  className="object-cover w-full h-full"
-                  draggable={false}
-                />
-              ) : (
-                <video
-                  key={m.src}
-                  src={m.src}
-                  poster={m.poster}
-                  className="object-cover w-full h-full"
-                  playsInline
-                  autoPlay
-                  muted
-                  loop
-                />
-              )}
+      {/* Date Range Highlight */}
+      <div className="inline-block text-gray-300 px-3 py-1 rounded-full text-xs font-bold tracking-wide shadow-md">
+        {startFormatted}
+        {endFormatted && ` — ${endFormatted}`}
+      </div>
 
-              {/* soft gradient overlay to keep headings readable */}
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-            </motion.div>
-          ) : null
-        )}
-      </AnimatePresence>
-
-      {/* arrows */}
-      {showArrows && length > 1 && (
-        <>
-          <button
-            aria-label="Previous"
-            onClick={() => go(-1)}
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 bg-black/30 backdrop-blur-sm p-2 rounded-full hover:scale-105 transition-transform"
-          >
-            <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-
-          <button
-            aria-label="Next"
-            onClick={() => go(1)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 bg-black/30 backdrop-blur-sm p-2 rounded-full hover:scale-105 transition-transform"
-          >
-            <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" d="M9 6l6 6-6 6" />
-            </svg>
-          </button>
-        </>
+      {/* Title */}
+      <h2 className="text-white font-extrabold text-xl leading-tight">
+        {entry.title}
+      </h2>
+      {entry.heading && (
+        <p className="text-gray-400 text-sm">{entry.heading}</p>
       )}
 
-      {/* dots */}
-      {showDots && length > 1 && (
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-3 z-30 flex gap-2">
-          {media.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setIndex(i)}
-              className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                i === index ? "scale-125 bg-white" : "bg-white/40"
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
+      {/* Media block right after title */}
+      {media.length > 0 && (
+        <div
+          className={`w-full mx-auto ${height} relative rounded-2xl overflow-hidden shadow-md bg-black/30`}
+        >
+          <AnimatePresence initial={false} mode="wait">
+            {media.map((m, i) =>
+              i === mediaIndex ? (
+                <motion.div
+                  key={m.id}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute inset-0 w-full h-full flex items-center justify-center"
+                >
+                  {m.type === "image" ? (
+                    <img
+                      src={m.src}
+                      alt="media"
+                      className="object-cover w-full h-full"
+                      draggable={false}
+                    />
+                  ) : (
+                    <video
+                      key={m.src}
+                      src={m.src}
+                      className="object-cover w-full h-full"
+                      playsInline
+                      autoPlay
+                      muted
+                      onEnded={nextMedia}
+                    />
+                  )}
+                  <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                </motion.div>
+              ) : null
+            )}
+          </AnimatePresence>
         </div>
       )}
+
+      {/* Points + Description below media */}
+      <div className="space-y-2 text-left mx-auto">
+        {entry.points?.title && (
+          <h4 className="text-white font-semibold text-sm mb-3">
+            {entry.points.title}
+          </h4>
+        )}
+        {entry.points?.content && entry.points.content.length > 0 && (
+          <ul className="space-y-2 text-gray-300 text-sm">
+            {entry.points.content.map((p, idx) => (
+              <li key={idx} className="flex items-start gap-2">
+                <div
+                  className={`w-2 h-2 rounded-full mt-2 bg-gradient-to-r from-green-400 to-teal-600 flex-shrink-0`}
+                />
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        {entry.description?.content && (
+          <p className="text-gray-400 text-sm">{entry.description.content}</p>
+        )}
+      </div>
     </div>
   );
 }
