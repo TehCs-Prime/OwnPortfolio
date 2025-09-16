@@ -84,6 +84,7 @@ const TimeLineCard: React.FC = () => {
   const rightRefs = useRef<HTMLDivElement[]>([]);
   const [beamOpacity, setBeamOpacity] = useState(1); 
   const [isMobile, setIsMobile] = useState(false);
+  const [currentCounter, setCurrentCounter] = useState(0);
 
 useEffect(() => {
   const checkScreen = () => setIsMobile(window.innerWidth < 768); // Tailwind md breakpoint
@@ -184,9 +185,56 @@ useEffect(() => {
   };
 }, [isMobile]);
 
+useEffect(() => {
+  let ticking = false;
+
+  const handleScroll = () => {
+    if (!wrapperRef.current) return;
+
+    const scrollY = window.scrollY + window.innerHeight / 2;
+
+    // Only main timeline entries (left + right cards)
+    const mainRows = itemRefs.current.filter(Boolean);
+
+    for (let i = 0; i < mainRows.length; i++) {
+      const row = mainRows[i];
+      const rect = row.getBoundingClientRect();
+      const rowTop = window.scrollY + rect.top;
+      const rowBottom = rowTop + rect.height;
+
+      if (scrollY >= rowTop && scrollY <= rowBottom) {
+        setCurrentCounter(i + 1); // counter starts from 1
+        break;
+      }
+    }
+
+    ticking = false;
+  };
+
+  const onScroll = () => {
+    if (!ticking) {
+      requestAnimationFrame(handleScroll);
+      ticking = true;
+    }
+  };
+
+  window.addEventListener('scroll', onScroll);
+
+  return () => window.removeEventListener('scroll', onScroll);
+}, []);
+
+
 
   return (
     <div className="relative w-full h-full max-w-full"> {/* parent */}
+      {/* Timeline Event Counter */}
+      <div
+        className="fixed top-4 left-4 z-50 text-[6rem] font-extrabold pointer-events-none select-none opacity-70"
+        style={{ color: '#d8d4c4' }}
+      >
+        {String(currentCounter).padStart(2, '0')}
+      </div> 
+
       {/* Particles as background */}
       <div className="fixed inset-0 -z-10 max-w-full">
         <Particles
