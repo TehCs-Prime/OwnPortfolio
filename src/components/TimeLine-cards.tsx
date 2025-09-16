@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Particles from './Particles';
 import TrueFocus from './TrueFocus';
-import CircularGallery from "./CircularGallery";
 import timelineData from '../DataSources/TimeLine.json';
+import HorizontalGallery from "./HorizontalGallery";
+import GalleryDiv from "./GalleryDiv";
+import AutoMedia from "./AutoMedia";
 
 type TimelineItem = {
   start_date: string;
@@ -52,10 +54,26 @@ const formatDate = (dateStr: string) => {
   return date.toLocaleString('en-US', { month: 'short', year: 'numeric' });
 };
 
-//To be deleted 
-const entries = [
-    ...timelineData.participations_achievements,
-  ];
+const allEvents = [
+  ...timelineData.participations_achievements,
+  ...timelineData.competitions_awards
+];
+
+function parseDate(str: string) {
+  if (!str || str.toLowerCase() === 'present') return new Date(); // now
+  const [y, m] = str.split('-').map(Number);
+  return new Date(y, (m || 1) - 1);
+}
+
+function isEventInRange(eventStart: string, eventEnd: string, itemStart: string, itemEnd: string) {
+  const evStart = parseDate(eventStart).getTime();
+  const evEnd = eventEnd ? parseDate(eventEnd).getTime() : evStart;
+  const itStart = parseDate(itemStart).getTime();
+  const itEnd = itemEnd ? parseDate(itemEnd).getTime() : Date.now();
+
+  return evStart <= itEnd && evEnd >= itStart; // overlaps
+}
+
 
 const TimeLineCard: React.FC = () => {
   const itemRefs = useRef<HTMLDivElement[]>([]);
@@ -200,13 +218,13 @@ useEffect(() => {
           </div>
 
           {/* Timeline Rows */}
-          <div className="space-y-20 mt-30">
+          <div className="space-y-32 mt-[15rem]">
             {combined.map((item, index) => {
               const icon = item.source === 'academic' ? '🎓' : '💼';
               return (
-                <div key={index} className="space-y-8"> 
+                <div key={index} className="space-y-[12rem]"> 
                   {/* Row 1: */}
-                  <div ref={(el) => { if(el) itemRefs.current[index] = el; }} className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center h-auto md:h-screen">
+                  <div ref={(el) => { if(el) itemRefs.current[index] = el; }} className="grid mt-[20rem] grid-cols-1 md:grid-cols-2 gap-4 items-center">
 
                     {/* LEFT SIDE */}
                     <div ref={el => { if (el) leftRefs.current[index] = el; }} className="flex justify-end pr-0 md:pr-[8rem] relative transition-transform duration-300 hover:scale-105">
@@ -295,13 +313,35 @@ useEffect(() => {
                   </div>
 
                   {/* Row 2: New row under the above two columns */}
-                  <div
-                    ref={el => { if (el) fullRowRefs.current[index] = el; }}
-                    className="relative w-full bg-black/30 backdrop-blur-md rounded-xl p-6">
-                      {/* full width content goes here */}
-                    <CircularGallery entries={entries} />
-                    {/* <AutoMedia media={item.media} /> */}
-                  </div>
+                    {(() => {
+                      // Filter events under this row
+                      const eventsForThisItem = allEvents.filter(ev =>
+                        isEventInRange(ev.start_date, ev.end_date, item.start_date, item.end_date)
+                      );
+
+                    if (eventsForThisItem.length === 0) return null; // nothing at all
+
+                      return (
+                        <div
+                          ref={el => { if (el) fullRowRefs.current[index] = el; }}
+                          className="relative w-full bg-black/30 item-start backdrop-blur-md rounded-xl p-6"
+                        >
+                          <HorizontalGallery >
+                            <GalleryDiv galleryItemsAspectRatio="square">
+                              {eventsForThisItem.map((ev, idx) => (
+                                <AutoMedia
+                                  key={idx}
+                                  entry={ev}       // single entry now
+                                  height="h-full min-h-[15rem]"
+                                  imageDuration={4000}
+                                  pauseOnHover={false}
+                                />
+                              ))}
+                            </GalleryDiv>
+                          </HorizontalGallery>
+                        </div>
+                      );
+                    })()}
                 </div>
               );
             })}

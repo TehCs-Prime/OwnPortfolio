@@ -25,7 +25,7 @@ function formatDate(dateString: string) {
   return d.toLocaleString("default", { month: "short", year: "numeric" });
 }
 
-export default function AutoMediaUnderHeading({
+export default function AutoMedia({
   entry,
   height = "h-72",
   imageDuration = 3000,
@@ -74,7 +74,7 @@ export default function AutoMediaUnderHeading({
 
   return (
     <div
-      className="w-[30rem] mx-auto bg-transparent backdrop-blur-md shadow-lg rounded-2xl p-6 hover:shadow-xl transition-shadow duration-300 space-y-4"
+      className="w-[30rem] mx-auto bg-transparent backdrop-blur-md shadow-lg rounded-2xl p-6 py-0 hover:shadow-xl transition-shadow duration-300 space-y-4"
       onMouseEnter={() => pauseOnHover && setIsPaused(true)}
       onMouseLeave={() => pauseOnHover && setIsPaused(false)}
     >
@@ -85,7 +85,7 @@ export default function AutoMediaUnderHeading({
       </div>
 
       {/* Title */}
-      <h2 className="text-white font-extrabold text-xl leading-tight">
+      <h2 className="text-softBeige font-extrabold text-xl leading-tight min-h-[3rem]">
         {entry.title}
       </h2>
       {entry.heading && (
@@ -95,7 +95,7 @@ export default function AutoMediaUnderHeading({
       {/* Media block right after title */}
       {media.length > 0 && (
         <div
-          className={`w-full mx-auto ${height} relative rounded-2xl overflow-hidden shadow-md bg-black/30`}
+          className={`w-[25rem] min-h-[15rem] mx-auto ${height} relative rounded-2xl overflow-hidden shadow-md bg-black/30`}
         >
           <AnimatePresence initial={false} mode="wait">
             {media.map((m, i) =>
@@ -112,20 +112,21 @@ export default function AutoMediaUnderHeading({
                     <img
                       src={m.src}
                       alt="media"
-                      className="object-cover w-full h-full"
+                      className="object-cover w-full h-full filter brightness-80"
                       draggable={false}
                     />
                   ) : (
                     <video
                       key={m.src}
                       src={m.src}
-                      className="object-cover w-full h-full"
+                      className="object-cover w-full h-full filter brightness-80"
                       playsInline
                       autoPlay
                       muted
                       onEnded={nextMedia}
                     />
                   )}
+                  {/* Slightly darker overlay to reduce brightness even more */}
                   <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 </motion.div>
               ) : null
