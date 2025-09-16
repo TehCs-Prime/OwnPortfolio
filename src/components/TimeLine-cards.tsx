@@ -191,21 +191,27 @@ useEffect(() => {
   const handleScroll = () => {
     if (!wrapperRef.current) return;
 
-    const scrollY = window.scrollY + window.innerHeight / 2;
-
-    // Only main timeline entries (left + right cards)
+    const mid = window.innerHeight / 2; // viewport midpoint (y)
     const mainRows = itemRefs.current.filter(Boolean);
+    let found = false;
 
     for (let i = 0; i < mainRows.length; i++) {
-      const row = mainRows[i];
-      const rect = row.getBoundingClientRect();
-      const rowTop = window.scrollY + rect.top;
-      const rowBottom = rowTop + rect.height;
-
-      if (scrollY >= rowTop && scrollY <= rowBottom) {
-        setCurrentCounter(i + 1); // counter starts from 1
+      const rect = mainRows[i].getBoundingClientRect();
+      // check if viewport midpoint lies inside this row (viewport coords)
+      if (rect.top <= mid && rect.bottom >= mid) {
+        setCurrentCounter(prev => (prev !== i + 1 ? i + 1 : prev));
+        found = true;
         break;
       }
+    }
+
+    if (!found && mainRows.length) {
+      const firstRectTop = mainRows[0].getBoundingClientRect().top;
+      // Only reset to 0 when the midpoint is ABOVE the first row
+      if (mid < firstRectTop) {
+        setCurrentCounter(prev => (prev !== 0 ? 0 : prev));
+      }
+      // if midpoint is below last row => do nothing (keep last counter)
     }
 
     ticking = false;
@@ -218,10 +224,11 @@ useEffect(() => {
     }
   };
 
-  window.addEventListener('scroll', onScroll);
-
+  window.addEventListener('scroll', onScroll, { passive: true });
+  handleScroll(); // run once on mount to set initial counter
   return () => window.removeEventListener('scroll', onScroll);
 }, []);
+
 
 
 
