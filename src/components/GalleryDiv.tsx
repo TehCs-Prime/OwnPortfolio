@@ -51,7 +51,7 @@ export default function GalleryDiv({
           <div
             key={i}
             className={`
-              flex-shrink-0 snap-center overflow-hidden object-cover
+              flex-shrink-0 snap-center overflow-visible object-cover
               ${
                 galleryItemsAspectRatio === "video"
                   ? "aspect-video"

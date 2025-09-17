@@ -74,7 +74,7 @@ export default function AutoMedia({
 
   return (
     <div
-      className="w-[30rem] mx-auto bg-transparent backdrop-blur-md shadow-lg rounded-2xl p-6 py-0 hover:shadow-xl transition-shadow duration-300 space-y-4"
+      className="w-full max-w-[23rem] sm:max-w-[30rem] mx-auto bg-transparent backdrop-blur-md shadow-lg rounded-2xl p-4 sm:p-6 hover:shadow-xl transition-shadow duration-300 space-y-4"
       onMouseEnter={() => pauseOnHover && setIsPaused(true)}
       onMouseLeave={() => pauseOnHover && setIsPaused(false)}
     >
@@ -94,9 +94,7 @@ export default function AutoMedia({
 
       {/* Media block right after title */}
       {media.length > 0 && (
-        <div
-          className={`w-[25rem] min-h-[15rem] mx-auto ${height} relative rounded-2xl overflow-hidden shadow-md bg-black/30`}
-        >
+<div className={`w-full max-w-[20rem] min-h-[15rem] mx-auto ${height} relative rounded-2xl overflow-hidden shadow-md bg-black/30`}>
           <AnimatePresence initial={false} mode="wait">
             {media.map((m, i) =>
               i === mediaIndex ? (

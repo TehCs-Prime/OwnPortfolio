@@ -236,7 +236,7 @@ useEffect(() => {
     <div className="relative w-full h-full max-w-full"> {/* parent */}
       {/* Timeline Event Counter */}
       <div
-        className="fixed top-4 left-4 z-50 text-[6rem] font-extrabold pointer-events-none select-none opacity-70"
+        className="fixed top-16 sm:top-2 left-4 z-50 text-[6rem] font-extrabold pointer-events-none select-none opacity-70"
         style={{ color: '#d8d4c4' }}
       >
         {String(currentCounter).padStart(2, '0')}
@@ -379,7 +379,7 @@ useEffect(() => {
                       return (
                         <div
                           ref={el => { if (el) fullRowRefs.current[index] = el; }}
-                          className="relative w-full bg-black/30 item-start backdrop-blur-md rounded-xl p-6"
+                          className="relative w-full items-stretch bg-black/30 item-start backdrop-blur-md rounded-xl p-0 sm:p-6"
                         >
                           <HorizontalGallery >
                             <GalleryDiv galleryItemsAspectRatio="square">
