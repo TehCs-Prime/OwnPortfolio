@@ -7,10 +7,10 @@
       "start_date": "2023-10",
       "end_date": "Present",
       "title": "Universiti Sains Malaysia (USM), Penang",
-      "heading": "CGPA: 3.77 | Bachelor of Computer Sciences (Intelligent Computing) with Honours",
+      "heading": "CGPA: 3.78 | Bachelor of Computer Sciences (Intelligent Computing) with Honours",
       "description": {
         "title": "Core subjects:",
-        "content": "Machine Learning and Computational Intelligence, Programming Methodology and Paradigms, Design & Analysis of Algorithms, Operating Systems, Database, Principles of Computer Networks and Information Security, Integrated Software Development Workshop."
+        "content": "Machine Learning and Computational Intelligence, Programming Methodology and Data Structures, Design & Analysis of Algorithms, Operating Systems, Database Organisation & Design, Principles of Computer Networks and Information Security, Integrated Software Development Workshop."
       },
       "points": {
         "title": "",
@@ -27,8 +27,26 @@
       "title": "Kolej Matrikulasi Johor (KMJ), Johor",
       "heading": "CGPA: 4.0 | Matriculation in Science",
       "description": {
+        "title": "Core subjects:",
+        "content": "Physics, Chemistry, Biology, Advanced Mathematics and Basic Programming"
+      },
+      "points": {
         "title": "",
-        "content": ""
+        "content": []
+      },
+      "media": [
+        { "type": "image", "path": "assets/images/.jpg" },
+        { "type": "video", "path": "assets/videos/.mp4" }
+      ]
+    },
+    {
+      "start_date": "2017-01",
+      "end_date": "2022-03",
+      "title": "SMK Sri Tebrau, Johor Bahru",
+      "heading": "Straight 9As | Sijil Pelajaran Malaysia (SPM) 2021",
+      "description": {
+        "title": "Core subjects:",
+        "content": "Physics, Chemistry, Biology, Advanced and Basic Mathematics, History, English Language, Malay Language, Moral Education"
       },
       "points": {
         "title": "",
@@ -110,8 +128,8 @@
       ]
     },
     {
-      "start_date": "2017-01",
-      "end_date": "2021-02",
+      "start_date": "2020-01",
+      "end_date": "2022-03",
       "title": "President of the History & Geography Club",
       "heading": "",
       "description": {
@@ -128,8 +146,8 @@
       ]
     },
     {
-      "start_date": "2017-01",
-      "end_date": "2021-02",
+      "start_date": "2020-01",
+      "end_date": "2022-03",
       "title": "President of the STEM Society (Science, Technology, Engineering, Mathematics)",
       "heading": "",
       "description": {
