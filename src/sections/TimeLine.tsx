@@ -1,11 +1,40 @@
 import TimeLineTop from "../components/TimeLine-top";
 import TimeLineCards from "../components/TimeLine-cards"
 import FuzzyText from '../components/FuzzyText';
+import useTypewriterlooping from '../Tools/Tools-useTypewriterlooping';
+
+import { useEffect, useRef, useState } from 'react';
 
 const TimeLine = () => {
+    // Visibility observer
+  const paragraphRef = useRef<HTMLParagraphElement>(null);
+  const [startTyping, setStartTyping] = useState(false);
 
-    const fontSize = window.innerWidth < 768 ? '30rem' : '6rem';
-    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setStartTyping(true); // start typing once visible
+          observer.disconnect(); // stop observing after triggered once
+        }
+      },
+      { threshold: 0.3 } // 30% visible triggers it
+    );
+    if (paragraphRef.current) observer.observe(paragraphRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const fontSize = window.innerWidth < 768 ? '30rem' : '6rem';
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const secEndingDes = useTypewriterlooping(
+    [
+        'A story still being written, driven by the belief that every experience brings me closer to the person who makes a real impact ...'
+    ],
+    10,    // typing speed (ms)
+    100,   // pause before deleting (ms)
+    false,   // don’t loop, just type once
+    startTyping // start only when visible
+    );
     return (
         <div className="relative w-full h-full max-w-full ">
 
@@ -44,18 +73,8 @@ const TimeLine = () => {
             <TimeLineCards/>
 
             {/* Section description */}
-            <p className="sectionDes bg-black mt-16 p-[2rem] sm:p-[8rem] mb-32 text-[#d8d4c4] text-lg sm:text-xl leading-relaxed text-justify">
-                A story still being written, driven by the belief that every experience brings me closer to <strong>the person who makes a real impact ...</strong>
-                <span
-                    style={{
-                    display: 'inline-block',
-                    width: '1ch',
-                    marginLeft: '2px',
-                    animation: 'blink 2.5s step-start infinite'
-                    }}
-                >
-                    ▌
-                </span>
+            <p ref={paragraphRef} className="sectionDes bg-black mt-16 p-[2rem] sm:p-[8rem] mb-32 text-[#d8d4c4] text-lg sm:text-xl leading-relaxed text-justify">
+                {secEndingDes}
             </p>
         </div>
         

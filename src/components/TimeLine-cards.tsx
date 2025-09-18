@@ -292,7 +292,7 @@ useEffect(() => {
                       </div>
 
                       {/* Left content */}
-                      <div className="relative bg-transparent backdrop-blur-md shadow-lg rounded-2xl w-full max-w-md md:w-[35rem] p-6 hover:shadow-xl transition-shadow duration-300 beam-border">
+                      <div className="relative bg-transparent backdrop-blur-md shadow-lg rounded-2xl w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-[35rem] p-6 hover:shadow-xl mx-auto item-center transition-shadow duration-300 beam-border">
                         <div className="space-y-3">
                           <div className="flex items-center gap-1 w-full">
                             {/* Icon + Date + Title + Headings */}
