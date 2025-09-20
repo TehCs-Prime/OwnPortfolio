@@ -57,8 +57,9 @@ const SpaceBoiScene = () => {
     // === Load GLTF Model ===
     let model: THREE.Object3D | null = null;
     const loader = new GLTFLoader();
+    const modelUrl = `${import.meta.env.BASE_URL}assets/space_boi/scene.gltf`;
     loader.load(
-      "https://github.com/TehCs-Prime/OwnPortfolio/releases/download/v1.0-3DmodelAssets/scene.gltf",
+      modelUrl,
       (gltf) => {
         model = gltf.scene;
         // Adjust model scale for mobile

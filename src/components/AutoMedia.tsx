@@ -35,11 +35,11 @@ export default function AutoMedia({
   const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef<number | null>(null);
 
-  // Build media array from entry, ensure leading '/'
+  // Build media array from entry, ensure correct base URL (exist in public/assets/)
   const media = (entry.media || []).map((m, i) => ({
     id: i,
     type: m.type as "image" | "video",
-    src: m.path.startsWith("/") ? m.path : "/" + m.path,
+    src: `${import.meta.env.BASE_URL}${m.path.replace(/^\/+/, '')}`, 
   }));
 
   // Show image for fixed duration
