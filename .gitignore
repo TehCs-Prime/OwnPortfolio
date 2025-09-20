@@ -1,3 +1,7 @@
+# Large 3D model source file 
+public/assets/space_boi/scene.bin
+public/assets/space_boi/scene.gltf
+
 # Logs
 logs
 *.log
