@@ -2,6 +2,9 @@
 public/assets/space_boi/scene.bin
 public/assets/space_boi/scene.gltf
 
+public/assets/scene.bin
+public/assets/scene.gltf
+
 # Logs
 logs
 *.log
