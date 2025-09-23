@@ -1,6 +1,8 @@
 import './App.css'
-import TimeLine from "./sections/TimeLine";
 import Header from "./sections/Header";
+import Footer from "./sections/Footer";
+import TimeLine from "./sections/TimeLine";
+
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
       >
         <TimeLine />
       </main>
+
+      <Footer />
     </>
   );
 }
