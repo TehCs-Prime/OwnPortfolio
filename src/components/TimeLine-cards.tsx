@@ -84,7 +84,31 @@ const TimeLineCard: React.FC = () => {
   const rightRefs = useRef<HTMLDivElement[]>([]);
   const [beamOpacity, setBeamOpacity] = useState(1); 
   const [isMobile, setIsMobile] = useState(false);
+  const [showCounter, setShowCounter] = useState(false);
   const [currentCounter, setCurrentCounter] = useState(0);
+
+useEffect(() => {
+  const handleVisibility = () => {
+    if (!wrapperRef.current) return;
+    const rect = wrapperRef.current.getBoundingClientRect();
+
+    const viewportMid = window.innerHeight / 2;
+
+    // Show only if midpoint of viewport is inside wrapper
+    const isVisible = viewportMid >= rect.top && viewportMid <= rect.bottom;
+
+    setShowCounter(isVisible);
+  };
+
+  handleVisibility();
+  window.addEventListener('scroll', handleVisibility, { passive: true });
+  window.addEventListener('resize', handleVisibility);
+
+  return () => {
+    window.removeEventListener('scroll', handleVisibility);
+    window.removeEventListener('resize', handleVisibility);
+  };
+}, []);
 
 useEffect(() => {
   const checkScreen = () => setIsMobile(window.innerWidth < 768); // Tailwind md breakpoint
@@ -236,7 +260,10 @@ useEffect(() => {
     <div className="relative w-full h-full max-w-full"> {/* parent */}
       {/* Timeline Event Counter */}
       <div
-        className="fixed top-16 sm:top-2 left-4 z-50 text-[6rem] font-extrabold pointer-events-none select-none opacity-70"
+        className={`fixed top-12 sm:top-48 left-4 sm:left-12 z-50 
+          text-[6rem] font-extrabold pointer-events-none select-none
+          transition-all duration-500 
+          ${showCounter ? 'opacity-70 translate-y-0' : 'opacity-0 translate-y-4'}`}
         style={{ color: '#d8d4c4' }}
       >
         {String(currentCounter).padStart(2, '0')}
