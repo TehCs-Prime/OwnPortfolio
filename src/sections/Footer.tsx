@@ -30,10 +30,10 @@ const Footer = () => {
     };
 
   return (
-    <footer className="relative flex flex-col items-center justify-center gap-y-16 backdrop-blur-sm py-20 px-8 md:px-20 shadow-xl" >
+    <footer className="relative flex flex-col items-center justify-center gap-y-16 backdrop-blur-sm py-20 px-8 md:px-20 shadow-xl mt-20" >
         
         {/* Upper Row - Menu + Contact Form, Socials */}
-        <div className="grid w-full grid-cols-1 gap-16 text-lg md:grid-cols-12"> 
+        <div className="grid w-full grid-cols-1 gap-8 sm:gap-16 text-lg md:grid-cols-12"> 
 
             {/* Left Column - Menu */}
             <div className="flex flex-col md:col-span-6">
