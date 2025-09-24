@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [showHeader, setShowHeader] = useState(true);
@@ -66,18 +67,19 @@ const Header = () => {
           <nav className="col-span-5 flex justify-end">
             <ul className="m-0 flex flex-col px-1 py-1 items-start gap-3 md:flex-row md:items-center md:gap-8 font-semibold text-[#d8d4c4]">
               {[
-                { name: "About Me", link: "/#AboutMe" },
-                { name: "Journey", link: "/#Journey" },
-                { name: "Portfolio", link: "/#Portfolio" },
-                { name: "Resume", link: "/#Resume" },
+                { name: "About Me", link: "/aboutme" },
+                { name: "Journey", link: "/journey" },
+                { name: "Portfolio", link: "/portfolio" },
+                { name: "Resume", link: "/resume" },
               ].map((item) => (
                 <li
                   key={item.name}
                   className="flex leading-normal md:leading-snug transition-all duration-500 ease-in transform opacity-100"
                 >
-                  <a
+                  <Link
                     className="group relative block h-fit px-3 overflow-hidden font-semibold cursor-pointer select-none text-[#d8d4c4] text-lg md:text-xl"
-                    href={item.link}
+                    to={item.link}
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     <span className="block w-full transition-transform duration-[0.4s] ease-[cubic-bezier(.51,.92,.24,1.15)] translate-y-0 group-hover:-translate-y-full text-[#d8d4c4]">
                       {item.name}
@@ -89,7 +91,7 @@ const Header = () => {
                       {item.name}
                     </span>
                     <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#d8d4c4] transition-all duration-300 group-hover:w-full" />
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

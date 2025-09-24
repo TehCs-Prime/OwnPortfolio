@@ -17,6 +17,7 @@
     "ogl": "^1.0.11",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.1",
     "three": "^0.180.0",
     "three-stdlib": "^2.36.0"
   },
