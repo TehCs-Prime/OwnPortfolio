@@ -46,27 +46,29 @@ const Footer = () => {
 
                 {/* Listed Sections */}
                 <ul className="flex flex-col gap-y-4">
-                {["About Me", "Journey", "Portfolio", "Resume"].map((item) => {
-                    const path = `/${item.replace(/\s+/g, "").toLowerCase()}`; // e.g., "About Me" -> "/aboutme"
-                    return (
-                    <li key={item}>
+                {[
+                    { name: "About Me", link: "/aboutme" },
+                    { name: "Journey", link: "/journey" },
+                    { name: "Portfolio", link: "/portfolio" },
+                    { name: "Résumé", link: "/resume" },
+              ].map((item) => (
+                    <li key={item.name}>
                         <Link
-                        to={path}
+                        to={item.link}
                         className="group relative block h-fit overflow-hidden font-light cursor-pointer select-none flex w-fit leading-base text-[var(--color-secondary-100)] sm:leading-snug"
                         >
-                        <span className="block w-full transition-transform duration-[0.4s] ease-[cubic-bezier(.51,.92,.24,1.15)] translate-y-0 group-hover:-translate-y-full">
-                            {item}
-                        </span>
-                        <span
-                            aria-hidden="true"
-                            className="absolute top-0 left-0 w-full block transition-transform duration-[0.4s] ease-[cubic-bezier(.51,.92,.24,1.15)] translate-y-full group-hover:translate-y-0"
-                        >
-                            {item}
-                        </span>
+                            <span className="block w-full transition-transform duration-[0.4s] ease-[cubic-bezier(.51,.92,.24,1.15)] translate-y-0 group-hover:-translate-y-full">
+                                {item.name}
+                            </span>
+                            <span
+                                aria-hidden="true"
+                                className="absolute top-0 left-0 w-full block transition-transform duration-[0.4s] ease-[cubic-bezier(.51,.92,.24,1.15)] translate-y-full group-hover:translate-y-0"
+                            >
+                                {item.name}
+                            </span>
                         </Link>
                     </li>
-                    );
-                })}
+                    ))}
                 </ul>
             </div>
 

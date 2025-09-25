@@ -70,7 +70,7 @@ const Header = () => {
                 { name: "About Me", link: "/aboutme" },
                 { name: "Journey", link: "/journey" },
                 { name: "Portfolio", link: "/portfolio" },
-                { name: "Resume", link: "/resume" },
+                { name: "Résumé", link: "/resume" },
               ].map((item) => (
                 <li
                   key={item.name}
@@ -158,22 +158,22 @@ const Header = () => {
             <nav className="relative h-full flex flex-col justify-center px-12 leading-tight">
                 <ul className="flex flex-col justify-center gap-y-10 text-4xl font-black">
                 {[
-                    { name: "About Me", link: "/#AboutMe" },
-                    { name: "Journey", link: "/#Journey" },
-                    { name: "Portfolio", link: "/#Portfolio" },
-                    { name: "Resume", link: "/#Resume" },
-                ].map((item) => (
+                    { name: "About Me", link: "/aboutme" },
+                    { name: "Journey", link: "/journey" },
+                    { name: "Portfolio", link: "/portfolio" },
+                    { name: "Résumé", link: "/resume" },
+              ].map((item) => (
                     <li
                     key={item.name}
                     className="relative flex w-fit cursor-pointer items-center"
                     >
-                    <a
-                        href={item.link}
-                        onClick={() => setIsMenuOpen(false)}
-                        className="relative inline-block text-[var(--color-accent-200)] after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[var(--color-accent-200)] after:transition-all after:duration-500 hover:after:w-full"
-                    >
-                        {item.name}
-                    </a>
+                      <Link
+                          to={item.link}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="relative inline-block text-[var(--color-accent-200)] after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[var(--color-accent-200)] after:transition-all after:duration-500 hover:after:w-full"
+                      >
+                          {item.name}
+                      </Link>
                     </li>
                 ))}
                 </ul>
