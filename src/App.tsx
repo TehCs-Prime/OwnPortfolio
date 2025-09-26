@@ -8,10 +8,15 @@ import TimeLine from "./sections/TimeLine";
 // import Portfolio from "./sections/Portfolio";
 import Resume from "./sections/Resume";
 
+import ScrollToTop from './Tools/Tools-scrollToTop';
+
 
 function App() {
   return (
     <Router basename="/portfolio-website">
+      {/* Scroll to Top */}
+      <ScrollToTop/>
+
       {/* Header always visible */}
       <Header />
 

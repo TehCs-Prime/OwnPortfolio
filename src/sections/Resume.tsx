@@ -4,9 +4,10 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 import { Viewer } from '@react-pdf-viewer/core';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
+import { scrollModePlugin } from '@react-pdf-viewer/scroll-mode';
+import { pageNavigationPlugin } from '@react-pdf-viewer/page-navigation';
 
 import FuzzyText from '../components/FuzzyText';
-
 import resumePDF from '/assets/Resumeeeeeeee-TehChunShen(25-5-25).pdf';
 
 import '@react-pdf-viewer/core/lib/styles/index.css';
@@ -17,6 +18,8 @@ const Resume = () => {
   const fontSize = window.innerWidth < 768 ? '30rem' : '6rem';
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
+  const scrollModePluginInstance = scrollModePlugin(); 
+  const pageNavigationPluginInstance = pageNavigationPlugin(); 
 
     return (
         <div className="relative w-full h-full max-w-full ">
@@ -46,16 +49,21 @@ const Resume = () => {
             </div>
 
             {/* Section description */}
-            <p className="sectionDes bg-black p-[2rem] sm:p-[8rem]  mt-24 mb-32 sm:mt-8 sm:mb-28 text-[#d8d4c4] text-base sm:text-xl leading-relaxed text-justify">
+            <div className="sectionDes bg-black p-[2rem] sm:p-[8rem]  mt-24 mb-32 sm:mt-8 sm:mb-28 text-[#d8d4c4] text-base sm:text-xl leading-relaxed text-justify">
                 <p><strong>“The Next Chapter”</strong> gathers every threads I've spun and weaves them forward into a living tapestry of who I am becoming. Here, I invite you to follow these strands, <strong>exploring my capabilities</strong> in a tangible way.</p>
                 <p className='mt-12 sm:mt-8'>As you read, you witness not only my accomplishments but <strong>the momentum that propels me toward what comes next</strong> ...<span className="blinking-cursor">▌</span></p>
-            </p>
+            </div>
             
             {/* PDF Preview & Download */}
             <div className="max-w-3xl mx-auto mb-16 justify-center items-center px-6 sm:px-6">
                 <Viewer
                     fileUrl={resumePDF} 
-                    plugins={[defaultLayoutPluginInstance]}
+                    theme="dark"
+                    plugins={[
+                        defaultLayoutPluginInstance,
+                        scrollModePluginInstance,
+                        pageNavigationPluginInstance,
+                    ]}
                     defaultScale={isMobile ? 0.5 : 1}
                 />
             </div>
