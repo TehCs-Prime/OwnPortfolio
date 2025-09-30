@@ -1,6 +1,59 @@
 
 {
-  "_comment": "This JSON stores my timeline data, all with same format:\n(academic_profile ->work_experience ->participations_achievements ->competitions_awards). \n",
+  "_comment": "This JSON stores my timeline data, all with same format:\n(academic_profile ->work_experience ->participations_achievements ->competitions_awards). Where available participations_achievements/competitions_awards populates under corresponding academic_profile/work_experience. \n",
+  "_guide": [
+    {
+      "academic_profile/work_experience":[
+        {
+          "start_date": "Starting date of this event, 2023-10",
+          "end_date": "Ending tarting date of this event, 2023-10, Present",
+          "title": "Title of the event, Universiti Sains Malaysia (USM), Penang",
+          "heading": "Small description of the event, CGPA: 3.78 | Bachelor of Computer Sciences (Intelligent Computing) with Honours",
+          "description": {
+            "title": "Highlighten title of description with a new line below, Core subjects:",
+            "content": "Normal description text related to the description title, Machine Learning and Computational Intelligence, Programming Methodology and Data Structures, Design & Analysis of Algorithms, Operating Systems, Database Organisation & Design, Principles of Computer Networks and Information Security, Integrated Software Development Workshop."
+          },
+          "points": {
+            "title": "Highlighten title of points form text, Key Highlights:", 
+            "content": ["Normal points form text each seperate by ',' ",
+              "Managed logistics, including VIP coordination, reviewing event procedures and delivering presentations.",
+              "Designed student's handbook and recorded meeting minutes.",
+              "Utilized Microsoft Excel, SharePoint, Word, and PowerPoint for documentation and team coordination."
+            ]
+          },
+          "media": [
+            { "type": "image", "path": "Not Available for academic_profile/work_experience now" },
+            { "type": "video", "path": "Not Available for academic_profile/work_experience now" }
+          ]
+        }
+      ]
+    },
+    {
+      "participations_achievements/competitions_awards":[
+        {
+          "start_date": "Starting date of this event (fill this if event is within 1 month), 2022-07",
+          "end_date": "Ending tarting date of this event, 2023-05",
+          "title": "Title of the event, Peer Assistance Leader (PAL)",
+          "heading": "Not Available for participations_achievements/competitions_awards now",
+          "description": {
+            "title": "Not Available for participations_achievements/competitions_awards now",
+            "content": "Not Available for participations_achievements/competitions_awards now"
+          },
+          "points": {
+            "title": "Highlighten title of points form text, Duties including:",
+            "content": ["Normal points form text each seperate by ',' ",
+            "Led a team of about 15 people across the academic year, coordinating tasks and ensuring cross-unit collaboration.",
+            "Supervised the progress and provided feedback to drive continuous improvement."
+            ]
+          },
+          "media": [
+            { "type": "image", "path": "Auto Animation of all media (img/video), assets/(field_folder)/ExpImg.png" },
+            { "type": "video", "path": "assets/(field_folder)/Expvideo.mp4" }
+          ]
+        }
+      ]
+    }
+  ],
 
   "academic_profile": [
     {

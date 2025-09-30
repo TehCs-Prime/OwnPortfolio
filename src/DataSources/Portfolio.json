@@ -1,0 +1,108 @@
+{
+    "_comment":"",
+    "_guide":[
+      {
+        "Skills":[
+          {
+            "name": "name of the skill, Malay",
+            "level": "master level in %, 98"
+          }
+        ]
+      },
+      {
+        "TechStacks": [
+          {
+            "field": "what field of technology, frontend, backend, design ... ",
+            "tech": ["this field including which tech","html","css","js","..."]
+          }
+        ]
+      },
+      {
+        "Projects": [
+          {
+            "title": "project title/name",
+            "heading": "what project this is, Blockchain Donation Platform",
+            "description": "project explaination with key points **highlighten**",
+            "points": {
+              "title": "",
+              "content": []
+            },
+            "date": "date doing this, 2025-10",
+            "status": "current stage of this project, Deployed",
+            "category": "what type of work this is, School Project",
+            "techStack": [
+                {
+                  "field": "what field this projects belong to, AI",
+                  "tech": ["python","bootstrap"]
+                }
+            ],
+            "sourceCode": "github repo link (public)",
+            "liveSite": "any live site link deployed?",
+            "media": [
+                { "type": "video", "path": "assets/video/.mp4" },
+                { "type": "image", "path": "assets/images/.jpg" }
+            ]
+          }
+        ]
+      }
+    ],
+    
+
+    "Skills":[
+      {
+        "name": "",
+        "level": 0
+      }
+    ],
+
+    "TechStacks":[
+      {
+        "field": "",
+        "tech": ["",""]
+      },
+      {
+        "field": "",
+        "tech": ["",""]
+      }
+    ],
+
+    "Projects": [
+    {
+      "title": "Lacial",
+      "heading": "Blockchain Donation Platform",
+      "description": "Lacial is a decentralized donation platform designed to improve transparency, accountability, and trust between donors and charitable organizations. Built on blockchain technology, the platform leverages smart contracts to automate fund distribution and provide verifiable transaction records in real time.",
+      "points": {
+        "title": "Key Features: ",
+        "content": [
+          "Blockchain-based donation tracking",
+          "Automated fund distribution via smart contracts",
+          "AI-powered donor insights dashboard",
+          "Multi-currency and crypto payment support"
+        ]
+      },
+      "date": "2025-10",
+      "status": "Deployed",
+      "category": "School Project",
+      "techStack": [
+        {
+          "field": "Frontend",
+          "tech": ["React", "TypeScript", "TailwindCSS"]
+        },
+        {
+          "field": "Backend",
+          "tech": ["Node.js", "Express", "Firebase"]
+        },
+        {
+          "field": "Blockchain",
+          "tech": ["Ethereum", "Solidity", "Web3.js"]
+        }
+      ],
+      "sourceCode": "https://github.com/username/lacial",
+      "liveSite": "https://lacial-demo.vercel.app",
+      "media": [
+        { "type": "image", "path": "assets/ExpImg1.png" },
+        { "type": "video", "path": "assets/Expvideo.mp4" }
+      ]
+    }
+  ]
+}

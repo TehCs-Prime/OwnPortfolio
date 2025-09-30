@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 type TimelineEntry = {
@@ -13,6 +13,8 @@ type TimelineEntry = {
 
 type Props = {
   entry: TimelineEntry;
+  width?: string;
+  maxWidth?: string;
   height?: string;
   imageDuration?: number; // ms to show image before next
   pauseOnHover?: boolean;
@@ -27,6 +29,8 @@ function formatDate(dateString: string) {
 
 export default function AutoMedia({
   entry,
+  width = "w-full",
+  maxWidth = "max-w-[20rem]",
   height = "h-72",
   imageDuration = 3000,
   pauseOnHover = true,
@@ -85,7 +89,7 @@ export default function AutoMedia({
       </div>
 
       {/* Title */}
-      <h2 className="text-softBeige font-extrabold text-xl leading-tight min-h-[3rem]">
+      <h2 className="text-softBeige font-extrabold text-xl leading-tight">
         {entry.title}
       </h2>
       {entry.heading && (
@@ -94,7 +98,7 @@ export default function AutoMedia({
 
       {/* Media block right after title */}
       {media.length > 0 && (
-<div className={`w-full max-w-[20rem] min-h-[15rem] mx-auto ${height} relative rounded-2xl overflow-hidden shadow-md bg-black/30`}>
+        <div className={`${width} ${maxWidth} min-h-[15rem] mx-auto ${height} relative rounded-2xl overflow-hidden shadow-md bg-black/30`}>
           <AnimatePresence initial={false} mode="wait">
             {media.map((m, i) =>
               i === mediaIndex ? (
@@ -110,14 +114,14 @@ export default function AutoMedia({
                     <img
                       src={m.src}
                       alt="media"
-                      className="object-cover w-full h-full filter brightness-80"
+                      className="w-full h-full filter brightness-80 object-contain"
                       draggable={false}
                     />
                   ) : (
                     <video
                       key={m.src}
                       src={m.src}
-                      className="object-cover w-full h-full filter brightness-80"
+                      className="w-full h-full filter brightness-80 object-contain"
                       playsInline
                       autoPlay
                       muted

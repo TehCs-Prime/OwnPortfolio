@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AutoMedia from "./AutoMedia";
 
 type TimelineEntry = {
@@ -79,6 +79,7 @@ export default function HorizontalGallery({
     function onScroll() {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
+        if (!scroller) return;
         const children = Array.from(scroller.children) as HTMLElement[];
         if (!children.length) return;
         const center = scroller.scrollLeft + scroller.clientWidth / 2;
