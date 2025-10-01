@@ -55,6 +55,32 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
   };
 
   const [activeField, setActiveField] = useState<string | null>(null);
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollContainerRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
+    setScrollLeft(scrollContainerRef.current.scrollLeft);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollContainerRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - startX) * 2; // Scroll speed multiplier
+    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
 
   return (
     <div className="relative flex flex-col md:flex-row items-stretch gap-5 md:gap-16 text-[#d8d4c4] mb-24 p-[1rem]">
@@ -146,25 +172,35 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
 </div>
 
 {/* Tech fields row */}
-<div className="flex justify-center gap-6 mb-4 md:mb-2">
-  {entry.techStack.map((stack, i) => {
-    const isActive = activeField === stack.field;
-    return (
-      <button
-        key={i}
-        className={`text-sm md:text-base transition-all duration-300 ease-out pb-1 ${
-          isActive
-            ? "text-[#d8d4c4] scale-140 translate-y-[-8px] font-semibold border-b-2 border-white-400"
-            : "text-[#d8d4c4]/70 hover:text-[#d8d4c4] scale-100 translate-y-0 border-b-2 border-transparent"
-        }`}
-        onClick={() => setActiveField(isActive ? null : stack.field)}
-      >
-        {stack.field}
-      </button>
-    );
-  })}
+<div 
+  ref={scrollContainerRef}
+  className="overflow-x-auto mb-4 md:mb-2 scrollbar-hide cursor-grab active:cursor-grabbing"
+  style={{ maxWidth: '100%' }}
+  onMouseDown={handleMouseDown}
+  onMouseMove={handleMouseMove}
+  onMouseUp={handleMouseUp}
+  onMouseLeave={handleMouseLeave}
+>
+  <div className="flex gap-6 px-4" style={{ width: 'max-content' }}>
+    {entry.techStack.map((stack, i) => {
+      const isActive = activeField === stack.field;
+      return (
+        <button
+          key={i}
+          className={`text-sm md:text-base transition-all duration-300 ease-out pb-1 whitespace-nowrap ${
+            isActive
+              ? "text-[#d8d4c4] scale-140 translate-y-[-8px] font-semibold border-b-2 border-white-400"
+              : "text-[#d8d4c4]/70 hover:text-[#d8d4c4] scale-100 translate-y-0 border-b-2 border-transparent"
+          }`}
+          style={{ minWidth: 'calc(33.333% - 1rem)' }}
+          onClick={() => setActiveField(isActive ? null : stack.field)}
+        >
+          {stack.field}
+        </button>
+      );
+    })}
+  </div>
 </div>
-
 
 
         {/* Project Description */}

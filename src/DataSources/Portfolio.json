@@ -89,12 +89,28 @@
           "tech": ["React", "TypeScript", "TailwindCSS"]
         },
         {
+          "field": "Northend",
+          "tech": ["Reaction", "Typing", "Tailwind"]
+        },
+        {
+          "field": "Southend",
+          "tech": ["Reacted", "Type", "Tail"]
+        },
+        {
           "field": "Backend",
           "tech": ["Node.js", "Express", "Firebase"]
         },
         {
           "field": "Blockchain",
-          "tech": ["Ethereum", "Solidity", "Web3.js"]
+          "tech": ["Eth", "Solid", "Web3"]
+        },
+        {
+          "field": "Block",
+          "tech": ["ereum", "lidity", "js"]
+        },
+        {
+          "field": "Chain",
+          "tech": ["thereum", "dity", "Web"]
         }
       ],
       "sourceCode": "https://github.com/username/lacial",
