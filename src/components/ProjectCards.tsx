@@ -1,5 +1,5 @@
 // components/ProjectCard.tsx
-import React from "react";
+import React, { useState } from "react";
 import AutoMedia from "./AutoMedia";
 import { Github, ArrowUpRight } from "lucide-react"; 
 
@@ -37,9 +37,6 @@ function formatDate(dateString: string) {
 
 const ProjectCard: React.FC<Props> = ({ entry }) => {
     
-  // flatten tech stack for tags
-  const techTags = entry.techStack.flatMap((item) => item.tech);
-
   // Helper function: Map status -> Tailwind styles
   // Define corresponding status color here 
   const getStatusStyle = (status: string) => {
@@ -57,6 +54,7 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
     }
   };
 
+  const [activeField, setActiveField] = useState<string | null>(null);
 
   return (
     <div className="relative flex flex-col md:flex-row items-stretch gap-5 md:gap-16 text-[#d8d4c4] mb-24 p-[1rem]">
@@ -121,18 +119,53 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
         
         {/* Project involved Techtags  */}
         {/* Later try enhance or replace with the one on filter */}
-        <div className="flex flex-wrap gap-3 mb-6 order-4 md:order-none">
-          {techTags.map((item, i) =>
-            item ? (
-              <span
-                key={i}
-                className="px-4 py-1 text-sm rounded-full border border-[#d8d4c4]/40 bg-white/5 hover:bg-white/10 transition"
-              >
-                {item}
-              </span>
-            ) : null
-          )}
-        </div>
+
+        {/* Tech tags row */}
+<div className="flex flex-wrap gap-3 mb-6">
+  {entry.techStack.flatMap((stack) =>
+    stack.tech.map((techItem, i) => {
+      const isActive = activeField === stack.field;
+      return (
+        <span
+          key={`${stack.field}-${i}`}
+          className={`
+            px-4 py-1 text-sm rounded-full border border-[#d8d4c4]/40 cursor-pointer
+            transition-all duration-300 ease-out
+            ${isActive 
+              ? "bg-gradient-to-r from-[#ffffff33] to-[#ffffff55] border-[#d8d4c4]/70 text-white shadow-lg scale-110" 
+              : "bg-white/5 hover:bg-white/20 text-[#d8d4c4] hover:text-white"
+            }
+          `}
+          data-field={stack.field} // for future filtering
+        >
+          {techItem}
+        </span>
+      );
+    })
+  )}
+</div>
+
+{/* Tech fields row */}
+<div className="flex justify-center gap-6 mb-4 md:mb-2">
+  {entry.techStack.map((stack, i) => {
+    const isActive = activeField === stack.field;
+    return (
+      <button
+        key={i}
+        className={`text-sm md:text-base transition-all duration-300 ease-out pb-1 ${
+          isActive
+            ? "text-[#d8d4c4] scale-140 translate-y-[-8px] font-semibold border-b-2 border-white-400"
+            : "text-[#d8d4c4]/70 hover:text-[#d8d4c4] scale-100 translate-y-0 border-b-2 border-transparent"
+        }`}
+        onClick={() => setActiveField(isActive ? null : stack.field)}
+      >
+        {stack.field}
+      </button>
+    );
+  })}
+</div>
+
+
 
         {/* Project Description */}
         <p className="text-base md:text-lg leading-relaxed text-justify order-5 md:order-none last:text-left">
