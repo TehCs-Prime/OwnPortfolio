@@ -59,11 +59,11 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
 
 
   return (
-    <div className="relative flex flex-col md:flex-row items-stretch gap-10 md:gap-16 text-[#d8d4c4] mb-24 p-[1rem]">
+    <div className="relative flex flex-col md:flex-row items-stretch gap-5 md:gap-16 text-[#d8d4c4] mb-24 p-[1rem]">
 
       {/* Mobile-first Date */}
       {entry.date && (
-        <div className="block md:hidden text-center mb-4 order-1">
+        <div className="block md:hidden text-center order-1">
             <div className="inline-block text-[#d8d4c4]/90 px-3 py-1 rounded-full text-2xl font-bold tracking-wide shadow-md">
                 {formatDate(entry.date)}    
             </div>
@@ -97,6 +97,27 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
             )}
         </div>
         )}
+
+        {/* Mobile view - Media display */}
+        <div className="mb-6 block md:hidden mb-6">
+            <AutoMedia
+                entry={{
+                start_date: "",
+                end_date: "",
+                title: "", 
+                heading: undefined,
+                description: { content: "" }, 
+                points: { content: [] }, 
+                media: entry.media ?? [],
+                }}
+                width = "w-full"
+                ySpace="p-0"
+                maxWidth= ""
+                height="h-[20rem] md:h-[25rem]"
+                imageDuration={3000}
+                pauseOnHover={true}
+            />
+        </div>
         
         {/* Project involved Techtags  */}
         {/* Later try enhance or replace with the one on filter */}
@@ -166,7 +187,7 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
       </div>
 
       {/* Right section – AutoMedia */}
-      <div className="flex-1 flex flex-col self-stretch order-3 md:order-2">
+      <div className="flex-1 flex flex-col self-stretch order-3 md:order-2 hidden md:block">
         {/* Project Date */}
         {entry.date && (
             <div className="hidden md:inline-block text-[#d8d4c4]/90 px-3 py-1 rounded-full text-4xl text-center font-bold tracking-wide shadow-md mb-1">
@@ -185,7 +206,7 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
             points: { content: [] }, 
             media: entry.media ?? [],
             }}
-            width = "w-full"
+            width = "w-full p-0"
             maxWidth= ""
             height="h-[20rem] md:h-[25rem]"
             imageDuration={3000}

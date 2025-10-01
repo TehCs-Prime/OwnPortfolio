@@ -14,6 +14,7 @@ type TimelineEntry = {
 type Props = {
   entry: TimelineEntry;
   width?: string;
+  ySpace?: string;
   maxWidth?: string;
   height?: string;
   imageDuration?: number; // ms to show image before next
@@ -30,6 +31,7 @@ function formatDate(dateString: string) {
 export default function AutoMedia({
   entry,
   width = "w-full",
+  ySpace = "space-y-4 p-4 sm:p-6",
   maxWidth = "max-w-[20rem]",
   height = "h-72",
   imageDuration = 3000,
@@ -78,7 +80,7 @@ export default function AutoMedia({
 
   return (
     <div
-      className="w-full max-w-[23rem] sm:max-w-[30rem] mx-auto bg-transparent backdrop-blur-md shadow-lg rounded-2xl p-4 sm:p-6 hover:shadow-xl transition-shadow duration-300 space-y-4"
+      className={`w-full max-w-[23rem] sm:max-w-[30rem] mx-auto bg-transparent backdrop-blur-md shadow-lg rounded-2xl hover:shadow-xl transition-shadow duration-300 ${ySpace}`}
       onMouseEnter={() => pauseOnHover && setIsPaused(true)}
       onMouseLeave={() => pauseOnHover && setIsPaused(false)}
     >
@@ -108,20 +110,20 @@ export default function AutoMedia({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.6 }}
-                  className="absolute inset-0 w-full h-full flex items-center justify-center"
+                  className="absolute inset-0 w-full flex items-center justify-center"
                 >
                   {m.type === "image" ? (
                     <img
                       src={m.src}
                       alt="media"
-                      className="w-full h-full filter brightness-80 object-contain"
+                      className="w-full filter brightness-80 object-contain"
                       draggable={false}
                     />
                   ) : (
                     <video
                       key={m.src}
                       src={m.src}
-                      className="w-full h-full filter brightness-80 object-contain"
+                      className="w-full filter brightness-80 object-contain"
                       playsInline
                       autoPlay
                       muted
