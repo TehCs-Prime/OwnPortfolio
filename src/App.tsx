@@ -6,7 +6,7 @@ import Footer from "./sections/Footer";
 // import Home from "./sections/AboutMe";
 import TimeLine from "./sections/TimeLine";
 import Portfolio from "./sections/Portfolio";
-// import Resume from "./sections/Resume";
+import Resume from "./sections/Resume";
 
 import ScrollToTop from './Tools/Tools-scrollToTop';
 
@@ -34,7 +34,7 @@ function App() {
           {/* <Route path="/aboutme" element={<Home />} /> */}
           <Route path="/journey" element={<TimeLine />} />
           <Route path="/portfolio" element={<Portfolio />} />
-          {/* <Route path="/resume" element={<Resume />} /> */}
+          <Route path="/resume" element={<Resume />} />
         </Routes>
       </main>
 
