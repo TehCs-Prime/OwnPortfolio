@@ -183,7 +183,7 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
                     px-4 py-1 text-sm rounded-full border border-[#d8d4c4]/40 cursor-pointer
                     transition-all duration-300 ease-out
                     ${isActive 
-                      ? "bg-gradient-to-r from-[#ffffff33] to-[#ffffff55] border-[#d8d4c4]/70 text-white shadow-lg scale-110" 
+                      ? "bg-gradient-to-r from-[#d8d4c4] to-[#E4F3B9]/80 border-[#d8d4c4]/70 text-black font-semibold shadow-lg scale-110 animate-pulse" 
                       : "bg-white/5 hover:bg-white/20 text-[#d8d4c4] hover:text-white"
                     }
                   `}
