@@ -103,3 +103,16 @@
     background-position: 300% 50%;
   }
 }
+
+@keyframes hint-bounce {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-12px); }
+  40% { transform: translateX(0); }
+  60% { transform: translateX(12px); }
+  80% { transform: translateX(0); }
+  100% { transform: translateX(0); }
+}
+
+.hint-bounce {
+  animation: hint-bounce 1.2s ease-in-out;
+}

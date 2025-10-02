@@ -1,5 +1,5 @@
 // components/ProjectCard.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AutoMedia from "./AutoMedia";
 import { Github, ArrowUpRight } from "lucide-react"; 
 
@@ -82,6 +82,31 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
     setIsDragging(false);
   };
 
+  const [showHint, setShowHint] = useState(false);
+  const hintRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShowHint(true);
+            observer.disconnect(); // run only once
+          }
+        });
+      },
+      { threshold: 0.9 } // 30% visible triggers
+    );
+
+    if (hintRef.current) {
+      observer.observe(hintRef.current);
+    }
+
+    return () => {
+      if (hintRef.current) observer.unobserve(hintRef.current);
+    };
+  }, []);
+
   return (
     <div className="relative flex flex-col md:flex-row items-stretch gap-5 md:gap-16 text-[#d8d4c4] mb-24 p-[1rem]">
 
@@ -95,7 +120,7 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
       )}
 
       {/* Left section – info */}
-      <div className="flex-1 order-2 md:order-1">
+      <div className="w-full md:w-1/2 order-2 md:order-1 max-w-screen">
         {/* Project Title + Status*/}
         <div className="flex items-center justify-between mb-2">
             <h2 className="text-2xl md:text-4xl font-bold text-left">{entry.title}</h2>
@@ -147,64 +172,65 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
         {/* Later try enhance or replace with the one on filter */}
 
         {/* Tech tags row */}
-<div className="flex flex-wrap gap-3 mb-6">
-  {entry.techStack.flatMap((stack) =>
-    stack.tech.map((techItem, i) => {
-      const isActive = activeField === stack.field;
-      return (
-        <span
-          key={`${stack.field}-${i}`}
-          className={`
-            px-4 py-1 text-sm rounded-full border border-[#d8d4c4]/40 cursor-pointer
-            transition-all duration-300 ease-out
-            ${isActive 
-              ? "bg-gradient-to-r from-[#ffffff33] to-[#ffffff55] border-[#d8d4c4]/70 text-white shadow-lg scale-110" 
-              : "bg-white/5 hover:bg-white/20 text-[#d8d4c4] hover:text-white"
-            }
-          `}
-          data-field={stack.field} // for future filtering
-        >
-          {techItem}
-        </span>
-      );
-    })
-  )}
-</div>
+        <div className="flex flex-wrap gap-3 mb-8">
+          {entry.techStack.flatMap((stack) =>
+            stack.tech.map((techItem, i) => {
+              const isActive = activeField === stack.field;
+              return (
+                <span
+                  key={`${stack.field}-${i}`}
+                  className={`
+                    px-4 py-1 text-sm rounded-full border border-[#d8d4c4]/40 cursor-pointer
+                    transition-all duration-300 ease-out
+                    ${isActive 
+                      ? "bg-gradient-to-r from-[#ffffff33] to-[#ffffff55] border-[#d8d4c4]/70 text-white shadow-lg scale-110" 
+                      : "bg-white/5 hover:bg-white/20 text-[#d8d4c4] hover:text-white"
+                    }
+                  `}
+                  data-field={stack.field} // for future filtering
+                >
+                  {techItem}
+                </span>
+              );
+            })
+          )}
+        </div>
 
-{/* Tech fields row */}
-<div 
-  ref={scrollContainerRef}
-  className="overflow-x-auto mb-4 md:mb-2 scrollbar-hide cursor-grab active:cursor-grabbing"
-  style={{ maxWidth: '100%' }}
-  onMouseDown={handleMouseDown}
-  onMouseMove={handleMouseMove}
-  onMouseUp={handleMouseUp}
-  onMouseLeave={handleMouseLeave}
->
-  <div className="flex gap-6 px-4" style={{ width: 'max-content' }}>
-    {entry.techStack.map((stack, i) => {
-      const isActive = activeField === stack.field;
-      return (
-        <button
-          key={i}
-          className={`text-sm md:text-base transition-all duration-300 ease-out pb-1 whitespace-nowrap ${
-            isActive
-              ? "text-[#d8d4c4] scale-140 translate-y-[-8px] font-semibold border-b-2 border-white-400"
-              : "text-[#d8d4c4]/70 hover:text-[#d8d4c4] scale-100 translate-y-0 border-b-2 border-transparent"
-          }`}
-          style={{ minWidth: 'calc(33.333% - 1rem)' }}
-          onClick={() => setActiveField(isActive ? null : stack.field)}
+        {/* Tech fields row */}
+        <div 
+          ref={el => {
+            scrollContainerRef.current = el;
+            hintRef.current = el; 
+          }}
+          className="overflow-x-auto mb-4 md:mb-2 scrollbar-hide cursor-grab active:cursor-grabbing hint-bounce"
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
         >
-          {stack.field}
-        </button>
-      );
-    })}
-  </div>
-</div>
-
+          <div className={`flex gap-6 flex-nowrap w-max justify-start max-w-[90vw] pr-12 -mr-6 ${showHint ? "hint-bounce" : ""}`}>
+            {entry.techStack.map((stack, i) => {
+              const isActive = activeField === stack.field;
+              return (
+                <button
+                  key={i}
+                  className={`text-sm md:text-base transition-all duration-300 ease-out pb-1 whitespace-nowrap ${
+                    isActive
+                      ? "text-[#EDDEA4] scale-140 translate-y-[-8px] font-semibold border-b-3 border-[#EDDEA4]"
+                      : "text-[#d8d4c4]/70 hover:text-[#646cff]/90 scale-100 translate-y-0 border-b-2 border-transparent"
+                  }`}
+                  style={{ flex: "0 0 auto" }}
+                  onClick={() => setActiveField(isActive ? null : stack.field)}
+                >
+                  {stack.field}
+                </button>
+              );
+            })}
+          </div>
+        </div>
 
         {/* Project Description */}
-        <p className="text-base md:text-lg leading-relaxed text-justify order-5 md:order-none last:text-left">
+        <p className="text-base md:text-lg leading-relaxed text-justify order-5 md:order-none last:text-left mt-6">
           {entry.description}
         </p>
 
@@ -219,13 +245,21 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
             )}
 
             {/* Points List */}
-            <ul className="list-disc pl-10 opacity-90 space-y-2">
+            <ul className="pl-3 sm:pl-5 opacity-90 space-y-2">
             {entry.points.content.map((point, idx) => (
-                <li key={idx}>{point}</li>
+              <li key={idx} className="flex items-center gap-3">
+                {/* Custom Gradient Dot */}
+                <div
+                  className="w-2.5 h-2.5 rounded-full mt-1 bg-gradient-to-r from-green-400 to-teal-600 flex-shrink-0"
+                />
+                {/* Point Text */}
+                <span className="opacity-90 leading-relaxed">{point}</span>
+              </li>
             ))}
             </ul>
         </div>
         )}
+
 
         {/* Links */}
         <div className="mt-10 flex items-center order-7 md:order-none">
