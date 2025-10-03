@@ -5,6 +5,7 @@ import ProjectCard from "../components/ProjectCards";
 import projectsData from '../DataSources/Portfolio.json';
 import * as Icons from "lucide-react";
 import type { LucideProps } from "lucide-react";
+import TechLogoMarquee from '../components/TechLogoMarquee';
 
 interface Tech {
   name: string;
@@ -111,126 +112,131 @@ const Portfolio = () => {
             </div>
 
             {/* Tech fields & techs */}
-      <div className="px-4 sm:px-12 md:px-20 mt-10 mb-30">
-        {/* Fields row */}
-        <div className="flex flex-wrap justify-center gap-5 mb-6">
-          {projectsData.TechStacks.map((stack: TechStack, i: number) => {
-            const FieldIcon = (Icons[stack.icon as keyof typeof Icons] ||
-              Icons.Circle) as React.ComponentType<LucideProps>;
+            <div className="px-4 sm:px-12 md:px-20 mt-10 mb-20">
+                {/* Fields row */}
+                <div className="flex flex-wrap justify-center gap-3 sm:gap-5 mb-6">
+                {projectsData.TechStacks.map((stack: TechStack, i: number) => {
+                    const FieldIcon = (Icons[stack.icon as keyof typeof Icons] ||
+                    Icons.Circle) as React.ComponentType<LucideProps>;
 
-            const isActive = activeFields.includes(stack.field);
-            const techNames = stack.tech.map(t => t.name);
-            const activeCount = activeTechs.filter(t => techNames.includes(t)).length;
+                    const isActive = activeFields.includes(stack.field);
+                    const techNames = stack.tech.map(t => t.name);
+                    const activeCount = activeTechs.filter(t => techNames.includes(t)).length;
 
-            const isPartial = activeCount > 0 && activeCount < techNames.length;
+                    const isPartial = activeCount > 0 && activeCount < techNames.length;
 
-            return (
-              <span
-                key={i}
-                onClick={() => toggleField(stack.field, techNames)}
-      className={`
-        group flex items-center gap-2 px-6 py-4 rounded-full text-sm font-semibold
-        bg-black/30 backdrop-blur-sm transition-all duration-200 cursor-pointer
-        ${isActive ? "opacity-100 scale-105" 
-          : isPartial ? "opacity-100 scale-103 animate-pulse" 
-          : "opacity-70"}
-      `}
-      style={{
-        border: isActive
-          ? `2px solid ${stack.color}` 
-          : isPartial
-          ? `2px solid ${stack.color}90`      
-          : `2px dashed ${stack.color}80`,   
-      }}
-      onMouseEnter={(e) => {
-        if (!isActive && !isPartial) {
-          (e.currentTarget as HTMLElement).style.border = `2px solid ${stack.color}`;
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (!isActive && !isPartial) {
-          (e.currentTarget as HTMLElement).style.border = `2px dashed ${stack.color}80`;
-        }
-      }}
-    >
-                <FieldIcon
-                  size={16}
-                  className={`
-          ${isActive ? "text-current" 
-            : isPartial ? "text-current opacity-80" 
-            : "text-[#d8d4c4]/60"} transition-colors
-        `}
-                  style={{ color: stack.color }}
-                />
-                <span className="text-[#d8d4c4]">{stack.field}</span>
-              </span>
-            );
-          })}
-        </div>
+                    return (
+                    <span
+                        key={i}
+                        onClick={() => toggleField(stack.field, techNames)}
+                        className={`
+                            group flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-4 rounded-full text-sm font-semibold
+                            bg-black/30 backdrop-blur-sm transition-all duration-200 cursor-pointer
+                            ${isActive ? "opacity-100 scale-105" 
+                            : isPartial ? "opacity-100 scale-103 animate-pulse" 
+                            : "opacity-70"}
+                        `}
+                        style={{
+                            border: isActive
+                            ? `2px solid ${stack.color}` 
+                            : isPartial
+                            ? `2px solid ${stack.color}90`      
+                            : `2px dashed ${stack.color}80`,   
+                        }}
+                        onMouseEnter={(e) => {
+                            if (!isActive && !isPartial) {
+                            (e.currentTarget as HTMLElement).style.border = `2px solid ${stack.color}`;
+                            }
+                        }}
+                        onMouseLeave={(e) => {
+                            if (!isActive && !isPartial) {
+                            (e.currentTarget as HTMLElement).style.border = `2px dashed ${stack.color}80`;
+                            }
+                        }}
+                    >
+                        <FieldIcon
+                        size={16}
+                        className={`
+                            ${isActive ? "text-current" 
+                                : isPartial ? "text-current opacity-80" 
+                                : "text-[#d8d4c4]/60"} transition-colors
+                        `}
+                        style={{ color: stack.color }}
+                        />
+                        <span className="text-[#d8d4c4]">{stack.field}</span>
+                    </span>
+                    );
+                })}
+                </div>
 
-        {/* Separator */}
-        <div className="border-t-2 border-[#d8d4c4]/60 mx-auto my-8"></div>
+                {/* Separator */}
+                <div className="border-t-2 border-[#d8d4c4]/60 mx-auto my-8"></div>
 
-        {/* Tech row */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {projectsData.TechStacks.flatMap((stack: TechStack) =>
-            stack.tech.map((tech: Tech, i: number) => {
-                const TechIcon = (Icons[tech.icon as keyof typeof Icons] ||
-                Icons.Circle) as React.ComponentType<LucideProps>;
+                {/* Tech row */}
+                <div className="hidden sm:flex flex-wrap justify-center gap-2 sm:gap-4 mb-12">
+                    {projectsData.TechStacks.flatMap((stack: TechStack) =>
+                        stack.tech.map((tech: Tech, i: number) => {
+                            const TechIcon = (Icons[tech.icon as keyof typeof Icons] ||
+                            Icons.Circle) as React.ComponentType<LucideProps>;
 
-                const isFieldActive = activeFields.includes(stack.field);
-                const isTechActive = activeTechs.includes(tech.name);
+                            const isFieldActive = activeFields.includes(stack.field);
+                            const isTechActive = activeTechs.includes(tech.name);
 
-              return (
-                <span
-                  key={i}
-                  onClick={() => toggleTech(stack.field, tech.name, stack.tech.map(t => t.name))}
-        className={`
-          group flex items-center justify-center gap-2
-          px-4 py-2 min-w-[120px] rounded-full text-sm font-semibold
-          bg-black/30 backdrop-blur-sm cursor-pointer
-          transition-all duration-200
-          ${isFieldActive || isTechActive ? "opacity-100 scale-105" : "opacity-50"}
-        `}
-        style={{
-          border:
-            isFieldActive || isTechActive
-              ? `2px solid ${stack.color}`
-              : `2px dashed ${stack.color}50`,
-        }}
-        onMouseEnter={(e) => {
-          if (!isFieldActive && !isTechActive) {
-            (e.currentTarget as HTMLElement).style.border = `2px solid ${stack.color}`;
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (!isFieldActive && !isTechActive) {
-            (e.currentTarget as HTMLElement).style.border = `2px dashed ${stack.color}50`;
-          }
-        }}
-      >
-                  <TechIcon
-                    size={14}
-                    className={`${
-            isFieldActive || isTechActive
-              ? "text-current"
-              : "text-[#d8d4c4]/40"
-          } transition-colors`}
-                    style={{ color: tech.color }}
-                  />
-                  <span className="text-[#d8d4c4]">{tech.name}</span>
-                </span>
-              );
-            })
-          )}
-        </div>
-      </div>
+                        return (
+                            <span
+                                key={i}
+                                onClick={() => toggleTech(stack.field, tech.name, stack.tech.map(t => t.name))}
+                                className={`
+                                group flex items-center justify-center gap-2
+                                px-2 py-2 sm:px-4 sm:py-2 min-w-[120px] rounded-full text-xs sm:text-sm font-semibold
+                                bg-black/30 backdrop-blur-sm cursor-pointer
+                                transition-all duration-200
+                                ${isFieldActive || isTechActive ? "opacity-100 scale-105" : "opacity-50"}
+                                `}
+                                style={{
+                                border:
+                                    isFieldActive || isTechActive
+                                    ? `2px solid ${stack.color}`
+                                    : `2px dashed ${stack.color}50`,
+                                }}
+                                onMouseEnter={(e) => {
+                                if (!isFieldActive && !isTechActive) {
+                                    (e.currentTarget as HTMLElement).style.border = `2px solid ${stack.color}`;
+                                }
+                                }}
+                                onMouseLeave={(e) => {
+                                if (!isFieldActive && !isTechActive) {
+                                    (e.currentTarget as HTMLElement).style.border = `2px dashed ${stack.color}50`;
+                                }
+                                }}
+                            >
+                            <TechIcon
+                                size={14}
+                                className={`${
+                                isFieldActive || isTechActive
+                                    ? "text-current"
+                                    : "text-[#d8d4c4]/40"
+                                } transition-colors`}
+                                style={{ color: tech.color }}
+                            />
+                            <span className="text-[#d8d4c4]">{tech.name}</span>
+                        </span>
+                        );
+                        })
+                    )}
+                </div>
+            </div>
 
             {/* Project Display */}
             <div className="px-4 sm:px-12 md:px-20 mt-20">
                 {projectsData.Projects.map((project, idx) => (
                     <ProjectCard key={idx} entry={project} />
                 ))}
+            </div>
+
+            {/* Tech Logo loop */}
+            <div className="mt-50">
+                <TechLogoMarquee techStacks={projectsData.TechStacks} />
             </div>
         </div>
         
