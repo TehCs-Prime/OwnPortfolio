@@ -55,16 +55,80 @@
       }
     ],
 
-    "TechStacks":[
-      {
-        "field": "",
-        "tech": ["",""]
-      },
-      {
-        "field": "",
-        "tech": ["",""]
-      }
-    ],
+    "TechStacks": [
+    {
+      "field": "Frontend",
+      "icon": "Monitor",
+      "color": "#60a5fa",
+      "tech": [
+        { "name": "React", "icon": "Atom", "color": "#61dafb" },
+        { "name": "TypeScript", "icon": "FileType2", "color": "#3178c6" },
+        { "name": "TailwindCSS", "icon": "Wind", "color": "#38bdf8" },
+        { "name": "Vite", "icon": "Zap", "color": "#ffca28" },
+        { "name": "Framer Motion", "icon": "Framer", "color": "#e91e63" }
+      ]
+    },
+    {
+      "field": "Backend",
+      "icon": "Server",
+      "color": "#f97316",
+      "tech": [
+        { "name": "Node.js", "icon": "Boxes", "color": "#68a063" },
+        { "name": "Express", "icon": "TerminalSquare", "color": "#000000" },
+        { "name": "Java", "icon": "Coffee", "color": "#b07219" }
+      ]
+    },
+    {
+      "field": "Database",
+      "icon": "Database",
+      "color": "#a855f7",
+      "tech": [
+        { "name": "PostgreSQL", "icon": "Cylinder", "color": "#336791" },
+        { "name": "MongoDB", "icon": "Leaf", "color": "#47a248" }
+      ]
+    },
+    {
+      "field": "Cloud & Hosting",
+      "icon": "Cloud",
+      "color": "#0ea5e9",
+      "tech": [
+        { "name": "Firebase", "icon": "Flame", "color": "#ffcb2b" },
+        { "name": "Vercel", "icon": "Triangle", "color": "#000000" },
+        { "name": "Netlify", "icon": "Network", "color": "#00ad9f" }
+      ]
+    },
+    {
+      "field": "Blockchain",
+      "icon": "Blocks",
+      "color": "#22c55e",
+      "tech": [
+        { "name": "Solidity", "icon": "Code2", "color": "#363636" },
+        { "name": "Ethereum", "icon": "Diamond", "color": "#627eea" },
+        { "name": "Hardhat", "icon": "Hammer", "color": "#fbbc04" },
+        { "name": "Metamask", "icon": "Wallet", "color": "#f6851b" }
+      ]
+    },
+    {
+      "field": "Version Control",
+      "icon": "GitBranch",
+      "color": "#ef4444",
+      "tech": [
+        { "name": "Git", "icon": "GitCommit", "color": "#f1502f" },
+        { "name": "GitHub", "icon": "Github", "color": "#181717" }
+      ]
+    },
+    {
+      "field": "Tools",
+      "icon": "Wrench",
+      "color": "#facc15",
+      "tech": [
+        { "name": "Figma", "icon": "PenTool", "color": "#f24e1e" },
+        { "name": "Postman", "icon": "Send", "color": "#ff6c37" },
+        { "name": "Docker", "icon": "Box", "color": "#2496ed" },
+        { "name": "Jest", "icon": "Beaker", "color": "#99425b" }
+      ]
+    }
+  ],
 
     "Projects": [
     {
