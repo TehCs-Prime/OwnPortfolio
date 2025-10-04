@@ -26,6 +26,10 @@ interface ProjectEntry {
 
 interface Props {
   entry: ProjectEntry;
+  activeFields: string[];
+  activeTechs: string[];
+  onFieldClick: (field: string) => void;
+  onTechClick: (field: string, tech: string) => void;
 }
 
 function formatDate(dateString: string) {
@@ -35,7 +39,7 @@ function formatDate(dateString: string) {
   return d.toLocaleString("default", { month: "short", year: "numeric" });
 }
 
-const ProjectCard: React.FC<Props> = ({ entry }) => {
+const ProjectCard: React.FC<Props> = ({ entry, activeFields, activeTechs, onFieldClick, onTechClick }) => {
     
   // Helper function: Map status -> Tailwind styles
   // Define corresponding status color here 
@@ -54,7 +58,6 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
     }
   };
 
-  const [activeField, setActiveField] = useState<string | null>(null);
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -175,19 +178,20 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
         <div className="flex flex-wrap gap-3 mb-8">
           {entry.techStack.flatMap((stack) =>
             stack.tech.map((techItem, i) => {
-              const isActive = activeField === stack.field;
+              const isTechActive = activeTechs.includes(techItem);
               return (
                 <span
                   key={`${stack.field}-${i}`}
                   className={`
                     px-4 py-1 text-sm rounded-full border border-[#d8d4c4]/40 cursor-pointer
                     transition-all duration-300 ease-out
-                    ${isActive 
+                    ${isTechActive 
                       ? "bg-gradient-to-r from-[#d8d4c4] to-[#E4F3B9]/80 border-[#d8d4c4]/70 text-black font-semibold shadow-lg scale-110 animate-pulse" 
                       : "bg-white/5 hover:bg-white/20 text-[#d8d4c4] hover:text-white"
                     }
                   `}
                   data-field={stack.field} // for future filtering
+                  onClick={() => onTechClick(stack.field, techItem)}
                 >
                   {techItem}
                 </span>
@@ -210,7 +214,7 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
         >
           <div className={`flex gap-6 flex-nowrap w-max justify-start max-w-[90vw] pr-12 -mr-6 ${showHint ? "hint-bounce" : ""}`}>
             {entry.techStack.map((stack, i) => {
-              const isActive = activeField === stack.field;
+              const isActive = activeFields.includes(stack.field);
               return (
                 <button
                   key={i}
@@ -220,7 +224,7 @@ const ProjectCard: React.FC<Props> = ({ entry }) => {
                       : "text-[#d8d4c4]/70 hover:text-[#646cff]/90 scale-100 translate-y-0 border-b-2 border-transparent"
                   }`}
                   style={{ flex: "0 0 auto" }}
-                  onClick={() => setActiveField(isActive ? null : stack.field)}
+                  onClick={() => onFieldClick(stack.field)}
                 >
                   {stack.field}
                 </button>

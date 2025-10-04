@@ -83,7 +83,7 @@ const Portfolio = () => {
             {/* Section title */}
             <div className="
                 flex flex-col justify-center text-center
-                mt-4 mb-8 px-2 
+                mt-20 px-2 
                 sm:mt-6 sm:mb-6 sm:px-4
                 md:flex-row md:text-left   
                 md:px-8                    
@@ -111,11 +111,11 @@ const Portfolio = () => {
                 <p className='mt-14 sm:mt-16'>Invites you to witness not just finished works, but the <strong> steps, experimentation</strong> and <strong>growth</strong> that bring them steps into the light ...<span className="blinking-cursor">▌</span></p>
             </div>
 
-            {/* Tech fields & techs */}
+            {/* Filter - Tech fields & techs */}
             <div className="px-4 sm:px-12 md:px-20 mt-10 mb-20">
                 {/* Fields row */}
                 <div className="flex flex-wrap justify-center gap-3 sm:gap-5 mb-6">
-                {projectsData.TechStacks.map((stack: TechStack, i: number) => {
+                {projectsData.TechStacks.map((stack: TechStack) => {
                     const FieldIcon = (Icons[stack.icon as keyof typeof Icons] ||
                     Icons.Circle) as React.ComponentType<LucideProps>;
 
@@ -127,7 +127,7 @@ const Portfolio = () => {
 
                     return (
                     <span
-                        key={i}
+                        key={stack.field}
                         onClick={() => toggleField(stack.field, techNames)}
                         className={`
                             group flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-4 rounded-full text-sm font-semibold
@@ -175,7 +175,7 @@ const Portfolio = () => {
                 {/* Tech row */}
                 <div className="hidden sm:flex flex-wrap justify-center gap-2 sm:gap-4 mb-12">
                     {projectsData.TechStacks.flatMap((stack: TechStack) =>
-                        stack.tech.map((tech: Tech, i: number) => {
+                        stack.tech.map((tech: Tech) => {
                             const TechIcon = (Icons[tech.icon as keyof typeof Icons] ||
                             Icons.Circle) as React.ComponentType<LucideProps>;
 
@@ -184,7 +184,7 @@ const Portfolio = () => {
 
                         return (
                             <span
-                                key={i}
+                                key={`${stack.field}-${tech.name}`}
                                 onClick={() => toggleTech(stack.field, tech.name, stack.tech.map(t => t.name))}
                                 className={`
                                 group flex items-center justify-center gap-2
@@ -229,9 +229,50 @@ const Portfolio = () => {
 
             {/* Project Display */}
             <div className="px-4 sm:px-12 md:px-20 mt-20">
-                {projectsData.Projects.map((project, idx) => (
-                    <ProjectCard key={idx} entry={project} />
-                ))}
+                {/* --- Filter Projects --- */}
+                {(() => {
+                const filteredProjects = projectsData.Projects.filter((project) => {
+                    const projectFields = project.techStack?.map((stack: { field: string; tech: string[] }) => stack.field) || [];
+                    const projectTechs = project.techStack?.flatMap((stack: { field: string; tech: string[] }) => stack.field) || [];
+
+                    if (activeFields.length === 0 && activeTechs.length === 0) return true;
+
+                    const matchesField = projectFields.some((field: string) =>
+                    activeFields.includes(field)
+                    );
+
+                    const matchesTech = projectTechs.some((tech: string) =>
+                    activeTechs.some(
+                        (active) =>
+                        tech.toLowerCase().includes(active.toLowerCase()) ||
+                        active.toLowerCase().includes(tech.toLowerCase())
+                    )
+                    );
+
+                    return matchesField || matchesTech;
+                });
+
+                return filteredProjects.length > 0 ? (
+                    filteredProjects.map((filteredProject, idx) => (
+                        <div key={idx} className="animate-fadeIn">
+                            <ProjectCard
+                            entry={filteredProject}
+                            activeFields={activeFields}
+                            activeTechs={activeTechs}
+                            onFieldClick={(field) => toggleField(field, [])}
+                            onTechClick={(field, tech) => toggleTech(field, tech, [])}
+                            />
+                        </div>
+                        ))
+                        ) : (
+                            <div className="text-center text-gray-400 py-16 animate-fadeIn flex flex-col items-center">
+                            <p className="text-lg md:text-xl font-medium">No projects match your current filters 😢</p>
+                            <p className="text-sm md:text-base mt-2">Try adjusting or clearing your filters.</p>
+                            <p className="text-sm md:text-base mt-8 opacity-80">You've selected techs I know, but I don't have a project to show for them    //yet 😉.</p>
+                            </div>
+                        );
+                    })()
+                }   
             </div>
 
             {/* Tech Logo loop */}
@@ -239,7 +280,6 @@ const Portfolio = () => {
                 <TechLogoMarquee techStacks={projectsData.TechStacks} />
             </div>
         </div>
-        
     )
 }
 
