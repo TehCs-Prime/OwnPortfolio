@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Header from "./sections/Header";
 import Footer from "./sections/Footer";
-// import Home from "./sections/AboutMe";
+import Home from "./sections/AboutMe";
 import TimeLine from "./sections/TimeLine";
 import Portfolio from "./sections/Portfolio";
 import Resume from "./sections/Resume";
@@ -30,8 +30,8 @@ function App() {
       >
         <Routes>
           {/* Define routes */}
-          {/* <Route path="/" element={<Home />} /> */}
-          {/* <Route path="/aboutme" element={<Home />} /> */}
+          <Route path="/" element={<Home />} />
+          <Route path="/aboutme" element={<Home />} />
           <Route path="/journey" element={<TimeLine />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/resume" element={<Resume />} />
