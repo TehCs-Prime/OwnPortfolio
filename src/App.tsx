@@ -9,13 +9,28 @@ import Portfolio from "./sections/Portfolio";
 import Resume from "./sections/Resume";
 
 import ScrollToTop from './Tools/Tools-scrollToTop';
+import Particles from './components/Particles';
 
 
 function App() {
   return (
     <Router basename="/portfolio-website">
-      {/* Scroll to Top */}
+      {/* Reset - Scroll to Top */}
       <ScrollToTop/>
+
+      {/* Particles as background */}
+      <div className="fixed inset-0 -z-1  0 max-w-full">
+          <Particles
+          particleColors={['#ffffff']}
+          particleCount={500}
+          particleSpread={20}
+          speed={0.5}
+          particleBaseSize={120}
+          moveParticlesOnHover={false}
+          alphaParticles={true}
+          disableRotation={true}
+          />
+      </div>
 
       {/* Header always visible */}
       <Header />

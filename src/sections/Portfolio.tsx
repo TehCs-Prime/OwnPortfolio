@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Particles from '../components/Particles';
 import FuzzyText from '../components/FuzzyText';
 import ProjectCard from "../components/ProjectCards";
 import projectsData from '../DataSources/Portfolio.json';
@@ -65,20 +64,6 @@ const Portfolio = () => {
 
     return (
         <div className="relative w-full h-full max-w-full ">
-
-            {/* Particles as background */}
-            <div className="fixed inset-0 -z-1  0 max-w-full">
-                <Particles
-                particleColors={['#ffffff']}
-                particleCount={500}
-                particleSpread={20}
-                speed={0.5}
-                particleBaseSize={120}
-                moveParticlesOnHover={false}
-                alphaParticles={true}
-                disableRotation={true}
-                />
-            </div>
 
             {/* Section title */}
             <div className="

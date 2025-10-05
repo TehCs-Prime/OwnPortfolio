@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Particles from './Particles';
 import TrueFocus from './TrueFocus';
 import timelineData from '../DataSources/TimeLine.json';
 import HorizontalGallery from "./HorizontalGallery";
@@ -268,20 +267,6 @@ useEffect(() => {
       >
         {String(currentCounter).padStart(2, '0')}
       </div> 
-
-      {/* Particles as background */}
-      <div className="fixed inset-0 -z-10 max-w-full">
-        <Particles
-          particleColors={['#ffffff']}
-          particleCount={500}
-          particleSpread={20}
-          speed={0.5}
-          particleBaseSize={120}
-          moveParticlesOnHover={false}
-          alphaParticles={true}
-          disableRotation={true}
-        />
-      </div>
       
       {/* Content Wrapper */}
       <div className="relative flex flex-col z-10 items-center justify-start py-16 max-w-full">
