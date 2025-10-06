@@ -94,6 +94,8 @@ export default function AutoMedia({
       <h2 className="text-softBeige font-extrabold text-xl leading-tight">
         {entry.title}
       </h2>
+
+      {/* Heading - only if exist */}
       {entry.heading && (
         <p className="text-gray-400 text-sm">{entry.heading}</p>
       )}
@@ -141,11 +143,15 @@ export default function AutoMedia({
 
       {/* Points + Description below media */}
       <div className="space-y-2 text-left mx-auto">
+
+        {/* Points' title - only if exist */}
         {entry.points?.title && (
           <h4 className="text-white font-semibold text-sm mb-3">
             {entry.points.title}
           </h4>
         )}
+
+        {/* Points - only if exist */}
         {entry.points?.content && entry.points.content.length > 0 && (
           <ul className="space-y-2 text-gray-300 text-sm">
             {entry.points.content.map((p, idx) => (
@@ -158,6 +164,8 @@ export default function AutoMedia({
             ))}
           </ul>
         )}
+
+        {/* Short des - only if exist */}
         {entry.description?.content && (
           <p className="text-gray-400 text-sm">{entry.description.content}</p>
         )}

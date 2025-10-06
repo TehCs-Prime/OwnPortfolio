@@ -31,7 +31,7 @@ const TechLogoMarquee: React.FC<TechLogoMarqueeProps> = ({ techStacks }) => {
   const duplicatedTechs = [...allTechs, ...allTechs];
 
   return (
-    <div className="block sm:hidden w-screen max-w-full overflow-hidden bg-black/40 backdrop-blur-sm py-6 my-8 -mx-4">
+    <div className="block w-screen max-w-full overflow-hidden bg-black/40 backdrop-blur-sm py-6 my-8 -mx-4">
       <div className="relative flex overflow-hidden">
         <div className="flex animate-marquee min-w-max">
           {duplicatedTechs.map((tech, idx) => {

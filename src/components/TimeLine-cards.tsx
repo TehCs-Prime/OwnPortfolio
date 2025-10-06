@@ -5,6 +5,7 @@ import HorizontalGallery from "./HorizontalGallery";
 import GalleryDiv from "./GalleryDiv";
 import AutoMedia from "./AutoMedia";
 
+// Props same as in local JSON
 type TimelineItem = {
   start_date: string;
   end_date: string;
@@ -53,17 +54,20 @@ const formatDate = (dateStr: string) => {
   return date.toLocaleString('en-US', { month: 'short', year: 'numeric' });
 };
 
+// all participations, achievements, competitions, awards as events
 const allEvents = [
   ...timelineData.participations_achievements,
   ...timelineData.competitions_awards
 ];
 
+// Format Date
 function parseDate(str: string) {
   if (!str || str.toLowerCase() === 'present') return new Date(); // now
   const [y, m] = str.split('-').map(Number);
   return new Date(y, (m || 1) - 1);
 }
 
+// check if this event belong to which milestone(academic / work)
 function isEventInRange(eventStart: string, eventEnd: string, itemStart: string, itemEnd: string) {
   const evStart = parseDate(eventStart).getTime();
   const evEnd = eventEnd ? parseDate(eventEnd).getTime() : evStart;
@@ -77,16 +81,25 @@ function isEventInRange(eventStart: string, eventEnd: string, itemStart: string,
 const TimeLineCard: React.FC = () => {
   const itemRefs = useRef<HTMLDivElement[]>([]);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const [beamTop, setBeamTop] = useState(0);
+
+  // Full row = left + right
   const fullRowRefs = useRef<HTMLDivElement[]>([]);
   const leftRefs = useRef<HTMLDivElement[]>([]);
   const rightRefs = useRef<HTMLDivElement[]>([]);
+
+  // Central following light beam
   const [beamOpacity, setBeamOpacity] = useState(1); 
+  const [beamTop, setBeamTop] = useState(0);
+
+  // Mobile responsive
   const [isMobile, setIsMobile] = useState(false);
+
+  // Milestone Counter
   const [showCounter, setShowCounter] = useState(false);
   const [currentCounter, setCurrentCounter] = useState(0);
 
 useEffect(() => {
+  // Only if current viewport is on this container wrapper then shows
   const handleVisibility = () => {
     if (!wrapperRef.current) return;
     const rect = wrapperRef.current.getBoundingClientRect();
@@ -110,6 +123,7 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
+  // Responsive design
   const checkScreen = () => setIsMobile(window.innerWidth < 768); // Tailwind md breakpoint
   checkScreen();
   window.addEventListener('resize', checkScreen);
@@ -117,6 +131,7 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
+  // Central beam visibility control- not covering cards
   let ticking = false;
   const handleScroll = () => {
     if (!wrapperRef.current) return;
@@ -209,6 +224,7 @@ useEffect(() => {
 }, [isMobile]);
 
 useEffect(() => {
+  // Milestone counter tracking - only pass >50% of item viewpoint then update it
   let ticking = false;
 
   const handleScroll = () => {
@@ -253,10 +269,8 @@ useEffect(() => {
 }, []);
 
 
-
-
   return (
-    <div className="relative w-full h-full max-w-full"> {/* parent */}
+    <div className="relative w-full h-full max-w-full"> 
       {/* Timeline Event Counter */}
       <div
         className={`fixed top-12 sm:top-48 left-4 sm:left-12 z-50 
@@ -274,11 +288,12 @@ useEffect(() => {
           {/* Center line */}
           <div className="absolute left-1/2 top-0 w-[0.2rem] h-full bg-gradient-to-b from-white/50 to-transparent -translate-x-1/2"></div>
 
-          {/* Light beam */}
+          {/* Central Light beam */}
           <div
             className="absolute left-1/2 w-4 h-20 bg-gradient-to-b from-[#B9E986] to-[#7E9181] rounded-full shadow-[0_0_20px_#B9E986] -translate-x-1/2 z-50 transition-opacity duration-300"
             style={{ top: beamTop, opacity: beamOpacity }}
           />
+
           {/* Initial blinking dot */}
           <div className="max-w-full absolute left-1/2 -top-12 w-24 h-24 bg-gradient-to-r from-[#0A2E36] to-[#B9E986] rounded-full flex items-center justify-center animate-pulse -translate-x-1/2 -translate-y-12 z-10">
             <div className="max-w-full w-12 h-12 bg-gray-300 rounded-full opacity-85"></div>
@@ -290,7 +305,7 @@ useEffect(() => {
               const icon = item.source === 'academic' ? '🎓' : '💼';
               return (
                 <div key={index} className="space-y-[12rem]"> 
-                  {/* Row 1: */}
+                  {/* Row 1 : */}
                   <div ref={(el) => { if(el) itemRefs.current[index] = el; }} className="grid mt-[20rem] grid-cols-1 md:grid-cols-2 gap-4 items-center">
 
                     {/* LEFT SIDE */}
@@ -379,7 +394,7 @@ useEffect(() => {
                     </div>
                   </div>
 
-                  {/* Row 2: New row under the above two columns */}
+                  {/* Row 2: New row under the above two columns - Events row */}
                     {(() => {
                       // Filter events under this row
                       const eventsForThisItem = allEvents.filter(ev =>
@@ -389,6 +404,7 @@ useEffect(() => {
                     if (eventsForThisItem.length === 0) return null; // nothing at all
 
                       return (
+                        // If any events to be populated, call it as horizontal scrolable component
                         <div
                           ref={el => { if (el) fullRowRefs.current[index] = el; }}
                           className="relative w-full items-stretch bg-black/30 item-start backdrop-blur-md rounded-xl p-0 sm:p-6"

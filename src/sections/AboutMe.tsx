@@ -10,8 +10,11 @@ const AboutMe = () => {
     // Visibility observer
     const fontSize = window.innerWidth < 768 ? '20rem' : '4rem';
     const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+
+    // Word typing effect
     const typingWords = WordsTyping(['Developer','Tech Passionalist', 'Freelancer'],80,2200);
 
+    // Contact form
     const [formData, setFormData] = useState({
             name: '',
             email: '',
@@ -36,16 +39,22 @@ const AboutMe = () => {
         }
 
         emailjs.send(
-            'service_ffk5zh2', // replace with your EmailJS service ID
-            'template_p0kl9q7', // replace with your EmailJS template ID
+            'service_ffk5zh2', //  EmailJS service ID
+            'template_p0kl9q7', // EmailJS template ID
             formData,
-            'fNXYRihJir0rMc9he' // replace with your EmailJS public key
+            'fNXYRihJir0rMc9he' // EmailJS public key
         ).then(
-            () => setStatus('✅ Message sent! Thank you.'),
-            () => setStatus('Failed to send. Please try again.')
+            () => {
+            // If sent, for UX delay a while before clearing form
+            setTimeout(() => {
+                setFormData({ name: "", email: "", message: "" });
+            }, 1500);
+            
+            setStatus('✅ Message sent! Thank you.')
+        },
+            // If failed,
+            () => {setStatus('Failed to send. Please try again.');}
         );
-
-        setFormData({ name: '', email: '', message: '' });
     };
 
     return (
@@ -55,17 +64,21 @@ const AboutMe = () => {
             <div className="w-full max-w-[100vw] mx-auto font-mono flex flex-col-reverse text-[#d8d4c4] md:flex-row items-center justify-center md:justify-between gap-8 md:gap-16 text-center md:text-left">
                 {/* Text section - left/down */}
                 <div className="flex-1 sm:ml-30">
-
+                    
+                    {/* Date - MM'YY */}
                     <h2 className="mb-2 text-3xl sm:text-4xl md:text-6xl font-mono font-semibold text-[#bfb99f] opacity-85">
                         {new Date().toLocaleString('en-US', {
                             month: 'short',
                         }) + "'" + new Date().getFullYear().toString().slice(-2)}
                     </h2>
-
+                    
+                    {/* Intro - Typring words */}
                     <h1 className="text-3xl md:text-5xl mt-2 sm:mt-0 font-semibold md:font-extrabold leading-tight md:leading-[1.1]">
                         <span className='home-content-fixed'>I am</span>
-                        <span className="home-content-keyword hidden sm:inline-block">&nbsp;{typingWords}</span>
+                        {/* In one line for desktop/pc */}
+                        <span className="home-content-keyword hidden sm:inline-block">&nbsp;{typingWords}</span> 
 
+                        {/* In a new line for mobile */}
                         <p className="sm:hidden">{typingWords}</p>
                     </h1>
                     
@@ -73,6 +86,7 @@ const AboutMe = () => {
 
                 {/* Img section - right/up */}
                 <div className="flex-1 flex justify-center items-center mt-30 sm:mt-0">
+                    {/* Floating animation */}
                     <img
                     src={HomeCodingPic}
                     alt="Coding illustration"
@@ -88,10 +102,10 @@ const AboutMe = () => {
                     (Not just something to show off! Gotta make it worth building, right?)
                 </span>
                 <p className='mt-12 sm:mt-24'>As a passionate tech enthusiast, I began my journey by <strong>realizing the real-life challenges and inefficiencies</strong> around me. And that <strong>curiosity</strong> soon grew into a drive to solve them through my profession. Over time, this grew into a genuine love for crafting innovative software solutions that <strong>build meaningful</strong> and <strong>problem-solving digital experiences</strong>.</p>
-                <p className='mt-12 sm:mt-8'>Beyond coding, I thrive in collaborative environments and enjoy <strong>presenting clear, creative solutions to complex problems</strong> and contributing to impactful projects that <strong>truly make a difference!</strong> <span className="blinking-cursor">▌</span>🚀</p>
+                <p className='mt-12 sm:mt-10'>Beyond coding, I thrive in collaborative environments and enjoy <strong>presenting clear, creative solutions to complex problems</strong> and contributing to impactful projects that <strong>truly make a difference!</strong> <span className="blinking-cursor">▌</span>🚀</p>
             </div>
 
-            {/* Section title */}
+            {/* Contact Form - Title */}
             <div className="
                 flex flex-col justify-center text-center
                 mt-4 mb-8 px-2 

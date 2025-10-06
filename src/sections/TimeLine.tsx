@@ -6,35 +6,39 @@ import useTypewriterlooping from '../Tools/Tools-useTypewriterlooping';
 import { useEffect, useRef, useState } from 'react';
 
 const TimeLine = () => {
-    // Visibility observer
-  const paragraphRef = useRef<HTMLParagraphElement>(null);
-  const [startTyping, setStartTyping] = useState(false);
+    const paragraphRef = useRef<HTMLParagraphElement>(null);
+    const [startTyping, setStartTyping] = useState(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setStartTyping(true); // start typing once visible
-          observer.disconnect(); // stop observing after triggered once
-        }
-      },
-      { threshold: 0.3 } // 30% visible triggers it
-    );
-    if (paragraphRef.current) observer.observe(paragraphRef.current);
-    return () => observer.disconnect();
-  }, []);
+    // HInt for horizontal scrollable elements
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+        (entries) => {
+            if (entries[0].isIntersecting) {
+            setStartTyping(true); // start typing once visible
+            observer.disconnect(); // stop observing after triggered once
+            }
+        },
+        { threshold: 0.3 } // 30% visible triggers it
+        );
+        if (paragraphRef.current) observer.observe(paragraphRef.current);
+        return () => observer.disconnect();
+    }, []);
 
-  const fontSize = window.innerWidth < 768 ? '30rem' : '6rem';
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
-  const secEndingDes = useTypewriterlooping(
-    [
-        'A story still being written, driven by the belief that every experience brings me closer to the person who makes a real impact ...'
-    ],
-    10,    // typing speed (ms)
-    100,   // pause before deleting (ms)
-    false,   // don’t loop, just type once
-    startTyping // start only when visible
-    );
+    // Mobile responsiveness
+    const fontSize = window.innerWidth < 768 ? '30rem' : '6rem';
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+
+    // to indicate story to be written, so applied typing effect
+    const secEndingDes = useTypewriterlooping(
+        [
+            'A story still being written, driven by the belief that every experience brings me closer to the person who makes a real impact ...'
+        ],
+        10,    // typing speed (ms)
+        100,   // pause before deleting (ms)
+        false,   // don’t loop, just type once
+        startTyping // start only when visible
+        );
+
     return (
         <div className="relative w-full h-full max-w-full ">
 

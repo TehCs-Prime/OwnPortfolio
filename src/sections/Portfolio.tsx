@@ -21,9 +21,11 @@ interface TechStack {
 
 const Portfolio = () => {
 
+    // Mobile responsiveness
     const fontSize = window.innerWidth < 768 ? '30rem' : '6rem';
     const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
+    // Selected tech/field = activated
     const [activeFields, setActiveFields] = useState<string[]>([]);
     const [activeTechs, setActiveTechs] = useState<string[]>([]);
 
@@ -103,7 +105,10 @@ const Portfolio = () => {
                 {projectsData.TechStacks.map((stack: TechStack) => {
                     const FieldIcon = (Icons[stack.icon as keyof typeof Icons] ||
                     Icons.Circle) as React.ComponentType<LucideProps>;
-
+                    
+                    // if activated will shows color and border
+                    // semiactivated (not all associated tech selected) will animate-pulse
+                    // if not selected, remain dashed border and dim in color
                     const isActive = activeFields.includes(stack.field);
                     const techNames = stack.tech.map(t => t.name);
                     const activeCount = activeTechs.filter(t => techNames.includes(t)).length;
@@ -253,18 +258,20 @@ const Portfolio = () => {
                         </div>
                         ))
                         ) : (
+                            // fall back if not project appear under current filters
                             <div className="text-center text-gray-400 py-16 animate-fadeIn flex flex-col items-center">
                             <p className="text-lg md:text-xl font-medium">No projects match your current filters 😢</p>
                             <p className="text-sm md:text-base mt-2">Try adjusting or clearing your filters.</p>
-                            <p className="text-sm md:text-base mt-8 opacity-80">You've selected techs I know, but I don't have a project to show for them    //yet 😉.</p>
+                            <p className="text-sm md:text-base mt-8 opacity-80">You've selected techs I learned, but I don't have a project to show for them    //yet 😉.</p>
                             </div>
                         );
                     })()
                 }   
             </div>
 
-            {/* Tech Logo loop */}
-            <div className="mt-50">
+            {/* Tech Logo loop - only in mobile */}
+            {/* as replacement to shows what skill/tech we had as i hide the tech filter on mobile (too messy to show) */}
+            <div className="mt-50 sm:hidden">
                 <TechLogoMarquee techStacks={projectsData.TechStacks} />
             </div>
         </div>

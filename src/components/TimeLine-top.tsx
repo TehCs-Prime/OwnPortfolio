@@ -74,7 +74,7 @@ const SpaceBoiScene = () => {
       }
     );
 
-    // We'll rotate the model directly on horizontal drags, and let vertical drags scroll the page.
+    // Rotate the model directly only on horizontal drags, to let vertical drags scroll the page.
     renderer.domElement.style.touchAction = "pan-y"; // important for mobile
 
     let isPointerDown = false;

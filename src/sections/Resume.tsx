@@ -2,8 +2,8 @@ import FuzzyText from '../components/FuzzyText';
 
 const Resume = () => {
     // Visibility observer
-  const fontSize = window.innerWidth < 768 ? '30rem' : '6rem';
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    const fontSize = window.innerWidth < 768 ? '30rem' : '6rem';
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
     return (
         <div className="relative w-full h-full max-w-full ">
@@ -62,3 +62,5 @@ const Resume = () => {
 }
 
 export default Resume;
+// initially was to render a pdf preview on this section, but turns out taking lots of resources 
+// so now just ope pdf in a new tab for user

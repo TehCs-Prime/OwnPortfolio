@@ -44,7 +44,7 @@ function App() {
         "
       >
         <Routes>
-          {/* Define routes */}
+          {/* Define routes to sections/pages */}
           <Route path="/" element={<Home />} />
           <Route path="/aboutme" element={<Home />} />
           <Route path="/journey" element={<TimeLine />} />

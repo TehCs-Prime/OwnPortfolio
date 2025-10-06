@@ -58,6 +58,7 @@ const ProjectCard: React.FC<Props> = ({ entry, activeFields, activeTechs, onFiel
     }
   };
 
+  // Horizontal scrolling tools
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -85,6 +86,7 @@ const ProjectCard: React.FC<Props> = ({ entry, activeFields, activeTechs, onFiel
     setIsDragging(false);
   };
 
+  // Hint that this component is scrollable
   const [showHint, setShowHint] = useState(false);
   const hintRef = useRef<HTMLDivElement>(null);
 
@@ -126,49 +128,54 @@ const ProjectCard: React.FC<Props> = ({ entry, activeFields, activeTechs, onFiel
       <div className="w-full md:w-1/2 order-2 md:order-1 max-w-screen">
         {/* Project Title + Status*/}
         <div className="flex items-center justify-between mb-2">
-            <h2 className="text-2xl md:text-4xl font-bold text-left">{entry.title}</h2>
+          {/* Project Title */}
+          <h2 className="text-2xl md:text-4xl font-bold text-left">{entry.title}</h2>
 
-            {entry.status && (
-                <span className={`ml-auto text-sm md:text-base font-medium px-5 py-2 rounded-full  ${getStatusStyle(entry.status)}`}>
-                {entry.status}
-                </span>
-            )}
+          {/* Project Status - defined color above */}
+          {entry.status && (
+              <span className={`ml-auto text-sm md:text-base font-medium px-5 py-2 rounded-full  ${getStatusStyle(entry.status)}`}>
+              {entry.status}
+              </span>
+          )}
         </div>
 
         {/* Project Heading + Category*/}
         {(entry.heading || entry.category) && (
         <div className="flex items-center justify-between mb-6">
-            {entry.heading && (
-            <p className="text-sm md:text-base opacity-80">{entry.heading}</p>
-            )}
+          
+          {/* Project Heading */}
+          {entry.heading && (
+          <p className="text-sm md:text-base opacity-80">{entry.heading}</p>
+          )}
 
-            {entry.category && (
-            <span className="ml-auto text-xs md:text-sm font-medium px-3 py-1 opacity-90">
-                {entry.category}
-            </span>
-            )}
+          {/* Project Category */}
+          {entry.category && (
+          <span className="ml-auto text-xs md:text-sm font-medium px-3 py-1 opacity-90">
+              {entry.category}
+          </span>
+          )}
         </div>
         )}
 
         {/* Mobile view - Media display */}
         <div className="mb-6 block md:hidden mb-6">
-            <AutoMedia
-                entry={{
-                start_date: "",
-                end_date: "",
-                title: "", 
-                heading: undefined,
-                description: { content: "" }, 
-                points: { content: [] }, 
-                media: entry.media ?? [],
-                }}
-                width = "w-full"
-                ySpace="p-0"
-                maxWidth= ""
-                height="h-[20rem] md:h-[25rem]"
-                imageDuration={3000}
-                pauseOnHover={true}
-            />
+          <AutoMedia
+            entry={{
+            start_date: "",
+            end_date: "",
+            title: "", 
+            heading: undefined,
+            description: { content: "" }, 
+            points: { content: [] }, 
+            media: entry.media ?? [],
+            }}
+            width = "w-full"
+            ySpace="p-0"
+            maxWidth= ""
+            height="h-[20rem] md:h-[25rem]"
+            imageDuration={3000}
+            pauseOnHover={true}
+          />
         </div>
         
         {/* Project involved Techtags  */}
@@ -178,6 +185,7 @@ const ProjectCard: React.FC<Props> = ({ entry, activeFields, activeTechs, onFiel
         <div className="flex flex-wrap gap-3 mb-8">
           {entry.techStack.flatMap((stack) =>
             stack.tech.map((techItem, i) => {
+              // which tech is activated/selected
               const isTechActive = activeTechs.includes(techItem);
               return (
                 <span
@@ -204,6 +212,7 @@ const ProjectCard: React.FC<Props> = ({ entry, activeFields, activeTechs, onFiel
         <div 
           ref={el => {
             scrollContainerRef.current = el;
+            // hint scrollable component
             hintRef.current = el; 
           }}
           className="overflow-x-auto mb-4 md:mb-2 scrollbar-hide cursor-grab active:cursor-grabbing hint-bounce"
@@ -214,6 +223,7 @@ const ProjectCard: React.FC<Props> = ({ entry, activeFields, activeTechs, onFiel
         >
           <div className={`flex gap-6 flex-nowrap w-max justify-start max-w-[90vw] pr-12 -mr-6 ${showHint ? "hint-bounce" : ""}`}>
             {entry.techStack.map((stack, i) => {
+              // which tech field is selected/associated
               const isActive = activeFields.includes(stack.field);
               return (
                 <button
@@ -265,7 +275,7 @@ const ProjectCard: React.FC<Props> = ({ entry, activeFields, activeTechs, onFiel
         )}
 
 
-        {/* Links */}
+        {/* Links Icon*/}
         <div className="mt-10 flex items-center order-7 md:order-none">
           {/* Github */}
           {entry.sourceCode && (
@@ -298,26 +308,26 @@ const ProjectCard: React.FC<Props> = ({ entry, activeFields, activeTechs, onFiel
         {/* Project Date */}
         {entry.date && (
             <div className="hidden md:inline-block text-[#d8d4c4]/90 px-3 py-1 rounded-full text-4xl text-center font-bold tracking-wide shadow-md mb-1">
-                {formatDate(entry.date)}
+              {formatDate(entry.date)}
             </div>
         )}
 
         {/* Reuse AutoMedia component but limit to only date and media shown */}
         <AutoMedia
-            entry={{
-            start_date: "",
-            end_date: "",
-            title: "", 
-            heading: undefined,
-            description: { content: "" }, 
-            points: { content: [] }, 
-            media: entry.media ?? [],
-            }}
-            width = "w-full p-0"
-            maxWidth= ""
-            height="h-[20rem] md:h-[25rem]"
-            imageDuration={3000}
-            pauseOnHover={true}
+          entry={{
+          start_date: "",
+          end_date: "",
+          title: "", 
+          heading: undefined,
+          description: { content: "" }, 
+          points: { content: [] }, 
+          media: entry.media ?? [],
+          }}
+          width = "w-full p-0"
+          maxWidth= ""
+          height="h-[20rem] md:h-[25rem]"
+          imageDuration={3000}
+          pauseOnHover={true}
         />
       </div>
     </div>

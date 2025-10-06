@@ -5,6 +5,7 @@ const Footer = () => {
     const [localTime, setLocalTime] = useState("");
     const [message, setMessage] = useState("");
 
+    // Local time shown
     useEffect(() => {
         const updateTime = () => {
         const now = new Date();
@@ -22,6 +23,7 @@ const Footer = () => {
         return () => clearInterval(interval); // cleanup
     }, []);
 
+    // quick email box to me 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // open email client
@@ -57,6 +59,7 @@ const Footer = () => {
                         to={item.link}
                         className="group relative block h-fit overflow-hidden font-light cursor-pointer select-none flex w-fit leading-base text-[var(--color-secondary-100)] sm:leading-snug"
                         >
+                            {/* Duplicate becoz of animation effect i imported - the fliping when hovering on it  */}
                             <span className="block w-full transition-transform duration-[0.4s] ease-[cubic-bezier(.51,.92,.24,1.15)] translate-y-0 group-hover:-translate-y-full">
                                 {item.name}
                             </span>
@@ -231,10 +234,10 @@ const Footer = () => {
         </div>
         
         {/* Lower Row */}
-            <div className="font-mono mt-2 flex w-full flex-col items-center justify-between gap-4 text-sm text-gray-300 md:flex-row">
-                <span className="font-bold uppercase text-[var(--color-secondary-300)]">Local Time: {localTime}</span>
-                <p>&copy; {new Date().getFullYear()} Maintain & Updated by Teh Chun Shen. All rights reserved.</p>
-            </div>
+        <div className="font-mono mt-2 flex w-full flex-col items-center justify-between gap-4 text-sm text-gray-300 md:flex-row">
+            <span className="font-bold uppercase text-[var(--color-secondary-300)]">Local Time: {localTime}</span>
+            <p>&copy; {new Date().getFullYear()} Maintain & Updated by Teh Chun Shen. All rights reserved.</p>
+        </div>
     </footer>
   );
 };

@@ -16,3 +16,4 @@ const ScrollToTop = () => {
 };
 
 export default ScrollToTop;
+// reset each page navigation back to top after naviagted 

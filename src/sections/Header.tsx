@@ -2,11 +2,13 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  // only when user scroll back up (to top) then shows header; else fold it to not block UX
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
+  // allow mobile menu slides from side
   useEffect(() => {
   if (isMenuOpen) {
     document.body.style.overflow = "hidden";
@@ -56,7 +58,7 @@ const Header = () => {
         }`}
       >
         <div className="px-6 sm:px-8 lg:px-12 flex flex-row items-center justify-between py-4 lg:grid lg:grid-cols-12 lg:items-center">
-          {/* Title */}
+          {/* Left side - Title */}
           <div className="col-span-7 flex flex-col items-start lg:flex-row lg:items-center">
             <Link
               to="/"
@@ -66,7 +68,7 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Desktop Nav */}
+          {/* Right side - Desktop Nav */}
           <nav className="col-span-5 flex justify-end">
             <ul className="m-0 flex flex-col px-1 py-1 items-start gap-3 md:flex-row md:items-center md:gap-8 font-semibold text-[#d8d4c4]">
               {[
@@ -84,6 +86,7 @@ const Header = () => {
                     to={item.link}
                     onClick={() => setIsMenuOpen(false)}
                   >
+                    {/* Duplicate due to my hovering animation will fold one */}
                     <span className="block w-full transition-transform duration-[0.4s] ease-[cubic-bezier(.51,.92,.24,1.15)] translate-y-0 group-hover:-translate-y-full text-[#d8d4c4]">
                       {item.name}
                     </span>
@@ -139,90 +142,94 @@ const Header = () => {
         {/* Mobile menu overlay */}
         <div
         //z-51 to set below Hamburger menu and above event counter
-            className={`fixed inset-0 md:hidden z-51 transform transition-all duration-500 ease-in-out 
-            ${isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"} 
-            bg-[var(--color-primary-900)/95] backdrop-blur-2xl`}
+          className={`fixed inset-0 md:hidden z-51 transform transition-all duration-500 ease-in-out 
+          ${isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"} 
+          bg-[var(--color-primary-900)/95] backdrop-blur-2xl`}
         >
-            {/* faded background svg */}
-            <div className="absolute right-0 bottom-0 opacity-25 ">
-                <img
-                src="/portfolio-website/assets/menu.svg"
-                alt="Menu Background"
-                loading="lazy"
-                width={245}
-                height={327}
-                decoding="async"
-                draggable="false"
-                className="scale-y-[-1]"
-                />
+          {/* faded background svg */}
+          <div className="absolute right-0 bottom-0 opacity-25 ">
+            <img
+            src="/portfolio-website/assets/menu.svg"
+            alt="Menu Background"
+            loading="lazy"
+            width={245}
+            height={327}
+            decoding="async"
+            draggable="false"
+            className="scale-y-[-1]"
+            />
+          </div>
+
+          {/* nav links */}
+          <nav className="relative h-full flex flex-col justify-center px-12 leading-tight">
+            <ul className="flex flex-col justify-center gap-y-10 text-4xl font-black">
+            {[
+                { name: "About Me", link: "/aboutme" },
+                { name: "Journey", link: "/journey" },
+                { name: "Portfolio", link: "/portfolio" },
+                { name: "Résumé", link: "/resume" },
+            ].map((item) => (
+                <li
+                key={item.name}
+                className="relative flex w-fit cursor-pointer items-center"
+                >
+                  <Link
+                    to={item.link}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="relative inline-block text-[var(--color-accent-200)] after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[var(--color-accent-200)] after:transition-all after:duration-500 hover:after:w-full"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+            ))}
+            </ul>
+
+            {/* Small Footer Section */}
+            <div className="flex flex-col items-start justify-start gap-y-4 pb-6 sm:pb-12 mt-40">
+
+              {/* Email address */}
+              <div className="flex flex-col">
+                <span className="text-left text-sm font-bold text-gray-200 2xl:text-sm">
+                Email Address
+                </span>
+                <a
+                href="mailto:chuns08022101@gmail.com"
+                className="group relative block h-fit overflow-hidden font-mono font-medium mt-1"
+                >
+                  <span className="relative block h-fit overflow-hidden select-none">
+                    <span className="block w-full opacity-70 transition-transform duration-400 ease-[cubic-bezier(.51,.92,.24,1.15)] translate-y-0 group-hover:-translate-y-full">
+                    chuns08022101@gmail.com
+                    </span>
+                  </span>
+                </a>
+              </div>
+
+              {/* Social Links */}
+              <ul className="flex flex-nowrap justify-start gap-x-2 mt-4">
+                <li>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://www.linkedin.com/in/teh-chun-shen/"
+                    className="hover:underline text-gray-200"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://github.com/TehCs-Prime"
+                    className="hover:underline text-gray-200"
+                  >
+                    Github
+                  </a>
+                </li>
+              </ul>
             </div>
-
-            {/* nav links */}
-            <nav className="relative h-full flex flex-col justify-center px-12 leading-tight">
-                <ul className="flex flex-col justify-center gap-y-10 text-4xl font-black">
-                {[
-                    { name: "About Me", link: "/aboutme" },
-                    { name: "Journey", link: "/journey" },
-                    { name: "Portfolio", link: "/portfolio" },
-                    { name: "Résumé", link: "/resume" },
-              ].map((item) => (
-                    <li
-                    key={item.name}
-                    className="relative flex w-fit cursor-pointer items-center"
-                    >
-                      <Link
-                          to={item.link}
-                          onClick={() => setIsMenuOpen(false)}
-                          className="relative inline-block text-[var(--color-accent-200)] after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[var(--color-accent-200)] after:transition-all after:duration-500 hover:after:w-full"
-                      >
-                          {item.name}
-                      </Link>
-                    </li>
-                ))}
-                </ul>
-
-                {/* Small Footer Section */}
-                <div className="flex flex-col items-start justify-start gap-y-4 pb-6 sm:pb-12 mt-40">
-                    <div className="flex flex-col">
-                        <span className="text-left text-sm font-bold text-gray-200 2xl:text-sm">
-                        Email Address
-                        </span>
-                        <a
-                        href="mailto:chuns08022101@gmail.com"
-                        className="group relative block h-fit overflow-hidden font-mono font-medium mt-1"
-                        >
-                            <span className="relative block h-fit overflow-hidden select-none">
-                                <span className="block w-full opacity-70 transition-transform duration-400 ease-[cubic-bezier(.51,.92,.24,1.15)] translate-y-0 group-hover:-translate-y-full">
-                                chuns08022101@gmail.com
-                                </span>
-                            </span>
-                        </a>
-                    </div>
-
-                    <ul className="flex flex-nowrap justify-start gap-x-2 mt-4">
-                        <li>
-                        <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href="https://www.linkedin.com/in/teh-chun-shen/"
-                            className="hover:underline text-gray-200"
-                        >
-                            LinkedIn
-                        </a>
-                        </li>
-                        <li>
-                        <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href="https://github.com/TehCs-Prime"
-                            className="hover:underline text-gray-200"
-                        >
-                            Github
-                        </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+          </nav>
         </div>
 
     </>
