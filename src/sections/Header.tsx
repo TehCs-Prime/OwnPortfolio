@@ -58,9 +58,12 @@ const Header = () => {
         <div className="px-6 sm:px-8 lg:px-12 flex flex-row items-center justify-between py-4 lg:grid lg:grid-cols-12 lg:items-center">
           {/* Title */}
           <div className="col-span-7 flex flex-col items-start lg:flex-row lg:items-center">
-            <span className="block w-fit font-bold tracking-wide text-[#d8d4c4] text-xl md:text-2xl">
+            <Link
+              to="/"
+              className="block w-fit font-bold tracking-wide text-[#d8d4c4] text-xl md:text-2xl hover:text-white transition-colors duration-200"
+            >
               Teh Chun Shen ©
-            </span>
+            </Link>
           </div>
 
           {/* Desktop Nav */}

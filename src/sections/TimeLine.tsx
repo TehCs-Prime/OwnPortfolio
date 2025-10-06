@@ -70,6 +70,7 @@ const TimeLine = () => {
                 <strong>“The Story So Far”</strong> tells a living tapestry of my journey of how I’ve grown. Structured as a flowing narrative, each thread begins with my <strong>academic profile</strong> and <strong>work experiences</strong> as the milestones, while <strong>participations</strong>, <strong>achievements</strong>, <strong>competitions</strong> and <strong>awards</strong> bloom alongside them. This flowing structure lets every moment breathe in its own time and place, showing not just timeline events but the growth, dreams and challenges behind them. It seeks to draw you into my story - to witness how a spark of initiative grew into contribution, how each contribution rippled into recognition and how that recognition now awakens the path toward my future.
             </p>
 
+            {/* Not directly reusable component as it alrd populate with data ... rushing*/}
             <TimeLineCards/>
 
             {/* Section description */}

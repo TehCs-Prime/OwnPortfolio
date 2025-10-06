@@ -217,24 +217,27 @@ const Portfolio = () => {
                 {/* --- Filter Projects --- */}
                 {(() => {
                 const filteredProjects = projectsData.Projects.filter((project) => {
-                    const projectFields = project.techStack?.map((stack: { field: string; tech: string[] }) => stack.field) || [];
-                    const projectTechs = project.techStack?.flatMap((stack: { field: string; tech: string[] }) => stack.field) || [];
+                const projectFields =
+                    project.techStack?.map((stack: { field: string; tech: string[] }) => stack.field) || [];
 
-                    if (activeFields.length === 0 && activeTechs.length === 0) return true;
+                const projectTechs =
+                    project.techStack?.flatMap((stack: { field: string; tech: string[] }) => stack.tech) || [];
 
-                    const matchesField = projectFields.some((field: string) =>
+                if (activeFields.length === 0 && activeTechs.length === 0) return true;
+
+                const matchesField = projectFields.some((field: string) =>
                     activeFields.includes(field)
-                    );
+                );
 
-                    const matchesTech = projectTechs.some((tech: string) =>
+                const matchesTech = projectTechs.some((tech: string) =>
                     activeTechs.some(
-                        (active) =>
+                    (active) =>
                         tech.toLowerCase().includes(active.toLowerCase()) ||
                         active.toLowerCase().includes(tech.toLowerCase())
                     )
-                    );
+                );
 
-                    return matchesField || matchesTech;
+                return matchesField || matchesTech;
                 });
 
                 return filteredProjects.length > 0 ? (
