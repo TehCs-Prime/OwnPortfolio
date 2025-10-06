@@ -52,15 +52,27 @@ const AboutMe = () => {
         <div className="relative w-full h-full max-w-full ">
 
             {/* Opening */}
-            <div className="w-full max-w-[100vw] mx-auto font-mono flex flex-col text-[#d8d4c4] md:flex-row items-center justify-between gap-8 md:gap-16 text-center md:text-left">
+            <div className="w-full max-w-[100vw] mx-auto font-mono flex flex-col-reverse text-[#d8d4c4] md:flex-row items-center justify-center md:justify-between gap-8 md:gap-16 text-center md:text-left">
+                {/* Text section - left/down */}
                 <div className="flex-1 sm:ml-30">
-                    <h1>
-                        <span className='home-content-fixed'>I am&nbsp;</span>
-                        <span className="home-content-keyword">{typingWords}</span>
+
+                    <h2 className="mb-2 text-3xl sm:text-4xl md:text-6xl font-mono font-semibold text-[#bfb99f] opacity-85">
+                        {new Date().toLocaleString('en-US', {
+                            month: 'short',
+                        }) + "'" + new Date().getFullYear().toString().slice(-2)}
+                    </h2>
+
+                    <h1 className="text-3xl md:text-5xl mt-2 sm:mt-0 font-semibold md:font-extrabold leading-tight md:leading-[1.1]">
+                        <span className='home-content-fixed'>I am</span>
+                        <span className="home-content-keyword hidden sm:inline-block">&nbsp;{typingWords}</span>
+
+                        <p className="sm:hidden">{typingWords}</p>
                     </h1>
-                    <h2>Jun'25</h2>
+                    
                 </div>
-                <div className="flex-1 flex justify-center items-center">
+
+                {/* Img section - right/up */}
+                <div className="flex-1 flex justify-center items-center mt-30 sm:mt-0">
                     <img
                     src={HomeCodingPic}
                     alt="Coding illustration"
