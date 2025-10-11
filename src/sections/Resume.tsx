@@ -33,12 +33,17 @@ const Resume = () => {
             </div>
 
             {/* Section description */}
-            <div className="sectionDes bg-black p-[2rem] sm:p-[8rem]  mt-24 mb-32 sm:mt-8 sm:mb-16 text-[#d8d4c4] text-base sm:text-xl leading-relaxed text-justify">
-                <p><strong>“The Next Chapter”</strong> gathers every thread I've spun and weaves them forward into a living tapestry of who I am becoming. Here, I invite you to follow these strands, <strong>exploring my capabilities</strong> in a tangible way.</p>
-                <span className="text-sm italic text-[#bfb99f] ml-6">
-                    (or perhaps an official way to introduce myself?)
-                </span>
-                <p className='mt-12 sm:mt-8'>As you read, you witness not only my accomplishments but <strong>the momentum that propels me toward what comes next</strong> ...<span className="blinking-cursor">▌</span></p>
+            <div className="sectionDes bg-black p-[2rem] sm:p-[8rem]  mt-20 mb-18 sm:mt-0 sm:mb-16 text-[#d8d4c4] text-base sm:text-xl leading-relaxed text-justify">
+                <p>Motivated and analytical <strong> Computer Science undergraduate majoring in Intelligent Computing</strong> with
+                strong foundation in software engineering, machine learning and web development. Experienced in developing
+                <strong> responsive websites</strong> and implementing <strong>machine learning models</strong> driven by a strong passion for the algorithms
+                and logic behind artificial intelligence. 
+                </p>
+                 <p className='mt-24'>
+                    Currently, <strong> Seeking an internship opportunity from February 16, 2026 to
+                August 16, 2026</strong> to apply academic knowledge and practical experience in real-world projects that advance
+                intelligent and data-driven solutions.
+                </p>
             </div>
             
             {/* Resume Button */}
@@ -54,8 +59,17 @@ const Resume = () => {
                     hover:scale-105
                     "
                 >
-                    My Resume 📄
+                    My Résumé 📄
                 </a>
+            </div>
+
+            {/* Section description */}
+            <div className="sectionDes bg-black p-[2rem] sm:p-[8rem]  mt-24 mb-32 sm:mt-8 sm:mb-16 text-[#d8d4c4] text-base sm:text-xl leading-relaxed text-justify">
+                <p><strong>“The Next Chapter”</strong> gathers every thread I've spun and weaves them forward into a living tapestry of who I am becoming. Here, I invite you to follow these strands, <strong>exploring my capabilities</strong> in a tangible way.</p>
+                <span className="text-sm italic text-[#bfb99f] ml-6">
+                    (or perhaps an official way to introduce myself?)
+                </span>
+                <p className='mt-12 sm:mt-8'>As you read, you witness not only my accomplishments but <strong>the momentum that propels me toward what comes next</strong> ...<span className="blinking-cursor">▌</span></p>
             </div>
         </div>
     )

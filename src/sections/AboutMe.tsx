@@ -97,12 +97,8 @@ const AboutMe = () => {
 
             {/* Section description */}
             <div className="sectionDes bg-black p-[2rem] sm:p-[8rem]  mt-12 mb-32 sm:mt-8 sm:mb-16 text-[#d8d4c4] text-base sm:text-xl leading-relaxed text-justify">
-                <p>This <strong>Portfolio Website</strong> serves as my personal tech identity to represent me in digital space. It's built to <strong>scale</strong>, <strong>structured with maintainable code</strong>  so it can grow alongside my career, with room for future updates and new additions.</p>
-                <span className="text-sm italic text-[#bfb99f] ml-6">
-                    (Not just something to show off! Gotta make it worth building, right?)
-                </span>
                 <p className='mt-12 sm:mt-24'>As a passionate tech enthusiast, I began my journey by <strong>realizing the real-life challenges and inefficiencies</strong> around me. And that <strong>curiosity</strong> soon grew into a drive to solve them through my profession. Over time, this grew into a genuine love for crafting innovative software solutions that <strong>build meaningful</strong> and <strong>problem-solving digital experiences</strong>.</p>
-                <p className='mt-12 sm:mt-10'>Beyond coding, I thrive in collaborative environments and enjoy <strong>presenting clear, creative solutions to complex problems</strong> and contributing to impactful projects that <strong>truly make a difference!</strong> <span className="blinking-cursor">▌</span>🚀</p>
+                <p className='mt-12 sm:mt-10'>Beyond coding, I thrive in collaborative environments and enjoy <strong>presenting clear, creative solutions to complex problems</strong> and contributing to impactful projects that <strong>truly make a difference!</strong> 🚀</p>
             </div>
 
             {/* Contact Form - Title */}
@@ -188,6 +184,14 @@ const AboutMe = () => {
                     )}
                 </form>
             </div>
+
+            {/* Section description */}
+            <div className="sectionDes bg-black p-[2rem] sm:p-[8rem]  mt-12 mb-24 sm:mt-0 sm:pt-0 sm:mb-0 text-[#d8d4c4] text-base sm:text-xl leading-relaxed text-justify">
+                <p>This <strong>Portfolio Website</strong> serves as my personal tech identity to represent me in digital space. It's built to <strong>scale</strong>, <strong>structured with maintainable code</strong>  so it can grow alongside my career, with room for future updates and new additions.</p>
+                <span className="text-sm italic text-[#bfb99f] ml-2 sm:ml-6">
+                    (Not just something to show off! Gotta make it worth building, right?)
+                </span>
+             </div>
         </div>
     )
 }
