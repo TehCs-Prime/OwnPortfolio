@@ -60,10 +60,10 @@
       "start_date": "2023-10",
       "end_date": "Present",
       "title": "Universiti Sains Malaysia (USM), Penang",
-      "heading": "CGPA: 3.78 | Bachelor of Computer Sciences (Intelligent Computing) with Honours",
+      "heading": "CGPA: 3.78 | Third-Year Bachelor of Computer Sciences (Intelligent Computing) with Honours",
       "description": {
         "title": "Core subjects:",
-        "content": "Machine Learning and Computational Intelligence, Programming Methodology and Data Structures, Design & Analysis of Algorithms, Operating Systems, Database Organisation & Design, Principles of Computer Networks and Information Security, Integrated Software Development Workshop."
+        "content": "Machine Learning and Computational Intelligence, Computer Graphics and Visualisation, Natural Language Processing (NLP), Programming Methodology and Data Structures, Design & Analysis of Algorithms, Operating Systems, Database Organisation & Design."
       },
       "points": {
         "title": "",
@@ -113,6 +113,29 @@
   ],
   "work_experience": [
     {
+      "start_date": "2025-07",
+      "end_date": "2025-09",
+      "title": "Future Objects",
+      "heading": "Remote Part-time  | Junior Software Engineer",
+      "description": {
+        "title": "",
+        "content": ""
+      },
+      "points": {
+        "title": "Key Highlights:",
+        "content": [
+        "Conducted feasibility studies to evaluate and propose optimal approaches for new feature implementations.",
+        "Gained exposure to Large Language Model (LLM)–based semantic search using vector embeddings, contributing to intelligent data retrieval capabilities.",
+        "Collaborated in an Agile development environment by delivering weekly progress updates",
+        "Prepared comprehensive technical documentation to support ongoing development and knowledge sharing."
+        ]
+      },
+      "media": [
+        { "type": "image", "path": "assets/images/.jpg" },
+        { "type": "video", "path": "assets/videos/.mp4" }
+      ]
+    },
+    {
       "start_date": "2023-07",
       "end_date": "2023-09",
       "title": "Southern University College, Johor, Malaysia",
@@ -125,7 +148,7 @@
         "title": "Key Highlights:",
         "content": [
         "Managed logistics, including VIP coordination, reviewing event procedures and delivering presentations.",
-        "Designed student's handbook and recorded meeting minutes.",
+        "Designed the student handbook and recorded meeting minutes.",
         "Utilized Microsoft Excel, SharePoint, Word, and PowerPoint for documentation and team coordination."
         ]
       },
@@ -138,7 +161,7 @@
       "start_date": "2020-02",
       "end_date": "2022-06",
       "title": "LOVETTE & CO, Malaysia",
-      "heading": "Event Setup Crew",
+      "heading": "Part-time | Event Setup Crew",
       "description": {
         "title": "",
         "content": ""
@@ -148,7 +171,7 @@
         "content": [
         "Enhanced client satisfaction ratings by scheduling on-site service requests, managing show logistics and booth functionality need to meet demands.",
         "Followed all policies, regulations, dress code and schedules.",
-        "Successfully communicated with all team members to navigate job duties and complete tasks.",
+        "Communicated with all team members to navigate job duties and complete tasks.",
         "Loaded, unloaded and moved material to and from storage and production areas."
         ]
       },
@@ -176,8 +199,8 @@
         ]
       },
       "media": [
-        { "type": "image", "path": "assets/ExpImg1.png" },
-        { "type": "video", "path": "assets/Expvideo.mp4" }
+        { "type": "image", "path": "assets/participations_achievements/PAL-04.jpg" },
+        { "type": "image", "path": "assets/participations_achievements/PAL-02.jpg" }
       ]
     },
     {
@@ -194,8 +217,7 @@
         "content": []
       },
       "media": [
-        { "type": "image", "path": "assets/ExpImg2.png" },
-        { "type": "video", "path": "assets/Expvideo.mp4" }
+        { "type": "image", "path": "assets/participations_achievements/GeoNHistory.jpeg" }
       ]
     },
     {
@@ -212,12 +234,30 @@
         "content": []
       },
       "media": [
-        { "type": "image", "path": "assets/ExpImg1.png" },
-        { "type": "video", "path": "assets/Expvideo.mp4" }
+        { "type": "image", "path": "assets/participations_achievements/STEM.jpeg" }
       ]
     }
   ],
   "competitions_awards": [
+    {
+      "start_date": "Present",
+      "end_date": "",
+      "title": "Dean’s List Awards | Universiti Sains Malaysia (USM)",
+      "heading": "4 times so far (and continuing!)",
+      "description": {
+        "title": "",
+        "content": ""
+      },
+      "points": {
+        "title": "",
+        "content": []
+      },
+      "media": [
+        { "type": "image", "path": "assets/competitions_awards/Y1S1_TEHCHUNSHEN_DeanListCert.jpg" },
+        { "type": "image", "path": "assets/competitions_awards/Y1S2_TEHCHUNSHEN_DeanListCert.png" },
+        { "type": "image", "path": "assets/competitions_awards/Y2S1_TEHCHUNSHEN_DeanListCert-1.png" }
+      ]
+    },
     {
       "start_date": "2025-05",
       "end_date": "",
@@ -232,8 +272,11 @@
         "content": []
       },
       "media": [
-        { "type": "image", "path": "assets/ExpImg1.png" },
-        { "type": "video", "path": "assets/Expvideo.mp4" }
+        { "type": "image", "path": "assets/competitions_awards/VHack-01.jpeg" },
+        { "type": "image", "path": "assets/competitions_awards/VHack-02.jpeg" },
+        { "type": "image", "path": "assets/competitions_awards/VHack-04.jpeg" },
+        { "type": "image", "path": "assets/competitions_awards/VHack-03.jpeg" },
+        { "type": "image", "path": "assets/competitions_awards/VHack-05.jpeg" }
       ]
     },
     {
@@ -250,8 +293,7 @@
         "content": []
       },
       "media": [
-        { "type": "image", "path": "assets/ExpImg2.png" },
-        { "type": "video", "path": "assets/Expvideo.mp4" }
+        { "type": "image", "path": "assets/competitions_awards/K3M.png" }
       ]
     },
     {
@@ -268,12 +310,11 @@
         "content": []
       },
       "media": [
-        { "type": "image", "path": "assets/ExpImg1.png" },
-        { "type": "video", "path": "assets/Expvideo.mp4" }
+        { "type": "image", "path": "assets/competitions_awards/KAKOM-01.png" }
       ]
     },
     {
-      "start_date": "2022-09",
+      "start_date": "2023-02",
       "end_date": "",
       "title": "Champion | KMJ Maths Trail ’23",
       "heading": "",
@@ -286,8 +327,7 @@
         "content": []
       },
       "media": [
-        { "type": "image", "path": "assets/ExpImg2.png" },
-        { "type": "video", "path": "assets/Expvideo.mp4" }
+        { "type": "image", "path": "assets/competitions_awards/MathT-01.jpg" }
       ]
     },
     {
@@ -304,8 +344,7 @@
         "content": []
       },
       "media": [
-        { "type": "image", "path": "assets/ExpImg1.png" },
-        { "type": "video", "path": "assets/Expvideo.mp4" }
+        { "type": "image", "path": "assets/competitions_awards/e-quiz-01.png" }
       ]
     },
     {
@@ -322,8 +361,9 @@
         "content": []
       },
       "media": [
-        { "type": "image", "path": "assets/ExpImg2.png" },
-        { "type": "video", "path": "assets/Expvideo.mp4" }
+        { "type": "image", "path": "assets/competitions_awards/IMU-SCD-03.png" },
+        { "type": "image", "path": "assets/competitions_awards/IMU-SCD-01.png" },
+        { "type": "image", "path": "assets/competitions_awards/IMU-SCD-02.png" }
       ]
     }
   ]

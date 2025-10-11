@@ -38,10 +38,15 @@ const combined = [...academic, ...work];
 
 // sort newest first based on start_date (YYYY-MM format)
 combined.sort((a, b) => {
-  // treat 'Present' as future date
-  const dateA = a.start_date === 'Present' ? '9999-12' : a.start_date;
-  const dateB = b.start_date === 'Present' ? '9999-12' : b.start_date;
-  return dateB.localeCompare(dateA); // descending
+  // Handle ongoing/current entries first
+  const aIsCurrent = a.end_date.toLowerCase() === 'present';
+  const bIsCurrent = b.end_date.toLowerCase() === 'present';
+
+  if (aIsCurrent && !bIsCurrent) return -1; // a first
+  if (!aIsCurrent && bIsCurrent) return 1;  // b first
+
+  // Otherwise sort by start_date descending
+  return b.start_date.localeCompare(a.start_date);
 });
 
 const formatDate = (dateStr: string) => {
@@ -268,6 +273,23 @@ useEffect(() => {
   return () => window.removeEventListener('scroll', onScroll);
 }, []);
 
+// Preprocess events so each belongs only to the OLDEST overlapping milestone
+const assignedEvents = new Set<typeof allEvents[number]>();
+const eventsPerItem: (typeof allEvents[number])[][] = Array(combined.length)
+  .fill(null)
+  .map(() => []);
+
+// Process from oldest → newest (reverse of visual order)
+[...combined].reverse().forEach((item, reverseIndex) => {
+  const itemIndex = combined.length - 1 - reverseIndex; // real index (for render order)
+  for (const ev of allEvents) {
+    if (assignedEvents.has(ev)) continue; // already assigned to older milestone
+    if (isEventInRange(ev.start_date, ev.end_date, item.start_date, item.end_date)) {
+      eventsPerItem[itemIndex].push(ev);
+      assignedEvents.add(ev);
+    }
+  }
+});
 
   return (
     <div className="relative w-full h-full max-w-full"> 
@@ -397,9 +419,7 @@ useEffect(() => {
                   {/* Row 2: New row under the above two columns - Events row */}
                     {(() => {
                       // Filter events under this row
-                      const eventsForThisItem = allEvents.filter(ev =>
-                        isEventInRange(ev.start_date, ev.end_date, item.start_date, item.end_date)
-                      );
+                      const eventsForThisItem = eventsPerItem[index];
 
                     if (eventsForThisItem.length === 0) return null; // nothing at all
 
@@ -416,7 +436,7 @@ useEffect(() => {
                                   key={idx}
                                   entry={ev}       // single entry now
                                   height="h-full min-h-[15rem]"
-                                  imageDuration={4000}
+                                  imageDuration={3500}
                                   pauseOnHover={false}
                                 />
                               ))}

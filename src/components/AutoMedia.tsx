@@ -23,6 +23,7 @@ type Props = {
 
 function formatDate(dateString: string) {
   if (!dateString) return "";
+  if (dateString.toLowerCase() === "present") return "Present";
   const [year, month] = dateString.split("-");
   const d = new Date(Number(year), Number(month) - 1, 1);
   return d.toLocaleString("default", { month: "short", year: "numeric" });
