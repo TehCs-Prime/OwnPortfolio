@@ -64,8 +64,7 @@
         { "name": "React", "icon": "Atom", "color": "#61dafb" },
         { "name": "TypeScript", "icon": "FileType2", "color": "#3178c6" },
         { "name": "TailwindCSS", "icon": "Wind", "color": "#38bdf8" },
-        { "name": "Vite", "icon": "Zap", "color": "#ffca28" },
-        { "name": "Framer Motion", "icon": "Framer", "color": "#e91e63" }
+        { "name": "Vite", "icon": "Zap", "color": "#ffca28" }
       ]
     },
     {
@@ -74,7 +73,6 @@
       "color": "#f97316",
       "tech": [
         { "name": "Node.js", "icon": "Boxes", "color": "#68a063" },
-        { "name": "Express", "icon": "TerminalSquare", "color": "#000000" },
         { "name": "Java", "icon": "Coffee", "color": "#b07219" }
       ]
     },
@@ -84,17 +82,35 @@
       "color": "#a855f7",
       "tech": [
         { "name": "PostgreSQL", "icon": "Cylinder", "color": "#336791" },
-        { "name": "MongoDB", "icon": "Leaf", "color": "#47a248" }
+        { "name": "Firebase", "icon": "Flame", "color": "#FFA611" }
       ]
     },
     {
-      "field": "Cloud & Hosting",
+      "field": "Machine Learning",
+      "icon": "Brain",
+      "color": "#f59e0b",
+      "tech": [
+        { "name": "Python", "icon": "FileCode", "color": "#3776AB" },
+        { "name": "TensorFlow", "icon": "Blocks", "color": "#FF6F00" },
+        { "name": "Keras", "icon": "Layers", "color": "#D00000" },
+        { "name": "Scikit-learn", "icon": "Network", "color": "#F7931E" }
+      ]
+    },
+    {
+      "field": "Data Analytic",
+      "icon": "BarChart3",
+      "color": "#10b981",
+      "tech": [
+        { "name": "NumPy", "icon": "Sigma", "color": "#4D77CF" },
+        { "name": "Pandas", "icon": "Table2", "color": "#150458" }
+      ]
+    },
+    {
+      "field": "Hosting & Deployment",
       "icon": "Cloud",
       "color": "#0ea5e9",
       "tech": [
-        { "name": "Firebase", "icon": "Flame", "color": "#ffcb2b" },
-        { "name": "Vercel", "icon": "Triangle", "color": "#000000" },
-        { "name": "Netlify", "icon": "Network", "color": "#00ad9f" }
+        { "name": "Vercel", "icon": "Triangle", "color": "#000000" }
       ]
     },
     {
@@ -104,7 +120,6 @@
       "tech": [
         { "name": "Solidity", "icon": "Code2", "color": "#363636" },
         { "name": "Ethereum", "icon": "Diamond", "color": "#627eea" },
-        { "name": "Hardhat", "icon": "Hammer", "color": "#fbbc04" },
         { "name": "Metamask", "icon": "Wallet", "color": "#f6851b" }
       ]
     },
@@ -122,66 +137,145 @@
       "icon": "Wrench",
       "color": "#facc15",
       "tech": [
-        { "name": "Figma", "icon": "PenTool", "color": "#f24e1e" },
-        { "name": "Postman", "icon": "Send", "color": "#ff6c37" },
-        { "name": "Docker", "icon": "Box", "color": "#2496ed" },
-        { "name": "Jest", "icon": "Beaker", "color": "#99425b" }
+        { "name": "Figma", "icon": "PenTool", "color": "#f24e1e" }
       ]
     }
   ],
 
     "Projects": [
     {
+      "title": "Enchor’",
+      "heading": "Personalized memory-sharing mobile application",
+      "description": "A mobile application concept designed to help people record, track and share joyful experiences/memories associated to physical locations. Combining the idea of note-taking, blogging and social sharing into a living map of shared emotions and memories. It aims to preserve emotional experiences/memories behind each visit and solve daily dilemma of struggling — Where to go?, What to eat?",
+      "points": {
+        "title": "Core Features: ",
+        "content": [
+          "📸 Memory Capture : Log reflections/experiences associated to each place with details and photos/videos.",
+          "🔍 Smart Recommendations : Suggest new locations based on user's prompt or random 'dice' suggestion.",
+          "👥 Community Sharing : Socially connected ecosystem of shared experiences bonded by emotion and authenticity rather than popularity metrics.",
+          "💡 Location Preview : A rich preview that help users to discover and understand places they've never visited before."
+        ]
+      },
+      "date": "2025-02",
+      "status": "Paused",
+      "category": "Original Concept Proposal",
+      "techStack": [
+        {
+          "field": "Tools",
+          "tech": ["Figma"]
+        }
+      ],
+      "sourceCode": "",
+      "liveSite": "",
+      "media": [
+        { "type": "image", "path": "assets/portfolio/Enchor-01.png" },
+        { "type": "image", "path": "assets/portfolio/Enchor-02.png" }
+      ]
+    },
+    {
       "title": "Lacial",
-      "heading": "Blockchain Donation Platform",
-      "description": "Lacial is a decentralized donation platform designed to improve transparency, accountability, and trust between donors and charitable organizations. Built on blockchain technology, the platform leverages smart contracts to automate fund distribution and provide verifiable transaction records in real time.",
+      "heading": "Blockchain-Based Charity Platform",
+      "description": "Lacial is a decentralized donation platform designed to improve transparency, accountability and trust between donors and charitable organizations. Built on blockchain technology, the platform leverages smart contracts to automate fund distribution and provide verifiable transaction records in real time.",
       "points": {
         "title": "Key Features: ",
         "content": [
-          "Blockchain-based donation tracking",
+          "Highly-secured Blockchain-based donation transactions",
           "Automated fund distribution via smart contracts",
-          "AI-powered donor insights dashboard",
-          "Multi-currency and crypto payment support"
+          "Transparent processes with every stage of a donation updates are user verifirable",
+          "Support multi-currency, crytocurrency and digital wallet"
         ]
       },
-      "date": "2025-10",
-      "status": "Deployed",
-      "category": "School Project",
+      "date": "2025-05",
+      "status": "Completed",
+      "category": "Hackathon Project",
       "techStack": [
         {
           "field": "Frontend",
-          "tech": ["React", "TypeScript", "TailwindCSS"]
+          "tech": ["React", "TypeScript", "TailwindCSS", "Vite"]
         },
         {
-          "field": "Northend",
-          "tech": ["Reaction", "Typing", "Tailwind"]
-        },
-        {
-          "field": "Southend",
-          "tech": ["Reacted", "Type", "Tail"]
-        },
-        {
-          "field": "Backend",
-          "tech": ["Node.js", "Express", "Firebase"]
+          "field": "Database",
+          "tech": ["Firebase"]
         },
         {
           "field": "Blockchain",
-          "tech": ["Eth", "Solid", "Web3"]
+          "tech": ["Ethereum", "Solidity", "Metamask"]
         },
         {
-          "field": "Block",
-          "tech": ["ereum", "lidity", "js"]
-        },
-        {
-          "field": "Chain",
-          "tech": ["thereum", "dity", "Web"]
+          "field": "Version Control",
+          "tech": ["Git", "GitHub"]
         }
       ],
-      "sourceCode": "https://github.com/username/lacial",
-      "liveSite": "https://lacial-demo.vercel.app",
+      "sourceCode": "https://github.com/TehCs-Prime/VHack2025-BlockchainCharity",
+      "liveSite": "https://youtu.be/ZcW74X2rrjI",
       "media": [
-        { "type": "image", "path": "assets/ExpImg1.png" },
-        { "type": "video", "path": "assets/Expvideo.mp4" }
+        { "type": "image", "path": "assets/portfolio/VHack-01.png" },
+        { "type": "video", "path": "assets/portfolio/VHack-02.mp4" }
+      ]
+    },
+    {
+      "title": "Seismic Bump Event Prediction",
+      "heading": "Machine Learning Prediction Model",
+      "description": "An ML-based system that detects and forecasts seismic bump events from underground mining sensor data. This project explores and compares different supervised learning models: Neural Networks, K-Nearest Neighbors (KNN), Support Vector Machine (SVM) and Decision Tree (DT). Study each model's effectiveness in classifying seismic bump occurrences based on geological and sensor data.",
+      "points": {
+        "title": "Highlights: ",
+        "content": [
+          "Developed multiple ML models (Neural Network, KNN, SVM, Decision Tree) to predict seismic events.",
+          "Built a reproducible end-to-end pipeline with temporal cross-validation for small and Class-Imbalance datasets.",
+          "Performed data preprocessing and feature engineering to ensure data cleanliness and model quality.",
+          "Implemented model evaluation and Fine-tuning to optimize prediction reliability and ensure generalization.",
+          "Visualized model outcomes through performance matrices for better interpretability."
+        ]
+      },
+      "date": "2025-06",
+      "status": "Completed",
+      "category": "School Project",
+      "techStack": [
+        {
+          "field": "Machine Learning",
+          "tech": ["Python", "TensorFlow", "Keras", "Scikit-learn"]
+        },
+        {
+          "field": "Data Analytic",
+          "tech": ["NumPy", "Pandas"]
+        }
+      ],
+      "sourceCode": "https://github.com/TehCs-Prime/SeismicBumps",
+      "liveSite": "https://colab.research.google.com/drive/1jBug1Y6e7sIGvncN4UuQTO_4Fm4-rtvj?usp=sharing",
+      "media": [
+        { "type": "video", "path": "assets/portfolio/seismic-02.mp4" }
+      ]
+    },
+    {
+      "title": "TehHub",
+      "heading": "Personal Developer Portfolio",
+      "description": "A self-developed website serves as my digital identity, a space where creativity meets code. Built to represent both my technical journey and personal growth, blends storytelling with structure to express who I am as a developer, student and lifetime-learner. Documenting how curiosity turns into craft and how each milestone fuels the next pursuit.",
+      "points": {
+        "title": "Key Sections: ",
+        "content": [
+          "🌟 About Me : Where it all began, a glimpse into my motivation and the passion that drives me in pursuing my life's journey.",
+          "🌱 Journey : A living timeline of growth, showcasing my academic milestones, achievements, participations and experiences woven into a tapestry of development.",
+          "🧩 Portfolio : Where ideas come alive, When innovation meets execution. Each project highlights the processes, experiments and technologies behind them.",
+          "📜 Resume : An official introduction/invitation to what's next, gathering everything into a clear, professional overview. Bridging the narrative of who I am with the potential of who I'm becoming."
+        ]
+      },
+      "date": "2025-09",
+      "status": "Completed",
+      "category": "Digital Identity Card",
+      "techStack": [
+        {
+          "field": "Frontend",
+          "tech": ["React", "TypeScript", "TailwindCSS", "Vite"]
+        },
+        {
+          "field": "Version Control",
+          "tech": ["Git", "GitHub"]
+        }
+      ],
+      "sourceCode": "https://github.com/TehCs-Prime/OwnPortfolio",
+      "liveSite": "",
+      "media": [
+        { "type": "image", "path": "assets/portfolio/portfolio-01.png" }
       ]
     }
   ]

@@ -46,15 +46,17 @@ const ProjectCard: React.FC<Props> = ({ entry, activeFields, activeTechs, onFiel
   const getStatusStyle = (status: string) => {
     switch (status.toLowerCase()) {
         case "deployed":
-        return "bg-green-500/20 text-green-300 border-green-400/40";
+          return "bg-green-500/20 text-green-300 border-green-400/40";
         case "in progress":
-        return "bg-yellow-500/20 text-yellow-300 border-yellow-400/40";
+          return "bg-yellow-500/20 text-yellow-300 border-yellow-400/40";
         case "planned":
-        return "bg-gray-500/20 text-gray-300 border-gray-400/40";
+          return "bg-gray-500/20 text-gray-300 border-gray-400/40";
+        case "completed":
+          return "bg-cyan-500/20 text-cyan-300 border-cyan-400/40";
         case "paused":
-        return "bg-red-500/20 text-red-300 border-red-400/40";
+          return "bg-red-500/20 text-red-300 border-red-400/40";
         default:
-        return "bg-white/5 text-white border-white/20"; // fallback
+          return "bg-white/5 text-white border-white/20"; // fallback
     }
   };
 
