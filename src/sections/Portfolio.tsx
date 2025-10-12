@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import FuzzyText from '../components/FuzzyText';
 import ProjectCard from "../components/ProjectCards";
 import projectsData from '../DataSources/Portfolio.json';
@@ -63,6 +63,24 @@ const Portfolio = () => {
             return newTechs;
         });
     };
+
+    const filteredProjects = useMemo(() => {
+    return projectsData.Projects.filter((project) => {
+        const projectFields = project.techStack?.map((stack) => stack.field) || [];
+        const projectTechs = project.techStack?.flatMap((stack) => stack.tech) || [];
+        if (activeFields.length === 0 && activeTechs.length === 0) return true;
+
+        const matchesField = projectFields.some((f) => activeFields.includes(f));
+        const matchesTech = projectTechs.some((t) =>
+        activeTechs.some(
+            (active) =>
+            t.toLowerCase().includes(active.toLowerCase()) ||
+            active.toLowerCase().includes(t.toLowerCase())
+        )
+        );
+        return matchesField || matchesTech;
+    });
+    }, [projectsData.Projects, activeFields, activeTechs]);
 
     return (
         <div className="relative w-full h-full max-w-full ">
@@ -220,32 +238,7 @@ const Portfolio = () => {
             {/* Project Display */}
             <div className="px-4 sm:px-12 md:px-20 mt-20">
                 {/* --- Filter Projects --- */}
-                {(() => {
-                const filteredProjects = projectsData.Projects.filter((project) => {
-                const projectFields =
-                    project.techStack?.map((stack: { field: string; tech: string[] }) => stack.field) || [];
-
-                const projectTechs =
-                    project.techStack?.flatMap((stack: { field: string; tech: string[] }) => stack.tech) || [];
-
-                if (activeFields.length === 0 && activeTechs.length === 0) return true;
-
-                const matchesField = projectFields.some((field: string) =>
-                    activeFields.includes(field)
-                );
-
-                const matchesTech = projectTechs.some((tech: string) =>
-                    activeTechs.some(
-                    (active) =>
-                        tech.toLowerCase().includes(active.toLowerCase()) ||
-                        active.toLowerCase().includes(tech.toLowerCase())
-                    )
-                );
-
-                return matchesField || matchesTech;
-                });
-
-                return filteredProjects.length > 0 ? (
+                {filteredProjects.length > 0 ? (
                     filteredProjects.map((filteredProject, idx) => (
                         <div key={idx} className="animate-fadeIn">
                             <ProjectCard
@@ -257,16 +250,14 @@ const Portfolio = () => {
                             />
                         </div>
                         ))
-                        ) : (
-                            // fall back if not project appear under current filters
-                            <div className="text-center text-gray-400 py-16 animate-fadeIn flex flex-col items-center">
-                            <p className="text-lg md:text-xl font-medium">No projects match your current filters 😢</p>
-                            <p className="text-sm md:text-base mt-2">Try adjusting or clearing your filters.</p>
-                            <p className="text-sm md:text-base mt-8 opacity-80">You've selected techs I learned, but I don't have a project to show for them    //yet 😉.</p>
-                            </div>
-                        );
-                    })()
-                }   
+                    ) : (
+                        // fall back if not project appear under current filters
+                        <div className="text-center text-gray-400 py-16 animate-fadeIn flex flex-col items-center">
+                        <p className="text-lg md:text-xl font-medium">No projects match your current filters 😢</p>
+                        <p className="text-sm md:text-base mt-2">Try adjusting or clearing your filters.</p>
+                        <p className="text-sm md:text-base mt-8 opacity-80">You've selected techs I learned, but I don't have a project to show for them    //yet 😉.</p>
+                        </div>
+                    )};
             </div>
 
             {/* Tech Logo loop - only in mobile */}

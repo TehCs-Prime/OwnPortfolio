@@ -336,4 +336,4 @@ const ProjectCard: React.FC<Props> = ({ entry, activeFields, activeTechs, onFiel
   );
 };
 
-export default ProjectCard;
+export default React.memo(ProjectCard);
