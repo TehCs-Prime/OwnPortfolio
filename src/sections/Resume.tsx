@@ -49,7 +49,7 @@ const Resume = () => {
             {/* Resume Button */}
             <div className="flex justify-center mb-16">
                 <a
-                    href="/Resumeeeeeeee-TehChunShen(25-5-25).pdf"
+                    href="/Resume-TehChunShen(13-10-25).pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="

@@ -54,7 +54,7 @@ const ProjectCard: React.FC<Props> = ({ entry, activeFields, activeTechs, onFiel
         case "completed":
           return "bg-cyan-500/20 text-cyan-300 border-cyan-400/40";
         case "paused":
-          return "bg-red-500/20 text-red-300 border-red-400/40";
+          return "bg-orange-500/20 text-orange-300 border-orange-400/40";
         default:
           return "bg-white/5 text-white border-white/20"; // fallback
     }
@@ -115,7 +115,7 @@ const ProjectCard: React.FC<Props> = ({ entry, activeFields, activeTechs, onFiel
   }, []);
 
   return (
-    <div className="relative flex flex-col md:flex-row items-stretch gap-5 md:gap-16 text-[#d8d4c4] mb-24 p-[1rem]">
+    <div className="relative flex flex-col md:flex-row items-stretch gap-5 md:gap-16 text-[#d8d4c4] mb-40 sm:mb-40 p-[1rem]">
 
       {/* Mobile-first Date */}
       {entry.date && (

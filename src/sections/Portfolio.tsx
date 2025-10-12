@@ -260,7 +260,7 @@ const Portfolio = () => {
                         <p className="text-sm md:text-base mt-2">Try adjusting or clearing your filters.</p>
                         <p className="text-sm md:text-base mt-8 opacity-80">You've selected techs I learned, but I don't have a project to show for them    //yet 😉.</p>
                         </div>
-                    )};
+                    )}
             </div>
 
             {/* Tech Logo loop - only in mobile */}

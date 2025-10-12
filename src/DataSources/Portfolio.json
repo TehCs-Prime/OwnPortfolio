@@ -73,7 +73,8 @@
       "color": "#f97316",
       "tech": [
         { "name": "Node.js", "icon": "Boxes", "color": "#68a063" },
-        { "name": "Java", "icon": "Coffee", "color": "#b07219" }
+        { "name": "Java", "icon": "Coffee", "color": "#b07219" },
+        { "name": "C++", "icon": "Code", "color": "#00599C" }
       ]
     },
     {
@@ -144,32 +145,36 @@
 
     "Projects": [
     {
-      "title": "Enchor’",
-      "heading": "Personalized memory-sharing mobile application",
-      "description": "A mobile application concept designed to help people record, track and share joyful experiences/memories associated to physical locations. Combining the idea of note-taking, blogging and social sharing into a living map of shared emotions and memories. It aims to preserve emotional experiences/memories behind each visit and solve daily dilemma of struggling — Where to go?, What to eat?",
+      "title": "Seismic Bump Event Prediction",
+      "heading": "Machine Learning Prediction Model",
+      "description": "An ML-based system that detects and forecasts seismic bump events from underground mining sensor data. This project explores and compares different supervised learning models: Neural Networks, K-Nearest Neighbors (KNN), Support Vector Machine (SVM) and Decision Tree (DT). Study each model's effectiveness in classifying seismic bump occurrences based on geological and sensor data.",
       "points": {
-        "title": "Core Features: ",
+        "title": "Highlights: ",
         "content": [
-          "📸 Memory Capture : Log reflections/experiences associated to each place with details and photos/videos.",
-          "🔍 Smart Recommendations : Suggest new locations based on user's prompt or random 'dice' suggestion.",
-          "👥 Community Sharing : Socially connected ecosystem of shared experiences bonded by emotion and authenticity rather than popularity metrics.",
-          "💡 Location Preview : A rich preview that help users to discover and understand places they've never visited before."
+          "Developed multiple ML models (Neural Network, KNN, SVM, Decision Tree) to predict seismic events.",
+          "Built a reproducible end-to-end pipeline with temporal cross-validation for small and Class-Imbalance datasets.",
+          "Performed data preprocessing and feature engineering to ensure data cleanliness and model quality.",
+          "Implemented model evaluation and Fine-tuning to optimize prediction reliability and ensure generalization.",
+          "Visualized model outcomes through performance matrices for better interpretability."
         ]
       },
-      "date": "2025-02",
-      "status": "Paused",
-      "category": "Original Concept Proposal",
+      "date": "2025-06",
+      "status": "Completed",
+      "category": "School Project",
       "techStack": [
         {
-          "field": "Tools",
-          "tech": ["Figma"]
+          "field": "Machine Learning",
+          "tech": ["Python", "TensorFlow", "Keras", "Scikit-learn"]
+        },
+        {
+          "field": "Data Analytic",
+          "tech": ["NumPy", "Pandas"]
         }
       ],
-      "sourceCode": "",
-      "liveSite": "",
+      "sourceCode": "https://github.com/TehCs-Prime/SeismicBumps",
+      "liveSite": "https://colab.research.google.com/drive/1jBug1Y6e7sIGvncN4UuQTO_4Fm4-rtvj?usp=sharing",
       "media": [
-        { "type": "image", "path": "assets/portfolio/Enchor-01.png" },
-        { "type": "image", "path": "assets/portfolio/Enchor-02.png" }
+        { "type": "video", "path": "assets/portfolio/seismic-02.mp4" }
       ]
     },
     {
@@ -214,39 +219,6 @@
       ]
     },
     {
-      "title": "Seismic Bump Event Prediction",
-      "heading": "Machine Learning Prediction Model",
-      "description": "An ML-based system that detects and forecasts seismic bump events from underground mining sensor data. This project explores and compares different supervised learning models: Neural Networks, K-Nearest Neighbors (KNN), Support Vector Machine (SVM) and Decision Tree (DT). Study each model's effectiveness in classifying seismic bump occurrences based on geological and sensor data.",
-      "points": {
-        "title": "Highlights: ",
-        "content": [
-          "Developed multiple ML models (Neural Network, KNN, SVM, Decision Tree) to predict seismic events.",
-          "Built a reproducible end-to-end pipeline with temporal cross-validation for small and Class-Imbalance datasets.",
-          "Performed data preprocessing and feature engineering to ensure data cleanliness and model quality.",
-          "Implemented model evaluation and Fine-tuning to optimize prediction reliability and ensure generalization.",
-          "Visualized model outcomes through performance matrices for better interpretability."
-        ]
-      },
-      "date": "2025-06",
-      "status": "Completed",
-      "category": "School Project",
-      "techStack": [
-        {
-          "field": "Machine Learning",
-          "tech": ["Python", "TensorFlow", "Keras", "Scikit-learn"]
-        },
-        {
-          "field": "Data Analytic",
-          "tech": ["NumPy", "Pandas"]
-        }
-      ],
-      "sourceCode": "https://github.com/TehCs-Prime/SeismicBumps",
-      "liveSite": "https://colab.research.google.com/drive/1jBug1Y6e7sIGvncN4UuQTO_4Fm4-rtvj?usp=sharing",
-      "media": [
-        { "type": "video", "path": "assets/portfolio/seismic-02.mp4" }
-      ]
-    },
-    {
       "title": "TehHub",
       "heading": "Personal Developer Portfolio",
       "description": "A self-developed website serves as my digital identity, a space where creativity meets code. Built to represent both my technical journey and personal growth, blends storytelling with structure to express who I am as a developer, student and lifetime-learner. Documenting how curiosity turns into craft and how each milestone fuels the next pursuit.",
@@ -270,12 +242,46 @@
         {
           "field": "Version Control",
           "tech": ["Git", "GitHub"]
+        },
+        {
+          "field": "Hosting & Deployment",
+          "tech": ["Vercel"]
         }
       ],
       "sourceCode": "https://github.com/TehCs-Prime/OwnPortfolio",
+      "liveSite": "https://tehcs.vercel.app/",
+      "media": [
+        { "type": "image", "path": "assets/portfolio/portfolio-01.png" },
+        { "type": "video", "path": "assets/portfolio/website-01.mp4" }
+      ]
+    },
+    {
+      "title": "Enchor’",
+      "heading": "Personalized memory-sharing mobile application",
+      "description": "A mobile application concept designed to help people record, track and share joyful experiences/memories associated to physical locations. Combining the idea of note-taking, blogging and social sharing into a living map of shared emotions and memories. It aims to preserve emotional experiences/memories behind each visit and solve daily dilemma of struggling — Where to go?, What to eat?",
+      "points": {
+        "title": "Core Features: ",
+        "content": [
+          "📸 Memory Capture : Log reflections/experiences associated to each place with details and photos/videos.",
+          "🔍 Smart Recommendations : Suggest new locations based on user's prompt or random 'dice' suggestion.",
+          "👥 Community Sharing : Socially connected ecosystem of shared experiences bonded by emotion and authenticity rather than popularity metrics.",
+          "💡 Location Preview : A rich preview that help users to discover and understand places they've never visited before."
+        ]
+      },
+      "date": "2025-02",
+      "status": "Paused",
+      "category": "Original Concept Proposal",
+      "techStack": [
+        {
+          "field": "Tools",
+          "tech": ["Figma"]
+        }
+      ],
+      "sourceCode": "",
       "liveSite": "",
       "media": [
-        { "type": "image", "path": "assets/portfolio/portfolio-01.png" }
+        { "type": "image", "path": "assets/portfolio/Enchor-01.png" },
+        { "type": "image", "path": "assets/portfolio/Enchor-02.png" }
       ]
     }
   ]
