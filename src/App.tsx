@@ -14,7 +14,7 @@ import Particles from './components/Particles';
 
 function App() {
   return (
-    <Router basename="/portfolio-website">
+    <Router>
       {/* Reset - Scroll to Top */}
       <ScrollToTop/>
 
