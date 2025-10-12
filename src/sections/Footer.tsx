@@ -100,7 +100,7 @@ const Footer = () => {
                         className="absolute bottom-3 right-3 text-[var(--color-secondary-300)] hover:text-[var(--color-secondary-100)] transition"
                         >
                             <img
-                                src="public/assets/communication.png" 
+                                src="/assets/communication.png" 
                                 alt="Send"
                                 className="w-6 h-6 " 
                             />

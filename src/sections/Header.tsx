@@ -149,7 +149,7 @@ const Header = () => {
           {/* faded background svg */}
           <div className="absolute right-0 bottom-0 opacity-25 ">
             <img
-            src="/portfolio-website/assets/menu.svg"
+            src="/assets/menu.svg"
             alt="Menu Background"
             loading="lazy"
             width={245}
