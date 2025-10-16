@@ -171,7 +171,7 @@
           "tech": ["NumPy", "Pandas"]
         }
       ],
-      "sourceCode": "https://github.com/TehCs-Prime/SeismicBumps",
+      "sourceCode": "https://github.com/b0929en/Seismic-Hazard-Prediction",
       "liveSite": "https://colab.research.google.com/drive/1jBug1Y6e7sIGvncN4UuQTO_4Fm4-rtvj?usp=sharing",
       "media": [
         { "type": "video", "path": "assets/portfolio/seismic-02.mp4" }
