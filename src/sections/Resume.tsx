@@ -40,8 +40,8 @@ const Resume = () => {
                 and logic behind artificial intelligence. 
                 </p>
                  <p className='mt-24'>
-                    Currently, <strong> Seeking an internship opportunity from February 16, 2026 to
-                August 16, 2026</strong> to apply academic knowledge and practical experience in real-world projects that advance
+                    Currently, <strong> Seeking an internship opportunity from March 1, 2026 to
+                August 31, 2026</strong> to apply academic knowledge and practical experience in real-world projects that advance
                 intelligent and data-driven solutions.
                 </p>
             </div>
