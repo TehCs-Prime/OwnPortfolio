@@ -39,9 +39,8 @@ const Resume = () => {
                 <strong> responsive websites</strong> and implementing <strong>machine learning models</strong> driven by a strong passion for the algorithms
                 and logic behind artificial intelligence. 
                 </p>
-                 <p className='mt-24'>
-                    Currently, <strong> Seeking an internship opportunity from March 1, 2026 to
-                August 31, 2026</strong> to apply academic knowledge and practical experience in real-world projects that advance
+                 <p className='mt-24'> 
+                    Currently, Seeking a <strong>6-month internship opportunity (March – August 2026)</strong> focused on <strong>AI/ML or Data Analytics </strong> to apply academic knowledge and practical experience in real-world projects that advance
                 intelligent and data-driven solutions.
                 </p>
             </div>
@@ -49,7 +48,7 @@ const Resume = () => {
             {/* Resume Button */}
             <div className="flex justify-center mb-16">
                 <a
-                    href="/Resume-TehChunShen(13-10-25).pdf"
+                    href="/Resume-TehChunShen.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="
